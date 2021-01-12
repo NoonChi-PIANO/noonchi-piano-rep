@@ -156,22 +156,31 @@ void divide_by_four() {
 int main() {
 	
 	Mat binary_image;
-	Mat temp;
+	Mat temp, temp2;
 	Mat dst1;
-	
-	image = imread("image/bair3.jpg", IMREAD_GRAYSCALE);
+	Mat clef;
+	image = imread("image/stars.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(image.data);
 	threshold(image, binary_image, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
-	temp = imread("image/1.jpg", IMREAD_GRAYSCALE);
+	temp = imread("image/B.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(temp.data);
 	threshold(temp, temp, 127, 255, THRESH_BINARY | THRESH_OTSU);
+
+	temp2 = imread("image/C.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(temp2.data);
+	threshold(temp2, temp2, 127, 255, THRESH_BINARY | THRESH_OTSU);
+
+	clef = imread("image/Clef.jpg", IMREAD_GRAYSCALE);
+	CV_Assert(clef.data);
+	threshold(clef, clef, 127, 255, THRESH_BINARY | THRESH_OTSU );
 
 	double min, max;
 	Point left_top;
 	Mat coeff;
+	Mat coeff2;
 	imshow("temp", temp);
-
+	imshow("temp2", temp2);
 
 	//adaptiveThreshold(image, binary_image,255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 7, 10);
 	imshow("binary_image", binary_image);
@@ -185,10 +194,27 @@ int main() {
 	matchTemplate(binary_image, temp, coeff, TM_CCOEFF_NORMED);
 	
 		minMaxLoc(coeff, &min, &max, NULL, &left_top);
-		if(max>0.60){
+		if(max>0.70){
 			rectangle(binary_image, Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)), 0, 1, LINE_8);
 		}
 	}
+	for (int k = 0;k < 10;k++) {
+		matchTemplate(binary_image, temp2, coeff2, TM_CCOEFF_NORMED);
+
+		minMaxLoc(coeff2, &min, &max, NULL, &left_top);
+		if (max > 0.50) {
+			rectangle(binary_image, Rect(left_top, Point(left_top.x + temp2.cols, left_top.y + temp2.rows)), 0, 1, LINE_8);
+		}
+	}
+	for (int k = 0;k < 10;k++) {
+		matchTemplate(binary_image, clef, coeff2, TM_CCOEFF_NORMED);
+
+		minMaxLoc(coeff2, &min, &max, NULL, &left_top);
+		if (max > 0.40) {
+			rectangle(binary_image, Rect(left_top, Point(left_top.x + clef.cols, left_top.y + clef.rows)), 0, 1, LINE_AA);
+		}
+	}
+
 	imshow("binary_image", binary_image);
 
 	
