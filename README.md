@@ -1,2 +1,2 @@
-# music_sheet_rep
-악보인식 프로그램
+# noonchi-piano-rep
+공통 저장소
