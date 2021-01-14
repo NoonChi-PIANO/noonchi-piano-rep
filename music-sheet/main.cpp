@@ -9,7 +9,7 @@ using namespace cv;
 using namespace std;
 
 Mat image;
-Mat subImage[10] = {}; //¿À¼± ¹è¿­ µ¿ÀûÇÒ´ç
+Mat subImage[10] = {}; //ì˜¤ì„  ë°°ì—´ ë™ì í• ë‹¹
 double line_y[5] = {};
 int linecheck = 0;
 
@@ -134,7 +134,7 @@ void divide_by_four() {
 	}
 }
 
-void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
+void find_scale() { //ë¶€ë¶„ì  í…œí”Œë¦¿ ë§¤ì¹­ -> ì¢Œí‘œ ì°¾ì•„ ìŒê³„ ì°¾ê¸°
 	Mat temp, temp2;
 	Mat g_clef, c_clef;
 	double min, max;
