@@ -9,7 +9,7 @@ using namespace cv;
 using namespace std;
 
 Mat image;
-Mat subImage[10] = {}; //Ïò§ÏÑ† Î∞∞Ïó¥ ÎèôÏ†ÅÌï†Îãπ
+Mat subImage[10] = {}; //ø¿º± πËø≠ µø¿˚«“¥Á
 double line_y[5] = {};
 int linecheck = 0;
 
@@ -20,7 +20,13 @@ bool cmp(const Point2d& p1, const Point2d& p2) {
 		return false;
 	}
 }
-
+bool cmp2(const Point2d& p1, const Point2d& p2) {
+	if (p1.x< p2.x)
+		return true;
+	else {
+		return false;
+	}
+}
 void draw_houghLines(Mat src, Mat& dst, vector<Vec2f> lines, int nline)
 {
 	Point2d pt_sort[300] = {};
@@ -55,7 +61,7 @@ void draw_houghLines(Mat src, Mat& dst, vector<Vec2f> lines, int nline)
 			}
 		}
 		line_y[line_num] = pt_sort[i].y - 1;
-		cout << line_y[line_num] << endl;
+		//cout << line_y[line_num] << endl;
 		line_num--;
 		
 	
@@ -134,7 +140,7 @@ void divide_by_four() {
 	}
 }
 
-void find_scale() { //Î∂ÄÎ∂ÑÏ†Å ÌÖúÌîåÎ¶ø Îß§Ïπ≠ -> Ï¢åÌëú Ï∞æÏïÑ ÏùåÍ≥Ñ Ï∞æÍ∏∞
+void find_scale() { //∫Œ∫–¿˚ ≈€«√∏¥ ∏≈ƒ™ -> ¡¬«• √£æ∆ ¿Ω∞Ë √£±‚
 	Mat temp, temp2;
 	Mat g_clef, c_clef;
 	double min, max;
@@ -142,14 +148,14 @@ void find_scale() { //Î∂ÄÎ∂ÑÏ†Å ÌÖúÌîåÎ¶ø Îß§Ïπ≠ -> Ï¢åÌëú Ï∞æÏïÑ ÏùåÍ≥Ñ Ï∞æÍ∏∞
 	Mat coeff;
 	Mat coeff2;
 	int clef = 1;
-	double note_x[100];
-	double note_y[100];
-	int note_number = 0;
+	Point2d note[10][100] = {};
+
+	
 
 	//templete image load
 	temp = imread("image/B.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(temp.data);
-	threshold(temp, temp, 127, 255, THRESH_BINARY | THRESH_OTSU);
+	//threshold(temp, temp, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
 	temp2 = imread("image/C.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(temp2.data);
@@ -164,46 +170,95 @@ void find_scale() { //Î∂ÄÎ∂ÑÏ†Å ÌÖúÌîåÎ¶ø Îß§Ïπ≠ -> Ï¢åÌëú Ï∞æÏïÑ ÏùåÍ≥Ñ Ï∞æÍ∏∞
 	threshold(c_clef, c_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
 	/*
 	
-	for (int k = 0;k < 10;k++) {
-		matchTemplate(binary_image, temp2, coeff2, TM_CCOEFF_NORMED);
-
-		minMaxLoc(coeff2, &min, &max, NULL, &left_top);
-		if (max > 0.50) {
-			rectangle(binary_image, Rect(left_top, Point(left_top.x + temp2.cols, left_top.y + temp2.rows)), 0, 1, LINE_8);
-		}
-	}
+	
 	*/
+
+
+
+	
 	for (int i = 0;i < linecheck;i++) {
+		Mat clone = subImage[i].clone();
+		int note_number = 0;
 		for (int k = 0;k < 10;k++) {
-			matchTemplate(subImage[i], g_clef, coeff, TM_CCOEFF_NORMED);
+			matchTemplate(clone, g_clef, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
 			if (max > 0.40) {
-				rectangle(subImage[i], Rect(left_top, Point(left_top.x + g_clef.cols, left_top.y + g_clef.rows)), 0, 1, LINE_8);
+				rectangle(clone, Rect(left_top, Point(left_top.x + g_clef.cols, left_top.y + g_clef.rows)), 0, 1, LINE_8);
 				clef = 1;
 			}
 		}
 		for (int k = 0;k < 10;k++) {
-			matchTemplate(subImage[i], c_clef, coeff, TM_CCOEFF_NORMED);
+			matchTemplate(clone, c_clef, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
 			if (max > 0.40) {
-				rectangle(subImage[i], Rect(left_top, Point(left_top.x + c_clef.cols, left_top.y + c_clef.rows)), 0, 1, LINE_8);
+				rectangle(clone, Rect(left_top, Point(left_top.x + c_clef.cols, left_top.y + c_clef.rows)), 0, 1, LINE_8);
 				clef = 0;
 			}
 		}
 		for (int k = 0;k < 100;k++) {
-			matchTemplate(subImage[i], temp, coeff, TM_CCOEFF_NORMED);
+			matchTemplate(clone, temp, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.70) {
+			if (max > 0.75) {
 
-				rectangle(subImage[i], Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)), 0, 1, LINE_8);
-				note_x[note_number] = left_top.x;
-				note_y[note_number] = temp.rows / 2;
+				rectangle(clone, Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)), 0, 1, LINE_8);
+				note[i][note_number].x = left_top.x;
+				note[i][note_number].y = (left_top.y + temp.rows / 2)-2;
 				note_number++;
 			}
 		}
+		for (int k = 0;k < 10;k++) {
+			matchTemplate(clone, temp2, coeff2, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff2, &min, &max, NULL, &left_top);
+			if (max > 0.50) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + temp2.cols, left_top.y + temp2.rows)), 0, 1, LINE_8);
+				note[i][note_number].x = left_top.x;
+				note[i][note_number].y = (left_top.y + temp.rows / 2)-2;
+				note_number++;
+			}
+		}
+		sort(note[i],note[i]+note_number,cmp2);
+		for (int j = 0;j < note_number;j++) {
+			if (note[i][j].x - note[i][j - 1].x < 3){
+				memmove(note[i] + j, note[i] + j+1, sizeof(note[i]) - j );
+				note_number--;
+
+			}
+				
+		}
+
+
+		int line_gap = line_y[1] - line_y[0];
+		if(clef==1){
+		
+			for (int j = 0;j < note_number;j++) {
+				if (note[i][j].y<line_y[0] + 2 && note[i][j].y>line_y[0] - 2) {
+					cout << note[i][j].x << "  " << note[i][j].y <<"∆ƒ"<< endl;
+				}
+				else{
+				cout << note[i][j].x << "  " << note[i][j].y << endl;
+				}
+			}
+		}
+		else if (clef == 0) {
+			for (int j = 0;j < note_number;j++) {
+				if (note[i][j].y<line_y[0] + 2 && note[i][j].y>line_y[0] - 2) {
+					cout << note[i][j].x << "  " << note[i][j].y << "∂Û" << endl;
+				}
+				else {
+					cout << note[i][j].x << "  " << note[i][j].y << endl;
+				}
+			}
+		}
+
+		cout << "1π¯¬∞ º±"<<line_y[0] << endl;
+		cout << "2π¯¬∞ º±" << line_y[1] << endl;
+		cout << "3π¯¬∞ º±" << line_y[2] << endl;
+		cout << "4π¯¬∞ º±" << line_y[3] << endl;
+		cout << "5π¯¬∞ º±" << line_y[4] << endl;
 		
 
 	}
@@ -211,6 +266,7 @@ void find_scale() { //Î∂ÄÎ∂ÑÏ†Å ÌÖúÌîåÎ¶ø Îß§Ïπ≠ -> Ï¢åÌëú Ï∞æÏïÑ ÏùåÍ≥Ñ Ï∞æÍ∏∞
 	
 
 }
+
 
 int main() {
 	
@@ -234,7 +290,7 @@ int main() {
 	
 	
 	
-	
+	find_scale();
 	
 
 
