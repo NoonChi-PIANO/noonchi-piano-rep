@@ -28,4 +28,19 @@ public:
 		std::cout << clef << " " << octav << " " + white_number << " " << black_number << " " << beat << " " << std::endl;;
 		
 	}
+	void setClef(int _clef) {
+		clef = _clef;
+	}
+	void setOctav(int _octav) {
+		octav = _octav;
+	}
+	void setWhiteNumber(int _white_number) {
+		white_number = _white_number;
+	}
+	void setBlackNumber(int _black_number) {
+		black_number = _black_number;
+	}
+	void setBeat(int _beat) {
+		beat = _beat;
+	}
 };

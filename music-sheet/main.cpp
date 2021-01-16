@@ -5,13 +5,17 @@
 #include"opencv2/opencv.hpp"
 #include"opencv2/highgui.hpp"
 #include"Note.hpp"
+
 using namespace cv;
 using namespace std;
+
+#define LINE_CONNECTION 2 //음계 색출 시 보정값
 
 Mat image;
 Mat subImage[10] = {}; //오선 배열 동적할당
 double line_y[5] = {};
 int linecheck = 0;
+Note sheet_note[10][100];
 
 bool cmp(const Point2d& p1, const Point2d& p2) {
 	if (p1.y > p2.y)
@@ -150,7 +154,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	int clef = 1;
 	Point2d note[10][100] = {};
 
-	
+
 
 	//templete image load
 	temp = imread("image/B.jpg", IMREAD_GRAYSCALE);
@@ -169,13 +173,13 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	CV_Assert(c_clef.data);
 	threshold(c_clef, c_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
 	/*
-	
-	
+
+
 	*/
-
-
-
 	
+
+
+
 	for (int i = 0;i < linecheck;i++) {
 		Mat clone = subImage[i].clone();
 		int note_number = 0;
@@ -205,7 +209,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 
 				rectangle(clone, Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)), 0, 1, LINE_8);
 				note[i][note_number].x = left_top.x;
-				note[i][note_number].y = (left_top.y + temp.rows / 2)-2;
+				note[i][note_number].y = (left_top.y + temp.rows / 2) - LINE_CONNECTION;
 				note_number++;
 			}
 		}
@@ -216,38 +220,209 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 			if (max > 0.50) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + temp2.cols, left_top.y + temp2.rows)), 0, 1, LINE_8);
 				note[i][note_number].x = left_top.x;
-				note[i][note_number].y = (left_top.y + temp.rows / 2)-2;
+				note[i][note_number].y = (left_top.y + temp.rows / 2) - LINE_CONNECTION;
 				note_number++;
 			}
 		}
-		sort(note[i],note[i]+note_number,cmp2);
-		for (int j = 0;j < note_number;j++) {
-			if (note[i][j].x - note[i][j - 1].x < 3){
-				memmove(note[i] + j, note[i] + j+1, sizeof(note[i]) - j );
+		sort(note[i], note[i] + note_number, cmp2);
+		for (int j = 0;j < note_number;j++) { //중복 제거
+			if (note[i][j].x - note[i][j - 1].x < 3) {
+				memmove(note[i] + j, note[i] + j + 1, sizeof(note[i]) - j);
 				note_number--;
 
 			}
-				
+
 		}
 
+		int Tolerance; //음표 중심좌표와 오선간 허용 오차 값
+		double line_gap = line_y[1] - line_y[0]; //오선 사이 간격
+		if (line_gap == 6) {
+			Tolerance = 2; //음표 중심좌표와 오선간 허용 오차 값
+		}
+		else
+			Tolerance = 2;
 
-		int line_gap = line_y[1] - line_y[0];
-		if(clef==1){
-		
+		if (clef == 1) {
+			cout << "오른손" << endl;
 			for (int j = 0;j < note_number;j++) {
-				if (note[i][j].y<line_y[0] + 2 && note[i][j].y>line_y[0] - 2) {
-					cout << note[i][j].x << "  " << note[i][j].y <<"파"<< endl;
+				if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - 2*line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "시" << endl;
+					sheet_note[i][j].setWhiteNumber(7);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
 				}
+				else if (note[i][j].y < line_y[0] - line_gap + Tolerance && note[i][j].y > line_y[0]-line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "라" << endl;
+					sheet_note[i][j].setWhiteNumber(6);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
+				}
+				else if (note[i][j].y > line_y[0]-line_gap + Tolerance && note[i][j].y < line_y[0] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "솔" << endl;
+					sheet_note[i][j].setWhiteNumber(5);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
+				}
+				else if (note[i][j].y<line_y[0] + Tolerance && note[i][j].y>line_y[0] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
+					sheet_note[i][j].setWhiteNumber(4);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
+				}
+				else if (note[i][j].y > line_y[0] + Tolerance && note[i][j].y < line_y[1] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "미" << endl;
+					sheet_note[i][j].setWhiteNumber(3);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
+				}
+				else if (note[i][j].y<line_y[1] + Tolerance && note[i][j].y>line_y[1] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "레" << endl;
+					sheet_note[i][j].setWhiteNumber(2);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
+				}
+				else if (note[i][j].y > line_y[1] + Tolerance && note[i][j].y < line_y[2] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "도" << endl;
+					sheet_note[i][j].setWhiteNumber(1);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(5);
+				}
+				else if (note[i][j].y<line_y[2] + Tolerance && note[i][j].y>line_y[2] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "시" << endl;
+					sheet_note[i][j].setWhiteNumber(7);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y > line_y[2] + Tolerance && note[i][j].y < line_y[3] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "라" << endl;
+					sheet_note[i][j].setWhiteNumber(6);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y<line_y[3] + Tolerance && note[i][j].y>line_y[3] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "솔" << endl;
+					sheet_note[i][j].setWhiteNumber(5);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y > line_y[3] + Tolerance && note[i][j].y < line_y[4] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
+					sheet_note[i][j].setWhiteNumber(4);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y<line_y[4] + Tolerance && note[i][j].y>line_y[4] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "미" << endl;
+					sheet_note[i][j].setWhiteNumber(3);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y > line_y[4] + Tolerance && note[i][j].y < line_y[4] + line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "레" << endl;
+					sheet_note[i][j].setWhiteNumber(2);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y < line_y[4] + line_gap + Tolerance && note[i][j].y > line_y[4] + line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y <<"  "<< "도" << endl;
+					sheet_note[i][j].setWhiteNumber(1);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(4);
+				}
+
 				else{
 				cout << note[i][j].x << "  " << note[i][j].y << endl;
 				}
 			}
 		}
 		else if (clef == 0) {
+			cout << "왼손" << endl;
 			for (int j = 0;j < note_number;j++) {
-				if (note[i][j].y<line_y[0] + 2 && note[i][j].y>line_y[0] - 2) {
-					cout << note[i][j].x << "  " << note[i][j].y << "라" << endl;
+				if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - Tolerance * line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "레" << endl;
+					sheet_note[i][j].setWhiteNumber(2);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(4);
 				}
+				else if (note[i][j].y < line_y[0] - line_gap + Tolerance && note[i][j].y > line_y[0] - line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "도" << endl;
+					sheet_note[i][j].setWhiteNumber(1);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(4);
+				}
+				else if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "시" << endl;
+					sheet_note[i][j].setWhiteNumber(7);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y<line_y[0] + Tolerance && note[i][j].y>line_y[0] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "라" << endl;
+					sheet_note[i][j].setWhiteNumber(6);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y > line_y[0] + Tolerance && note[i][j].y < line_y[1] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "솔" << endl;
+					sheet_note[i][j].setWhiteNumber(5);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y<line_y[1] + Tolerance && note[i][j].y>line_y[1] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
+					sheet_note[i][j].setWhiteNumber(4);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y > line_y[1] + Tolerance && note[i][j].y < line_y[2] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "미" << endl;
+					sheet_note[i][j].setWhiteNumber(3);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y<line_y[2] + Tolerance && note[i][j].y>line_y[2] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "레" << endl;
+					sheet_note[i][j].setWhiteNumber(2);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y > line_y[2] + Tolerance && note[i][j].y < line_y[3] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "도" << endl;
+					sheet_note[i][j].setWhiteNumber(1);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(3);
+				}
+				else if (note[i][j].y<line_y[3] + Tolerance && note[i][j].y>line_y[3] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "시" << endl;
+					sheet_note[i][j].setWhiteNumber(7);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(2);
+				}
+				else if (note[i][j].y > line_y[3] + Tolerance && note[i][j].y < line_y[4] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "라" << endl;
+					sheet_note[i][j].setWhiteNumber(6);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(2);
+				}
+				else if (note[i][j].y<line_y[4] + Tolerance && note[i][j].y>line_y[4] - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "솔" << endl;
+					sheet_note[i][j].setWhiteNumber(5);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(2);
+				}
+				else if (note[i][j].y > line_y[4] + Tolerance && note[i][j].y < line_y[4] + line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
+					sheet_note[i][j].setWhiteNumber(4);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(2);
+				}
+				else if (note[i][j].y < line_y[4] + line_gap + Tolerance && note[i][j].y > line_y[4] + line_gap - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "미" << endl;
+					sheet_note[i][j].setWhiteNumber(3);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(2);
+				}
+
 				else {
 					cout << note[i][j].x << "  " << note[i][j].y << endl;
 				}
@@ -264,8 +439,9 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	}
 	
 	
-
+	
 }
+
 
 
 int main() {
@@ -287,7 +463,6 @@ int main() {
 	imshow("binary_image", binary_image);
 	divide_image(binary_image);
 	divide_by_four();
-	
 	
 	
 	find_scale();
