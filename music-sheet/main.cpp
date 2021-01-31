@@ -4,7 +4,8 @@
 #include"opencv2/opencv.hpp"
 #include"opencv2/highgui.hpp"
 #include"Note.hpp"
-
+#include<fstream>
+#include<string>
 using namespace cv;
 using namespace std;
 
@@ -15,6 +16,7 @@ Mat subImage[10] = {}; //오선 배열 동적할당
 double line_y[5] = {};
 int linecheck = 0;
 Note sheet_note[10][100];
+int fn_number[20] = {};
 Point2d note[10][100] = {};
 
 bool cmp(const Point2d& p1, const Point2d& p2) {
@@ -146,9 +148,12 @@ void divide_by_four() {
 void find_beat() {
 	Mat quater_h, quater_l;
 	Mat half_h, half_l;
+	Mat eighth_l, eighth_h;
 	double min, max;
 	Mat coeff;
 	Point left_top;
+
+	int Tolerance =3; //오차 허용 값
 
 	quater_h = imread("image/QUATER_H.png", IMREAD_GRAYSCALE);
 	CV_Assert(quater_h.data);
@@ -165,57 +170,115 @@ void find_beat() {
 	half_l = imread("image/HALF_L.png", IMREAD_GRAYSCALE);
 	CV_Assert(half_l.data);
 	threshold(half_l, half_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
-	/*
+
+	eighth_l = imread("image/EIGHTH_L.png", IMREAD_GRAYSCALE);
+	CV_Assert(eighth_l.data);
+	threshold(eighth_l, eighth_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
+
+	
 	for (int i = 0;i < linecheck;i++) {
 		Mat clone = subImage[i];
-		for (int k = 0;k < 10;k++) {
+		int beat_x;
+		
+		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, quater_h, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.9) {
+			if (max > 0.95) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + quater_h.cols, left_top.y + quater_h.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + quater_h.cols / 2;
+				for (int j = 0;j <fn_number[i];j++) {
+					if ( beat_x - Tolerance < note[i][j].x && note[i][j].x  < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(160);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
-	}
 	
-	for (int i = 0;i < linecheck;i++) {
-		Mat clone = subImage[i];
-		for (int k = 0;k < 10;k++) {
+		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, quater_l, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.9) {
+			if (max > 0.95) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + quater_l.cols, left_top.y + quater_l.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + (quater_h.cols) / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if ( beat_x - Tolerance < note[i][j].x && note[i][j].x  < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(160);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
-	}
-	*/
-	/*
-	for (int i = 0;i < linecheck;i++) {
-		Mat clone = subImage[i];
-		for (int k = 0;k < 10;k++) {
-			matchTemplate(clone, half_h, coeff, TM_CCOEFF_NORMED);
+		for (int k = 0;k < 30;k++) {
+			matchTemplate(clone, eighth_l, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.40) {
-				rectangle(clone, Rect(left_top, Point(left_top.x + half_h.cols, left_top.y + half_h.rows)), 0, 1, LINE_8);
+			if (max > 0.95) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + eighth_l.cols, left_top.y + eighth_l.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + (quater_h.cols) / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(80);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
-	}
-	*/
-	for (int i = 0;i < linecheck;i++) {
-		Mat clone = subImage[i];
-		for (int k = 0;k < 10;k++) {
+		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, half_l, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.9) {
+			if (max > 0.90) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + half_l.cols, left_top.y + half_l.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + quater_h.cols / 2;
+				for (int j = 0;j <fn_number[i];j++) {
+					if ( beat_x - Tolerance < note[i][j].x && note[i][j].x  < beat_x + Tolerance) {
+						//cout <<"note배열 x좌표"<< note[i][j].x << endl;
+						sheet_note[i][j].setBeat(320);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
-	}
+
+		for (int j = 0;j < fn_number[i];j++) {
+			sheet_note[i][j].getNote();
+		}
+		cout << endl;
+	}//라인 별 반복
 	
+
 }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
 void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	Mat temp, temp2,temp3,temp4;
 	Mat g_clef, c_clef;
@@ -282,7 +345,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 				clef = 0;
 			}
 		}
-		for (int k = 0;k < 100;k++) {
+		for (int k = 0;k < 40;k++) {
 			matchTemplate(clone, temp, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
@@ -316,7 +379,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 				note_number++;
 			}
 		}
-		for (int k = 0;k < 100;k++) {
+		for (int k = 0;k < 40;k++) {
 			matchTemplate(clone, temp3, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
@@ -336,7 +399,10 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 			}
 
 		}
-
+		fn_number[i] = note_number;
+		cout << endl;
+		cout <<" 음표 갯수"<<fn_number[i];
+		cout << endl;
 		int Tolerance; //음표 중심좌표와 오선간 허용 오차 값
 
 		double line_gap = line_y[1] - line_y[0]; //오선 사이 간격
@@ -557,11 +623,6 @@ int main() {
 
 	Mat binary_image;
 
-	double data[] = { -1,-1,-1
-					- 1,9,-1
-					- 1,-1,-1 };
-	Mat mask(3, 3, CV_32F, data);
-
 	image = imread("image/bair.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(image.data);
 
@@ -576,7 +637,7 @@ int main() {
 	find_scale();
 	find_beat();
 
-	/*
+	
 	namedWindow("gray image", WINDOW_AUTOSIZE);
 
 
@@ -587,9 +648,9 @@ int main() {
 	//윈도우에 콜백함수를 등록
 	setMouseCallback("gray image", CallBackFunc, NULL);
 	
-	Mat A = subImage[2](Rect(Point(413,36), Point(427, 73)));
-	imwrite("QUATER_H.png", A);
-	*/
+	Mat A = subImage[2](Rect(Point(285,24), Point(304, 61)));
+	imwrite("EIGHTH_L.png", A);
+	
 	//이미지 따는 부분!!
 	/*
 	Mat A;
@@ -636,12 +697,20 @@ int main() {
 
 	//imshow("binary_image", binary_image);
 
-
+	
 
 imshow("original", image);
 imshow("result", binary_image);
 
-
+ofstream fout("note.txt", ios_base::out);
+	
+for (int i = 0; i < linecheck;i++) {
+	for (int j = 0;j < fn_number[i];j++) {
+		sheet_note[i][j].getNote();
+		fout << sheet_note[i][j].printNote() << endl;
+	}
+}
+fout.close();
 
 
 

@@ -24,9 +24,16 @@ public:
 		black_number = _black_number;
 		beat = _beat;
 	}
+	string printNote() {
+		return to_string(clef) + " " + to_string(octav) + " " + to_string(white_number) + " " + to_string(black_number) + " " + to_string(beat);
+	}
+
 	void getNote() {
-		std::cout << clef << " " << octav << " " + white_number << " " << black_number << " " << beat << " " << std::endl;;
+		cout << clef << " " << octav << " " << white_number << " " << black_number << " " << beat << " " << endl;;
 		
+	}
+	int getBeat() {
+		return beat;
 	}
 	void setClef(int _clef) {
 		clef = _clef;
