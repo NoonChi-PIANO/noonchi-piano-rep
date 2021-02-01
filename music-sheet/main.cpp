@@ -82,7 +82,7 @@ void divide_image(Mat binary_image) {
 	int five[100];
 	
 	int nWidth = binary_image.cols;
-	int limit = (int)((nWidth / 100.0) * 80);
+	int limit = (int)((nWidth / 100.0) * 70);
 	int nHeight = binary_image.rows;
 
 	for (int nY = 0;nY < nHeight; nY++) {
@@ -116,7 +116,7 @@ void divide_image(Mat binary_image) {
 		//cout << five[i] << endl;
 
 		subImage[i] = binary_image(rect[i]);
-		
+		imshow("i", subImage[i]);
 	}
 	
 }
@@ -162,11 +162,11 @@ void find_beat() {
 	quater_l = imread("image/QUATER_L.png", IMREAD_GRAYSCALE);
 	CV_Assert(quater_l.data);
 	threshold(quater_l, quater_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
-	/*
-	half_h = imread("image/HALF_H.jpg", IMREAD_GRAYSCALE);
+	
+	half_h = imread("image/HALF_H.png", IMREAD_GRAYSCALE);
 	CV_Assert(half_h.data);
 	threshold(half_h, half_h, 127, 255, THRESH_BINARY | THRESH_OTSU);
-	*/
+	
 	half_l = imread("image/HALF_L.png", IMREAD_GRAYSCALE);
 	CV_Assert(half_l.data);
 	threshold(half_l, half_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
@@ -174,6 +174,8 @@ void find_beat() {
 	eighth_l = imread("image/EIGHTH_L.png", IMREAD_GRAYSCALE);
 	CV_Assert(eighth_l.data);
 	threshold(eighth_l, eighth_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
+
+	
 
 	
 	for (int i = 0;i < linecheck;i++) {
@@ -229,6 +231,25 @@ void find_beat() {
 				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
+		/*
+		for (int k = 0;k < 30;k++) {
+			matchTemplate(clone, eighth_h, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.95) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + eighth_h.cols, left_top.y + eighth_h.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + (quater_h.cols) / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(80);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
+			}
+		}
+		*/
+
 		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, half_l, coeff, TM_CCOEFF_NORMED);
 
@@ -246,6 +267,25 @@ void find_beat() {
 				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
+		
+		for (int k = 0;k < 30;k++) {
+			matchTemplate(clone, half_h, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.90) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + half_h.cols, left_top.y + half_h.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + quater_h.cols / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						//cout <<"note배열 x좌표"<< note[i][j].x << endl;
+						sheet_note[i][j].setBeat(320);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
+			}
+		}
+
 
 		for (int j = 0;j < fn_number[i];j++) {
 			sheet_note[i][j].getNote();
@@ -308,7 +348,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	CV_Assert(temp4.data);
 	threshold(temp4, temp4, 127, 255, THRESH_BINARY);
 
-	g_clef = imread("image/Clef2.jpg", IMREAD_GRAYSCALE);
+	g_clef = imread("image/G_Clef.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(g_clef.data);
 	threshold(g_clef, g_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
@@ -623,7 +663,7 @@ int main() {
 
 	Mat binary_image;
 
-	image = imread("image/bair.jpg", IMREAD_GRAYSCALE);
+	image = imread("image/stars.png", IMREAD_GRAYSCALE);
 	CV_Assert(image.data);
 
 
@@ -640,62 +680,17 @@ int main() {
 	
 	namedWindow("gray image", WINDOW_AUTOSIZE);
 
-
+	//템플릿 이미지 추출(수동) >>
 	//윈도우에 출력  
 	
-	imshow("gray image", subImage[2]);
+	imshow("gray image", subImage[1]);
 
 	//윈도우에 콜백함수를 등록
 	setMouseCallback("gray image", CallBackFunc, NULL);
 	
-	Mat A = subImage[2](Rect(Point(285,24), Point(304, 61)));
+	Mat A = subImage[1](Rect(Point(182,40), Point(195, 76)));
 	imwrite("EIGHTH_L.png", A);
 	
-	//이미지 따는 부분!!
-	/*
-	Mat A;
-	Mat temp, temp2;
-	Mat g_clef, c_clef;
-	double min, max;
-	Point left_top;
-	Mat coeff;
-
-	int clef = 1;
-	Point2d note[10][100] = {};
-
-
-
-	//templete image load
-	temp = imread("image/E.png", IMREAD_GRAYSCALE);
-	CV_Assert(temp.data);
-	threshold(temp, temp, 10, 255, THRESH_BINARY);
-
-	temp2 = imread("image/B.png", IMREAD_GRAYSCALE);
-	CV_Assert(temp2.data);
-	threshold(temp2, temp2, 127, 255, THRESH_BINARY);
-
-	g_clef = imread("image/Clef2.jpg", IMREAD_GRAYSCALE);
-	CV_Assert(g_clef.data);
-	threshold(g_clef, g_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
-
-	c_clef = imread("image/C_Clef.jpg", IMREAD_GRAYSCALE);
-	CV_Assert(c_clef.data);
-	threshold(c_clef, c_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
-
-	matchTemplate(subImage[0], temp, coeff, TM_CCOEFF_NORMED);
-
-	minMaxLoc(coeff, &min, &max, NULL, &left_top);
-	//if (max > 0.50) {
-	//	A = subImage[1](Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)));
-	//	rectangle(subImage[1], Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)), 0, 1, LINE_8);
-	//	imshow("adsf", subImage[1]);
-	//}
-
-	A = subImage[1](Rect(Point(313, 48), Point(313 + 22, 48 + 14)));
-	imwrite("D.png", A);
-	*/
-
-	//imshow("binary_image", binary_image);
 
 	
 
