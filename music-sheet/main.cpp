@@ -149,11 +149,17 @@ void find_beat() {
 	Mat quater_h, quater_l;
 	Mat half_h, half_l;
 	Mat eighth_l, eighth_h;
+	Mat dotted_quater_l, dotted_quater_h;
+	Mat sixteenth_l, sixteenth_h;
 	double min, max;
 	Mat coeff;
 	Point left_top;
 
-	int Tolerance =3; //오차 허용 값
+	int Tolerance =4; //오차 허용 값
+
+	dotted_quater_l = imread("image/DOTTED_QUATER_L.png", IMREAD_GRAYSCALE);
+	CV_Assert(dotted_quater_l.data);
+	threshold(dotted_quater_l, dotted_quater_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
 	quater_h = imread("image/QUATER_H.png", IMREAD_GRAYSCALE);
 	CV_Assert(quater_h.data);
@@ -175,6 +181,13 @@ void find_beat() {
 	CV_Assert(eighth_l.data);
 	threshold(eighth_l, eighth_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
+	eighth_h = imread("image/EIGHTH_H.png", IMREAD_GRAYSCALE);
+	CV_Assert(eighth_h.data);
+	threshold(eighth_h, eighth_h, 127, 255, THRESH_BINARY | THRESH_OTSU);
+
+	sixteenth_h = imread("image/SIXTEENTH_H.png", IMREAD_GRAYSCALE);
+	CV_Assert(sixteenth_h.data);
+	threshold(sixteenth_h, sixteenth_h, 127, 255, THRESH_BINARY | THRESH_OTSU);
 	
 
 	
@@ -183,43 +196,44 @@ void find_beat() {
 		int beat_x;
 		
 		for (int k = 0;k < 30;k++) {
-			matchTemplate(clone, quater_h, coeff, TM_CCOEFF_NORMED);
+			matchTemplate(clone, dotted_quater_l, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
 			if (max > 0.95) {
-				rectangle(clone, Rect(left_top, Point(left_top.x + quater_h.cols, left_top.y + quater_h.rows)), 0, 1, LINE_8);
-				beat_x = left_top.x + quater_h.cols / 2;
-				for (int j = 0;j <fn_number[i];j++) {
-					if ( beat_x - Tolerance < note[i][j].x && note[i][j].x  < beat_x + Tolerance) {
-						sheet_note[i][j].setBeat(160);
-						//sheet_note[i][j].getNote();
-					}
-				}
-				//cout << left_top.x + quater_h.cols / 2 << endl;
-			}
-		}
-	
-		for (int k = 0;k < 30;k++) {
-			matchTemplate(clone, quater_l, coeff, TM_CCOEFF_NORMED);
-
-			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.95) {
-				rectangle(clone, Rect(left_top, Point(left_top.x + quater_l.cols, left_top.y + quater_l.rows)), 0, 1, LINE_8);
-				beat_x = left_top.x + (quater_h.cols) / 2;
+				rectangle(clone, Rect(left_top, Point(left_top.x + dotted_quater_l.cols, left_top.y + dotted_quater_l.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + dotted_quater_l.cols / 2;
 				for (int j = 0;j < fn_number[i];j++) {
-					if ( beat_x - Tolerance < note[i][j].x && note[i][j].x  < beat_x + Tolerance) {
-						sheet_note[i][j].setBeat(160);
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(240);
 						//sheet_note[i][j].getNote();
 					}
 				}
-				//cout << left_top.x + quater_h.cols / 2 << endl;
+				//cout << left_top.x + dotted_quater_l.cols / 2 << endl;
 			}
 		}
+		for (int k = 0;k < 30;k++) {
+			matchTemplate(clone, sixteenth_h, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.95) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + sixteenth_h.cols, left_top.y + sixteenth_h.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + sixteenth_h.cols / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(40);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + sixteenth_h.cols / 2 << endl;
+			}
+		}
+
+		
 		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, eighth_l, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.95) {
+			if (max > 0.90) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + eighth_l.cols, left_top.y + eighth_l.rows)), 0, 1, LINE_8);
 				beat_x = left_top.x + (quater_h.cols) / 2;
 				for (int j = 0;j < fn_number[i];j++) {
@@ -231,12 +245,12 @@ void find_beat() {
 				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
-		/*
+		
 		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, eighth_h, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.95) {
+			if (max > 0.90) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + eighth_h.cols, left_top.y + eighth_h.rows)), 0, 1, LINE_8);
 				beat_x = left_top.x + (quater_h.cols) / 2;
 				for (int j = 0;j < fn_number[i];j++) {
@@ -248,7 +262,39 @@ void find_beat() {
 				//cout << left_top.x + quater_h.cols / 2 << endl;
 			}
 		}
-		*/
+		for (int k = 0;k < 30;k++) {
+			matchTemplate(clone, quater_h, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.90) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + quater_h.cols, left_top.y + quater_h.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + quater_h.cols / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(160);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
+			}
+		}
+
+		for (int k = 0;k < 30;k++) {
+			matchTemplate(clone, quater_l, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.90) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + quater_l.cols, left_top.y + quater_l.rows)), 0, 1, LINE_8);
+				beat_x = left_top.x + (quater_h.cols) / 2;
+				for (int j = 0;j < fn_number[i];j++) {
+					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
+						sheet_note[i][j].setBeat(160);
+						//sheet_note[i][j].getNote();
+					}
+				}
+				//cout << left_top.x + quater_h.cols / 2 << endl;
+			}
+		}
 
 		for (int k = 0;k < 30;k++) {
 			matchTemplate(clone, half_l, coeff, TM_CCOEFF_NORMED);
@@ -322,6 +368,9 @@ void find_beat() {
 void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	Mat temp, temp2,temp3,temp4;
 	Mat g_clef, c_clef;
+	Mat quater_rest;
+	Mat eighth_rest;
+	Mat sharp;
 	double min, max;
 	Point left_top;
 	Mat coeff;
@@ -348,18 +397,25 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	CV_Assert(temp4.data);
 	threshold(temp4, temp4, 127, 255, THRESH_BINARY);
 
-	g_clef = imread("image/G_Clef.jpg", IMREAD_GRAYSCALE);
+	g_clef = imread("image/G_ClEF.png", IMREAD_GRAYSCALE);
 	CV_Assert(g_clef.data);
 	threshold(g_clef, g_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
 	c_clef = imread("image/C_Clef.jpg", IMREAD_GRAYSCALE);
 	CV_Assert(c_clef.data);
 	threshold(c_clef, c_clef, 127, 255, THRESH_BINARY | THRESH_OTSU);
-	/*
 
+	quater_rest = imread("image/QUATER_REST.png", IMREAD_GRAYSCALE);
+	CV_Assert(quater_rest.data);
+	threshold(quater_rest, quater_rest, 127, 255, THRESH_BINARY | THRESH_OTSU);
 
-	*/
+	eighth_rest = imread("image/EIGHTH_REST.png", IMREAD_GRAYSCALE);
+	CV_Assert(eighth_rest.data);
+	threshold(eighth_rest, eighth_rest, 127, 255, THRESH_BINARY | THRESH_OTSU);
 	
+	sharp = imread("image/SHARP.png", IMREAD_GRAYSCALE);
+	CV_Assert(sharp.data);
+	threshold(sharp, sharp, 127, 255, THRESH_BINARY);
 
 	cout << "가로길이"<< temp.cols << endl;
 	cout << "세로길이" << temp.rows << endl;
@@ -367,29 +423,37 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 	for (int i = 0;i < linecheck;i++) {
 		Mat clone = subImage[i].clone();
 		int note_number = 0;
-		for (int k = 0;k < 10;k++) {
+		int clef_x;
+
+		//높은음자리표/낮은음자리표 탐색
+		for (int k = 0;k < 1;k++) {
 			matchTemplate(clone, g_clef, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
 			if (max > 0.40) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + g_clef.cols, left_top.y + g_clef.rows)), 0, 1, LINE_8);
+				clef_x = left_top.x + g_clef.cols / 2;
 				clef = 1;
 			}
 		}
-		for (int k = 0;k < 10;k++) {
+		for (int k = 0;k < 1;k++) {
 			matchTemplate(clone, c_clef, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
 			if (max > 0.40) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + c_clef.cols, left_top.y + c_clef.rows)), 0, 1, LINE_8);
+				clef_x = left_top.x + c_clef.cols / 2;
 				clef = 0;
 			}
 		}
+
+
+
 		for (int k = 0;k < 40;k++) {
 			matchTemplate(clone, temp, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.90) {
+			if (max > 0.70) {
 
 				rectangle(clone, Rect(left_top, Point(left_top.x + temp.cols, left_top.y + temp.rows)), 0, 1, LINE_8);
 				note[i][note_number].x = left_top.x+temp2.cols/2;
@@ -401,7 +465,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 			matchTemplate(clone, temp2, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.90) {
+			if (max > 0.70) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + temp2.cols, left_top.y + temp2.rows)), 0, 1, LINE_8);
 				note[i][note_number].x = left_top.x+temp2.cols/2;
 				note[i][note_number].y = (left_top.y + temp2.rows / 2) - LINE_CONNECTION;
@@ -412,7 +476,7 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 			matchTemplate(clone, temp4, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.80) {
+			if (max > 0.70) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + temp4.cols, left_top.y + temp4.rows)), 0, 1, LINE_8);
 				note[i][note_number].x = left_top.x+temp4.cols/2;
 				note[i][note_number].y = (left_top.y + temp4.rows / 2) - LINE_CONNECTION;
@@ -423,13 +487,54 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 			matchTemplate(clone, temp3, coeff, TM_CCOEFF_NORMED);
 
 			minMaxLoc(coeff, &min, &max, NULL, &left_top);
-			if (max > 0.80) {
+			if (max > 0.70) {
 				rectangle(clone, Rect(left_top, Point(left_top.x + temp3.cols, left_top.y + temp3.rows)), 0, 1, LINE_8);
 				note[i][note_number].x = left_top.x+temp3.cols/2;
 				note[i][note_number].y = (left_top.y + temp3.rows / 2) - LINE_CONNECTION;
 				note_number++;
 			}
 		}
+		//쉼표 탐색
+		for (int k = 0;k < 40;k++) {
+			matchTemplate(clone, eighth_rest, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.90) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + eighth_rest.cols, left_top.y + eighth_rest.rows)), 0, 1, LINE_8);
+				note[i][note_number].x = left_top.x + eighth_rest.cols / 2;
+				note[i][note_number].y = -8;
+				note_number++;
+			}
+		}
+		for (int k = 0;k < 40;k++) {
+			matchTemplate(clone, quater_rest, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.90) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + quater_rest.cols, left_top.y + quater_rest.rows)), 0, 1, LINE_8);
+				note[i][note_number].x = left_top.x + quater_rest.cols / 2;
+				note[i][note_number].y = -4;
+				note_number++;
+			}
+		}
+
+		//조 탐색.(# :: 파도솔레라미시. 다른거 :: 시미라레솔도파)
+		int key=0;
+		for (int k = 0;k < 20;k++) {
+			matchTemplate(clone, sharp, coeff, TM_CCOEFF_NORMED);
+
+			minMaxLoc(coeff, &min, &max, NULL, &left_top);
+			if (max > 0.90) {
+				rectangle(clone, Rect(left_top, Point(left_top.x + sharp.cols, left_top.y + sharp.rows)), 0, 1, LINE_8);
+				if (clef_x < left_top.x && left_top.x < note[i][0].x) {
+					key++;
+				}
+				
+			}
+		}
+
+
+
 		sort(note[i], note[i] + note_number, cmp2);
 		for (int j = 0;j < note_number;j++) { //중복 제거
 			if ((note[i][j].x - note[i][j - 1].x) < 3) {
@@ -437,8 +542,8 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 				note_number--;
 				j--;
 			}
-
 		}
+
 		fn_number[i] = note_number;
 		cout << endl;
 		cout <<" 음표 갯수"<<fn_number[i];
@@ -474,10 +579,21 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 					sheet_note[i][j].setOctav(5);
 				}
 				else if (note[i][j].y<line_y[0] + Tolerance && note[i][j].y>line_y[0] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
-					sheet_note[i][j].setWhiteNumber(4);
-					sheet_note[i][j].setClef(1);
-					sheet_note[i][j].setOctav(5);
+
+					if (key > 0) {
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "파 샾" << endl;
+						sheet_note[i][j].setBlackNumber(3);
+						sheet_note[i][j].setClef(1);
+						sheet_note[i][j].setOctav(5);
+					}
+					else {
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
+						sheet_note[i][j].setWhiteNumber(4);
+						sheet_note[i][j].setClef(1);
+						sheet_note[i][j].setOctav(5);
+					}
+					
+					
 				}
 				else if (note[i][j].y > line_y[0] + Tolerance && note[i][j].y < line_y[1] - Tolerance) {
 					cout << note[i][j].x << "  " << note[i][j].y << "  " << "미" << endl;
@@ -516,10 +632,19 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 					sheet_note[i][j].setOctav(4);
 				}
 				else if (note[i][j].y > line_y[3] + Tolerance && note[i][j].y < line_y[4] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
-					sheet_note[i][j].setWhiteNumber(4);
-					sheet_note[i][j].setClef(1);
-					sheet_note[i][j].setOctav(4);
+					
+					if (key > 0) {
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "파 샾" << endl;
+						sheet_note[i][j].setBlackNumber(3);
+						sheet_note[i][j].setClef(1);
+						sheet_note[i][j].setOctav(4);
+					}
+					else {
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "파" << endl;
+						sheet_note[i][j].setWhiteNumber(4);
+						sheet_note[i][j].setClef(1);
+						sheet_note[i][j].setOctav(4);
+					}
 				}
 				else if (note[i][j].y<line_y[4] + Tolerance && note[i][j].y>line_y[4] - Tolerance) {
 					cout << note[i][j].x << "  " << note[i][j].y << "  " << "미" << endl;
@@ -539,12 +664,38 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(4);
 				}
+				else if (note[i][j].y > line_y[4] +line_gap + Tolerance && note[i][j].y < line_y[4] + line_gap*2 - Tolerance) {
+				cout << note[i][j].x << "  " << note[i][j].y << "  " << "시" << endl;
+				sheet_note[i][j].setWhiteNumber(7);
+				sheet_note[i][j].setClef(1);
+				sheet_note[i][j].setOctav(3);
+				}
+
+
+
+				//쉼표 탐색
+				else if (note[i][j].y == -8) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "8분 쉼표" << endl;
+					sheet_note[i][j].setWhiteNumber(0);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(0);
+					sheet_note[i][j].setBeat(80);
+				}
+				else if (note[i][j].y == -4) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "4분 쉼표" << endl;
+					sheet_note[i][j].setWhiteNumber(0);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(0);
+					sheet_note[i][j].setBeat(160);
+				}
 
 				else{
 				cout << note[i][j].x << "  " << note[i][j].y << endl;
 				}
 			}
 		}
+
+
 		else if (clef == 0) {
 			cout << "왼손" << endl;
 			for (int j = 0;j < note_number;j++) {
@@ -632,6 +783,28 @@ void find_scale() { //부분적 템플릿 매칭 -> 좌표 찾아 음계 찾기
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(2);
 				}
+				else if (note[i][j].y > line_y[4] + line_gap + Tolerance && note[i][j].y < line_y[4] + line_gap * 2 - Tolerance) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "레" << endl;
+					sheet_note[i][j].setWhiteNumber(2);
+					sheet_note[i][j].setClef(1);
+					sheet_note[i][j].setOctav(2);
+				}
+
+				//쉼표 인식
+				else if (note[i][j].y == -8) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "8분 쉼표" << endl;
+					sheet_note[i][j].setWhiteNumber(0);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(0);
+					sheet_note[i][j].setBeat(80);
+				}
+				else if (note[i][j].y == -4) {
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "4분 쉼표" << endl;
+					sheet_note[i][j].setWhiteNumber(0);
+					sheet_note[i][j].setClef(0);
+					sheet_note[i][j].setOctav(0);
+					sheet_note[i][j].setBeat(160);
+				}
 
 				else {
 					cout << note[i][j].x << "  " << note[i][j].y << endl;
@@ -663,7 +836,7 @@ int main() {
 
 	Mat binary_image;
 
-	image = imread("image/stars.png", IMREAD_GRAYSCALE);
+	image = imread("image/shoe_footprint.png", IMREAD_GRAYSCALE);
 	CV_Assert(image.data);
 
 
@@ -683,13 +856,13 @@ int main() {
 	//템플릿 이미지 추출(수동) >>
 	//윈도우에 출력  
 	
-	imshow("gray image", subImage[1]);
+	imshow("gray image", subImage[2]);
 
 	//윈도우에 콜백함수를 등록
 	setMouseCallback("gray image", CallBackFunc, NULL);
 	
-	Mat A = subImage[1](Rect(Point(182,40), Point(195, 76)));
-	imwrite("EIGHTH_L.png", A);
+	Mat A = subImage[2](Rect(Point(383,29), Point(394, 73)));
+	imwrite("DOTTED_QUATER_L.png", A);
 	
 
 	
