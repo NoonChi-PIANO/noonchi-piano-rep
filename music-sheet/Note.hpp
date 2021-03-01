@@ -9,6 +9,7 @@ private:
 	int white_number;
 	int black_number;
 	int beat;
+	int is_dotted;
 public:
 	Note() {
 		clef = 0;
@@ -16,6 +17,7 @@ public:
 		white_number = 0;
 		black_number = 0;
 		beat = 0;
+		is_dotted = 0;
 	}
 	void setNote(int _clef, int _octav, int _white_number, int _black_number, int _beat) {
 		clef = _clef;
@@ -48,6 +50,15 @@ public:
 		black_number = _black_number;
 	}
 	void setBeat(int _beat) {
-		beat = _beat;
+		if (is_dotted == 1) {
+			beat = _beat + _beat / 2;
+		}
+		else {
+			beat = _beat;
+		}
+		
+	}
+	void isDot() {
+		is_dotted = 1;
 	}
 };
