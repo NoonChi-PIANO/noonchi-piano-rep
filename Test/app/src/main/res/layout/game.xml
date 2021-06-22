@@ -1,0 +1,147 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.test.GameActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_play_or_stop"
+            android:text="play or stop"
+            android:textOff="연습하기"
+            android:textOn="멈추기"
+            android:textSize="30dp"
+            android:layout_margin="20dp"
+            android:onClick="onToggleClicked"
+            />
+
+        <ImageView
+            android:id="@+id/btn_velocity1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:background="@drawable/btn_velocity1"
+            android:onClick="clickVelocity"
+            android:layout_toRightOf="@id/btn_play_or_stop"
+            />
+
+        <ImageView
+            android:id="@+id/btn_velocity2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity1"
+            android:background="@drawable/btn_velocity2"
+            android:onClick="clickVelocity"
+            />
+
+        <ImageView
+            android:id="@+id/btn_velocity3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity2"
+            android:background="@drawable/btn_velocity3"
+            android:onClick="clickVelocity"/>
+
+        <ImageView
+            android:id="@+id/btn_velocity4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity3"
+            android:background="@drawable/btn_velocity4"
+            android:onClick="clickVelocity"/>
+
+        <ImageView
+            android:id="@+id/btn_velocity5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity4"
+            android:background="@drawable/btn_velocity5"
+            android:onClick="clickVelocity"/>
+
+        <ImageView
+            android:id="@+id/btn_velocity6"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity5"
+            android:background="@drawable/btn_velocity6"
+            android:onClick="clickVelocity"/>
+
+        <ImageView
+            android:id="@+id/btn_velocity7"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity6"
+            android:background="@drawable/btn_velocity7"
+            android:onClick="clickVelocity"/>
+
+        <ImageView
+            android:id="@+id/btn_velocity8"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+
+            android:layout_toRightOf="@+id/btn_velocity7"
+            android:background="@drawable/btn_velocity8"
+            android:onClick="clickVelocity"/>
+
+        <Button
+            android:id="@+id/repeat_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toRightOf="@id/btn_play_or_stop"
+            android:layout_below="@id/btn_velocity1"
+            android:text="반복" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="반복 끝"
+            android:id="@+id/repeat_end"
+            android:layout_below="@id/btn_velocity3"
+            android:layout_toRightOf="@+id/repeat_start"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="반복 연습 시작"
+            android:id="@+id/repeat"
+            android:layout_below="@id/btn_velocity6"
+            android:layout_toRightOf="@+id/repeat_end"
+            />
+        <!--
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_back"
+            android:layout_alignParentRight="true"
+            android:maxWidth="70dp"
+            android:maxHeight="70dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:id="@+id/btn_back"
+            />
+-->
+    </RelativeLayout>
+
+
+
+
+    <ImageView
+        android:id="@+id/test"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+</LinearLayout>
