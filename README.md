@@ -1,8 +1,9 @@
 # noonchi-piano-rep
 눈치 피아노 졸업 작품 공통 저장소
 
-# 프로젝트 수행 시나리오
+# 프로젝트 개요
 
+![image](https://user-images.githubusercontent.com/66546156/125243188-b59b8f80-e328-11eb-86d7-e23a7e9dd844.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242247-66089400-e327-11eb-82d6-2deb554cc10f.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242346-85072600-e327-11eb-87c4-5b354c792f6f.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242374-8e908e00-e327-11eb-9a53-6cf5a428ac8f.png)
@@ -32,3 +33,8 @@
 
 # 리듬 막대 모듈
 ![image](https://user-images.githubusercontent.com/66546156/125242920-4e7ddb00-e328-11eb-93eb-feec19d411bd.png)
+
+
+# 어플리케이션 데모
+
+
