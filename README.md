@@ -20,3 +20,15 @@
 
 ![image](https://user-images.githubusercontent.com/66546156/125242731-08287c00-e328-11eb-95b7-39f2ad671e69.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242684-fc3cba00-e327-11eb-80e3-f81a1904d5f5.png)
+
+
+# 음계 인식 모듈
+사용 기술
+-> Fast Fourier Transform (using RealDoubleFFT)
+
+![image](https://user-images.githubusercontent.com/66546156/125242886-3efe9200-e328-11eb-97e8-ff82aef920ef.png)
+![image](https://user-images.githubusercontent.com/66546156/125242902-43c34600-e328-11eb-82e0-3258f5409d1e.png)
+
+
+# 리듬 막대 모듈
+![image](https://user-images.githubusercontent.com/66546156/125242920-4e7ddb00-e328-11eb-93eb-feec19d411bd.png)
