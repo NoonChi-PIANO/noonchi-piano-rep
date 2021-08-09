@@ -1019,7 +1019,7 @@ public class GameActivity extends AppCompatActivity{
             answer_left.clear();
 
 
-
+            Toast.makeText(this, "연습을 종료합니다", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(GameActivity.this,Home.class));
             ActivityCompat.finishAffinity(this);
 
