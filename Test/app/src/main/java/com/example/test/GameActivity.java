@@ -960,6 +960,7 @@ public class GameActivity extends AppCompatActivity{
             answer_left.clear();
 
 
+            Toast.makeText(GameActivity.this, "game start", Toast.LENGTH_SHORT).show();
 
             startActivity(new Intent(GameActivity.this,Home.class));
             ActivityCompat.finishAffinity(this);
