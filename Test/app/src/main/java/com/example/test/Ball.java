@@ -35,6 +35,7 @@ class Ball {
     private float length; // 빛막대의 세로길이
     private float length_boundary; // 판정선에 닿았을 때 빛막대의 세로길이
     private boolean touch_line; //빛 막대에 닿았는지 안 닿았는지
+    private boolean finish_line;
 
     private int correct;
     private int effect_check = 0;
@@ -55,6 +56,7 @@ class Ball {
         setLength_boundary(length);
         setCorrect(BAD); // 맞게 쳤는지
         touch_line=false;
+        finish_line=false;
 
 
         bitmap1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.effect_hit1), 100,100,false);
@@ -97,6 +99,8 @@ class Ball {
 
         //this.touch_line=f.touch_line;
 
+        //this.finish_line=f.finish_line;
+
         this.correct=f.correct;
         this.effect_check = f.effect_check;
         this.bitmap1=f.bitmap1;
@@ -115,10 +119,72 @@ class Ball {
  */
     }
 
+    public String getWhiteScale(){
+        //int octav = 0;
+        int scale = 0;
+
+        String answer=null;
+        //octav = ((protocol/1000000)%10);
+        scale = ((protocol/100000)%10);
+
+        if(scale==1){
+            answer="C";//+Integer.toString(octav);
+        }
+        else if(scale==2){
+            answer="D";//+Integer.toString(octav);
+        }
+        else if(scale==3){
+            answer="E";//+Integer.toString(octav);
+        }
+        else if(scale==4){
+            answer="F";//+Integer.toString(octav);
+        }
+        else if(scale==5){
+            answer="G";//+Integer.toString(octav);
+        }
+        else if(scale==6){
+            answer="A";//+Integer.toString(octav);
+        }
+        else if(scale==7){
+            answer="B";//+Integer.toString(octav);
+        }
+        return answer;
+    }
+    public String getBlackScale(){
+        int octav = 0;
+        int scale = 0;
+        String answer=null;
+
+        octav = ((protocol/1000000)%10);
+        scale = ((protocol/10000)%10);
+
+
+        if(scale==1){
+            answer="C#"+Integer.toString(octav);
+        }
+        else if(scale==2){
+            answer="D#"+Integer.toString(octav);
+        }
+        else if(scale==3){
+            answer="F#"+Integer.toString(octav);
+        }
+        else if(scale==4){
+            answer="G#"+Integer.toString(octav);
+        }
+        else if(scale==5){
+            answer="A#"+Integer.toString(octav);
+        }
+        return answer;
+    }
+
+
     public int getProtocol() {
         return protocol;
     }
 
+    public boolean getFinish_Line(){
+        return finish_line;
+    }
     public void setProtocol(int protocol) {
         this.protocol = protocol;
     }
@@ -189,7 +255,9 @@ class Ball {
     public boolean getTouch_Line(){
         return touch_line;
     }
-
+    public void setCount_while(int count_while){
+        this.count_while=count_while;
+    }
     public void setCount_while(int protocol, float velocity) {
         float percentage;
 
@@ -356,13 +424,14 @@ class Ball {
 
     public void drawWhiteGubanLight(Canvas canvas) {
         if(y >= y_piano_upleft + gunban.getWhiteVertical() - length) { // 흰색 건반 아래쪽 경계선에 빛막대가 닿게 될 경우
+            touch_line=true; // 막대에 닿았다고 판정
 
             if(length_boundary >= 0) { // 빛 막대가 경계선을 아직 완전히 지나가지 않았을 경우
                 canvas.drawRect(x, y, x + 47/1.3f + gunban.getCountSizeChange(), y + length_boundary, paint);
                 length_boundary -= velocity; // 속력만큼 빛막대 세로길이 감소
                 effect_check++;
             } else {
-                touch_line=true; // 막대에 닿았다고 판정
+                finish_line=true;
                 go_down = false; // 더 이상 내려가지 마라
             }
         } else {
@@ -406,11 +475,14 @@ class Ball {
 
     public void drawBlackGubanLight(Canvas canvas) {
         if(y >= y_piano_upleft + gunban.getBlackVertical() - length) { // 검은 건반 아래쪽 경계선에 빛막대가 닿게 될 경우
+            touch_line=true;
+
             if(length_boundary >= 0) { // 빛 막대가 경계선을 아직 완전히 지나가지 않았을 경우
                 canvas.drawRect(x, y, x + 23/1.3f + 0.489361f * gunban.getCountSizeChange(), y + length_boundary, paint);
                 length_boundary -= velocity; // 속력만큼 빛막대 세로길이 감소
                 effect_check++;
             } else {
+                finish_line=true;
                 go_down = false; // 더 이상 내려가지 마라
             }
         } else {

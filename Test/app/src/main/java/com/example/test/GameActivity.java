@@ -1,22 +1,22 @@
 package com.example.test;
 
+import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.media.AudioFormat;
-import android.media.AudioRecord;
-import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -35,29 +35,26 @@ import static com.example.test.Fpractice.music_selected;
 import static com.example.test.DrawGunban.y_piano_upleft;
 import static com.example.test.Panel.balls_right;
 import static com.example.test.Panel.balls_left;
-import static com.example.test.Panel.repeat_right_sum;
-import static com.example.test.Panel.repeat_right;
-import static com.example.test.Panel.repeat_left_sum;
-import static com.example.test.Panel.repeat_left;
 import static com.example.test.Panel.repeat_number;
-import static com.example.test.ScoreActivity.GREAT;
-import static com.example.test.ScoreActivity.GOOD;
-import static com.example.test.ScoreActivity.BAD;
-import static com.example.test.SetPianoOctaveActivity.gunban;
 import static com.example.test.Ball.velocity;
 
 
 
+
 public class GameActivity extends AppCompatActivity{
+
     public static Panel panel;
     public static ArrayList<ArrayList> answer_right;
     public static ArrayList<ArrayList> answer_left;
     public static int sum_right_count_while; //오른손 for문 도는 개수
     public static int sum_left_count_while; // 왼손 for문 도는 개수
-
+    public static TextView Right_scale;
+    public static TextView Left_scale;
     public static int total_length;//곡 전체 길이(프로토콜 개수)
 
 
+    public int music;
+    public static TextView is_Correct;
     private ToggleButton play_or_stop;
     private Button repeat_start;
     private Button repeat_end;
@@ -67,18 +64,45 @@ public class GameActivity extends AppCompatActivity{
     private Paint green_line;
     private ImageView Test;
 
+    public static Context context_game;
+
+    public Button StartStopBTN;
+    public static TextView t2;
+    private ScaleDetector2 sc2 ;
+    private ScaleDetector2.RecordAudio recordTask;
+
+
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+
+
+
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(GameActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        }
+
         final int[] selectedItem={0};
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
+
+        context_game = this;
+
 
         repeat=findViewById(R.id.repeat);
         repeat_end=findViewById(R.id.repeat_end);
         repeat_start=findViewById(R.id.repeat_start);
 
+        Right_scale = findViewById(R.id.Right_Scale);
+        Left_scale = findViewById(R.id.Left_Scale);
+        is_Correct = findViewById((R.id.isCorrect));
         Intent myintent = getIntent();
         int selectImg= myintent.getIntExtra("select",0);
+        music = myintent.getIntExtra("music",0);
 
         panel = new Panel(this);
 
@@ -153,13 +177,42 @@ public class GameActivity extends AppCompatActivity{
                 dlg.create();
                 dlg.show();
 
-                panel.thread = new DrawBall(panel);
-                panel.thread.start();
+                panel.thread = new DrawBall(panel,GameActivity.this);
 
+                panel.thread.start();
                 panel.thread.setEnd_point(true);
 
             }
         });
+
+        StartStopBTN = (Button)findViewById(R.id.StartStopButton);
+
+        t2 = (TextView)findViewById(R.id.HzText2);
+        t2.setText("...");
+
+
+        //sc2.started
+        sc2 = new ScaleDetector2(this);
+        StartStopBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sc2.started){
+                    StartStopBTN.setText("Start");
+                    sc2.started=false;
+                    recordTask.cancel(true);
+
+
+                }else{
+                    StartStopBTN.setText("Stop");
+                    sc2.started=true;
+                    recordTask = sc2.new RecordAudio();
+                    recordTask.execute();
+                }
+
+            }
+        });
+
+
 
 
 
@@ -184,8 +237,9 @@ public class GameActivity extends AppCompatActivity{
         ToggleButton play_or_stop = (ToggleButton)findViewById(R.id.btn_play_or_stop);
         if(is_on) {
             //play_or_stop.setText("멈추기");
-            panel.thread = new DrawBall(panel);
+            panel.thread = new DrawBall(panel,this);
             panel.thread.start();
+
 
         } else {
             //play_or_stop.setText("연습하기");
@@ -211,41 +265,46 @@ public class GameActivity extends AppCompatActivity{
 
         music_selected = true; // 노래를 선택했다
 
-        insertRightProtocol(R.raw.elise_right, panel);
+        /*
+        insertRightProtocol(R.raw.butterfly_right, panel);
         //insertLeftProtocol(R.raw.elise_left, panel);
-        answer_right = insertAnswerProtocol(R.raw.elise_right);
+        answer_right = insertAnswerProtocol(R.raw.butterfly_right);
         //answer_left = insertAnswerProtocol(R.raw.elise_left);
- /*
+
+         */
         switch(music) {
-            case elise:
-                insertRightProtocol(R.raw.elise_right, panel);
-                insertLeftProtocol(R.raw.elise_left, panel);
-                answer_right = insertAnswerProtocol(R.raw.elise_right);
-                answer_left = insertAnswerProtocol(R.raw.elise_left);
+            case 0:
+                insertRightProtocol(R.raw.butterfly_right, panel);
+                //insertLeftProtocol(R.raw.elise_left, panel);
+                answer_right = insertAnswerProtocol(R.raw.butterfly_right);
+                //answer_left = insertAnswerProtocol(R.raw.elise_left);
                 break;
 
-            case nowhere:
-                insertRightProtocol(R.raw.nowhere_right, panel);
-                insertLeftProtocol(R.raw.nowhere_left, panel);
-                answer_right = insertAnswerProtocol(R.raw.nowhere_right);
-                answer_left = insertAnswerProtocol(R.raw.nowhere_left);
+            case 1:
+                insertRightProtocol(R.raw.shanz_right, panel);
+                insertLeftProtocol(R.raw.shanz_left, panel);
+                answer_right = insertAnswerProtocol(R.raw.shanz_right);
+                answer_left = insertAnswerProtocol(R.raw.shanz_left);
                 break;
 
-            case star:
-                insertRightProtocol(R.raw.star_right, panel);
-                insertLeftProtocol(R.raw.star_left, panel);
-                answer_right = insertAnswerProtocol(R.raw.star_right);
-                answer_left = insertAnswerProtocol(R.raw.star_left);
+            case 2:
+                insertRightProtocol(R.raw.summer_right, panel);
+                insertLeftProtocol(R.raw.summer_left, panel);
+                answer_right = insertAnswerProtocol(R.raw.summer_right);
+                answer_left = insertAnswerProtocol(R.raw.summer_left);
                 break;
-
+/*
             case rabbit:
                 insertRightProtocol(R.raw.rabbit_right, panel);
                 insertLeftProtocol(R.raw.rabbit_left, panel);
                 answer_right = insertAnswerProtocol(R.raw.rabbit_right);
                 answer_left = insertAnswerProtocol(R.raw.rabbit_left);
                 break;
+
+ */
+
         }
-        */
+
 
     }
     public void insertRightProtocol(int music_name, Panel panel) { // 오른손 프로토콜 입력
@@ -960,7 +1019,11 @@ public class GameActivity extends AppCompatActivity{
             answer_left.clear();
 
 
+
+            Toast.makeText(this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
+
             Toast.makeText(GameActivity.this, "game start", Toast.LENGTH_SHORT).show();
+
 
             startActivity(new Intent(GameActivity.this,Home.class));
             ActivityCompat.finishAffinity(this);

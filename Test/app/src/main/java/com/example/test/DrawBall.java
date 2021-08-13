@@ -1,13 +1,19 @@
 package com.example.test;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Message;
 import android.view.SurfaceHolder;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.example.test.Panel.repeat_L_flag;
 import static com.example.test.Panel.repeat_number;
 import static com.example.test.SetPianoOctaveActivity.gunban;
 import static com.example.test.Ball.WHITE;
@@ -26,20 +32,35 @@ import static com.example.test.Panel.repeat_left_sum;
 import static com.example.test.Panel.repeat_right_num;
 import static com.example.test.Panel.repeat_left_num;
 import static com.example.test.Panel.repeat_left;
+import static com.example.test.GameActivity.Right_scale;
+import static com.example.test.GameActivity.Left_scale;
+import static com.example.test.GameActivity.t2;
+import static com.example.test.GameActivity.is_Correct;
+import static com.example.test.Panel.last_flag;
+import static com.example.test.Panel.right_scale;
+import static com.example.test.Panel.left_scale;
 
 class DrawBall extends Thread {
+    public static String is_correct;
     private SurfaceHolder holder;
     private Paint white_gunban;
     private Paint black_gunban;
     private Paint judge_line;
     private boolean stop;
+    private int total_Count_while=0;
+    Context mContext;
 
-
-
+    //public DrawBall(){ }
     public DrawBall(Panel panel){
         setHolder(panel);
         setColor();
         setStop(false);
+    }
+    public DrawBall(Panel panel, Context context){
+        setHolder(panel);
+        setColor();
+        setStop(false);
+        mContext = context;
        // setStart_point(false);
         //setEnd_point(false);
         //repeat_flag=0;
@@ -51,6 +72,9 @@ class DrawBall extends Thread {
         holder=panel.getHolder();
     }
 
+    public boolean getStop(){
+        return stop;
+    }
     public void setColor(){
         white_gunban = new Paint();
         white_gunban.setColor(Color.WHITE);
@@ -66,10 +90,25 @@ class DrawBall extends Thread {
     public void setStart_point(boolean true_or_false){start_point = true_or_false;}
     public void setStart(boolean true_or_false){start=true_or_false;}
     public void setEnd_point(boolean true_or_false){end_point = true_or_false;}
+    final Handler handler = new Handler()
+    {
+        public void handleMessage(Message msg)
+        {
+            if(t2.getText().equals(right_scale)||t2.getText().equals(left_scale)){
+                is_Correct.setText("correct");
+            }
+            else
+                is_Correct.setText("bad");
+            Right_scale.setText(right_scale);
+            Left_scale.setText(left_scale);
+        }
+    };
     public void run(){
 
         while(!stop){
+
             Canvas canvas = holder.lockCanvas();
+
 
             if(canvas != null){
                 canvas.drawColor(Color.BLACK);
@@ -84,6 +123,7 @@ class DrawBall extends Thread {
 
 
                 synchronized(balls_right) { // 흰색 건반에 내려오는 빛 그리기(오른쪽)
+
                     if(start_point&&repeat_flag==0) { //한번만 repeat_right에 복사
                         for(int i=0;i<balls_right.size();i++){
                             balls_right.get(i).setColor(balls_right.get(i).getProtocol());
@@ -95,15 +135,22 @@ class DrawBall extends Thread {
                         end_point=false;
                     }
                     if(end_point&&repeat_flag==1){
+
+
                         for(int i=0;i<repeat_right.size()-1;i++){
                             if(balls_right.get(i).getGo_down()){
                                 if(balls_right.get(i).getTouch_Line()==false){
-                                    repeat_right.remove(i);
-                                    i--;
+
+                                        repeat_right.remove(i);
+                                        i--;
+
+
                                 }
                             }
                         }
+
                         repeat_right.remove(repeat_right.size()-1);
+
                         balls_right.clear();
                         repeat_flag=0;
                         start_point=false;
@@ -121,6 +168,8 @@ class DrawBall extends Thread {
                                 if(ball.getType() == WHITE && ball.getGo_down()) {
                                     if (ball.getCount_while() > 0) {
                                         ball.minusCount_while();
+                                        
+
                                     } else {
                                         ball.drawWhiteGubanLight(canvas);
                                     }
@@ -128,7 +177,7 @@ class DrawBall extends Thread {
 
                             }
                             if(repeat_right.size()>0) {
-                                if (repeat_right.get(repeat_right.size() - 1).getTouch_Line() == true) {
+                                if (repeat_right.get(repeat_right.size() - 1).getFinish_Line() == true) {
 
                                     repeat_right.clear();
                                     for (Ball ball2 : repeat_right_sum.get(repeat_right_num)) {
@@ -147,8 +196,15 @@ class DrawBall extends Thread {
                             if (ball.getType() == WHITE && ball.getGo_down()) {
                                 if (ball.getCount_while() > 0) {
                                     ball.minusCount_while();
+                                    total_Count_while++;
                                 } else {
                                     ball.drawWhiteGubanLight(canvas);
+                                    if(ball.getTouch_Line()==true){
+                                        right_scale=(ball.getWhiteScale());
+
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
                                 }
                             }
                         }
@@ -156,29 +212,61 @@ class DrawBall extends Thread {
                 }
 
 
-                synchronized(balls_left) { // 흰색 건반에 내려오는 빛 그리기(오른쪽)
-                    if(start_point&&repeat_flag==0) { //한번만 repeat_left에 복사
+                synchronized(balls_left) { // 흰색 건반에 내려오는 빛 그리기(왼쪽)
+
+                    if(start_point&&repeat_L_flag==0) { //한번만 repeat_left에 복사
                         for(int i=0;i<balls_left.size();i++){
                             balls_left.get(i).setColor(balls_left.get(i).getProtocol());
                         }
                         for(Ball ball : balls_left){
                             repeat_left.add(new Ball(ball));
                         }
-                        repeat_flag=1;
+                        repeat_L_flag=1;
                         end_point=false;
                     }
-                    if(end_point&&repeat_flag==1){
-                        for(int i=0;i<repeat_left.size()-1;i++){
-                            if(balls_left.get(i).getGo_down()){
-                                if(balls_left.get(i).getTouch_Line()==false){
+                    if(end_point&&repeat_L_flag==1) {
+
+                        for (int i = 0; i < repeat_left.size() - 1; i++) {
+                            if (balls_left.get(i).getGo_down()) {
+                                if (balls_left.get(i).getTouch_Line() == false) {
+
                                     repeat_left.remove(i);
                                     i--;
+
+
                                 }
                             }
                         }
-                        repeat_left.remove(repeat_left.size()-1);
+
+
+                        try{
+                            if(repeat_left!=null) {
+                                repeat_left.remove(repeat_left.size() - 1);
+                            }
+                        }catch(ArrayIndexOutOfBoundsException e){
+
+                        }
+
+                        if(repeat_left!=null&&repeat_right!=null) {
+                            try {
+                                repeat_left.add(new Ball(repeat_left.get(repeat_left.size() - 1)));
+                                repeat_left.get(repeat_left.size() - 1).setLength(160);
+                                repeat_left.get(repeat_left.size() - 1).setCount_while(repeat_left.get(repeat_left.size() - 1).getCount_while() + 30);
+
+                                repeat_right.add(new Ball(repeat_left.get(repeat_left.size() - 1)));
+                                repeat_right.get(repeat_right.size() - 1).setLength(160);
+                                repeat_right.get(repeat_right.size() - 1).setCount_while(repeat_left.get(repeat_left.size() - 1).getCount_while());
+
+                            } catch (ArrayIndexOutOfBoundsException e) {
+
+                            }
+                        }
+
+
+                         
+
                         balls_left.clear();
-                        repeat_flag=0;
+                        repeat_L_flag=0;
                         start_point=false;
                     }
                     if(start){
@@ -201,7 +289,7 @@ class DrawBall extends Thread {
 
                         }
                         if(repeat_left.size()>0) {
-                            if (repeat_left.get(repeat_left.size() - 1).getTouch_Line() == true) {
+                            if (repeat_left.get(repeat_left.size() - 1).getFinish_Line() == true) {
 
                                 repeat_left.clear();
                                 for (Ball ball2 : repeat_left_sum.get(repeat_left_num)) {
@@ -222,6 +310,12 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawWhiteGubanLight(canvas);
+                                    if(ball.getTouch_Line()==true){
+                                        left_scale=(ball.getWhiteScale());
+
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
                                 }
                             }
                         }
@@ -299,6 +393,7 @@ class DrawBall extends Thread {
                                 if (ball.getCount_while() > 0) {
                                     ball.minusCount_while();
                                 } else {
+
                                     ball.drawBlackGubanLight(canvas);
                                 }
                             }
@@ -327,6 +422,12 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawBlackGubanLight(canvas);
+                                    if(ball.getTouch_Line()==true){
+                                        right_scale=(ball.getBlackScale());
+
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
                                 }
                             }
                         }
@@ -405,6 +506,12 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawBlackGubanLight(canvas);
+                                    if(ball.getTouch_Line()==true){
+                                        left_scale=(ball.getBlackScale());
+
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
                                 }
                             }
                         }

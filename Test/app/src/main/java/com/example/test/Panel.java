@@ -21,10 +21,15 @@ class Panel extends SurfaceView implements SurfaceHolder.Callback {
     public static boolean start_point; //
     public static boolean end_point; //
     public static boolean start; //
+    public static boolean last_flag;
     public static int repeat_flag; //
+    public static int repeat_L_flag; //
     public static int repeat_number;
     public static int repeat_right_num;
     public static int repeat_left_num;
+
+    public static String right_scale;
+    public static String left_scale;
 
     public Panel(Context context) {
         super(context);
@@ -33,12 +38,15 @@ class Panel extends SurfaceView implements SurfaceHolder.Callback {
         end_point=false;
         start = false;
         repeat_flag=0;
+        repeat_L_flag=0;
         repeat_right_num=0;
         repeat_left_num=0;
         repeat_right = new ArrayList<>();
         repeat_left= new ArrayList<>();
         repeat_right_sum = new ArrayList<>();
         repeat_left_sum = new ArrayList<>();
+        last_flag=true;
+
     }
 
     @Override

@@ -146,7 +146,7 @@ public class Galary extends AppCompatActivity {
         // String msg= etMsg.getText().toString();
 
         //안드로이드에서 보낼 데이터를 받을 php 서버 주소
-        String serverUrl="http://172.20.10.7/noonchi/OpenCV_PJT/insertDB.php";
+        String serverUrl="http://192.168.206.213/noonchi/OpenCV_PJT/insertDB.php";
         // String serverUrl="http://172.30.1.60/noonchi/insertDB.php";
         //192.168.206.159
 
@@ -176,13 +176,13 @@ public class Galary extends AppCompatActivity {
         //요청객체를 서버로 보낼 우체통 같은 객체 생성
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(smpr);
-        //왜 아무도 커밋안하냐
+
     }
 
 
     public void clickDownLoad(View view){
 
-        String serverUrl="http://172.20.10.7/noonchi/OpenCV_PJT/download.php";
+        String serverUrl="http://192.168.206.213/noonchi/OpenCV_PJT/download.php";
 
         SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
                 new Response.Listener<String>() {

@@ -22,6 +22,8 @@ import android.widget.LinearLayout;
 public class Fpractice extends Fragment {
     public static boolean music_selected = false;
     LinearLayout testButton;
+    LinearLayout testButton2;
+    LinearLayout testButton3;
    public Fpractice() {
         // Required empty public constructor
    }
@@ -45,6 +47,8 @@ public class Fpractice extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_fpractice, container, false);
         testButton = (LinearLayout)rootView.findViewById(R.id.testbutton);
+        testButton2 = (LinearLayout)rootView.findViewById(R.id.testbutton2);
+        testButton3 = (LinearLayout)rootView.findViewById(R.id.testbutton3);
 
         testButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +56,34 @@ public class Fpractice extends Fragment {
 
                 Intent myIntent = new Intent(getActivity(),GameActivity.class);
                 myIntent.putExtra("select",0);
+                myIntent.putExtra("music",0);
                 getActivity().startActivity(myIntent);
             }
 
         });
+        testButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent myIntent = new Intent(getActivity(),GameActivity.class);
+                myIntent.putExtra("select",0);
+                myIntent.putExtra("music",1);
+                getActivity().startActivity(myIntent);
+            }
+
+        });
+        testButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent myIntent = new Intent(getActivity(),GameActivity.class);
+                myIntent.putExtra("select",0);
+                myIntent.putExtra("music",2);
+                getActivity().startActivity(myIntent);
+            }
+
+        });
+
 
         // Inflate the layout for this fragment
         //return view;
