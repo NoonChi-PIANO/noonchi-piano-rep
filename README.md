@@ -1,3 +1,6 @@
+# 공지사항
+API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가해야함
+
 # noonchi-piano-rep
 눈치 피아노 졸업 작품 공통 저장소
 
