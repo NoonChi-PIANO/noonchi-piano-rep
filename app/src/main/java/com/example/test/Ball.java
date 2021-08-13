@@ -134,6 +134,7 @@ class Ball {
             answer="D";//+Integer.toString(octav);
         }
         else if(scale==3){
+
             answer="E";//+Integer.toString(octav);
         }
         else if(scale==4){
