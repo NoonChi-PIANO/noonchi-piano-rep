@@ -25,6 +25,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    compileSdkVersion 29
 }
 
 repositories {
@@ -50,6 +51,6 @@ dependencies {
     implementation files('libs\\fftpack-0.1.jar')
     //mpandroidchart는 위에 리포지토리도 추가해야함
 
-    compile group: 'me.franfernandez', name: 'fftpack', version: '0.1'
+    //compile group: 'me.franfernandez', name: 'fftpack', version: '0.1'
 
 }
