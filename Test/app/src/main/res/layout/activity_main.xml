@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="USERNAME"
+            android:id="@+id/uidT"
             android:inputType="text" />
         <Button
             android:id="@+id/login"
@@ -49,7 +50,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="PASSWORD"
-            android:inputType="numberPassword" />
+            android:id="@+id/upassT"
+            android:inputType="text" />
         <Button
             android:id="@+id/signup"
             android:layout_margin="10dp"
