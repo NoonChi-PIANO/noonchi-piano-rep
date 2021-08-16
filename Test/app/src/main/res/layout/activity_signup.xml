@@ -37,7 +37,9 @@
                 <EditText
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:id="@+id/signid"
+                    />
             </LinearLayout>
 
             <TextView
@@ -55,7 +57,9 @@
                 <EditText
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:id="@+id/signpw"
+                    />
             </LinearLayout>
 
             <TextView
@@ -63,6 +67,7 @@
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:text="비밀번호 확인"/>
             <LinearLayout
                 android:layout_marginTop="5dp"
@@ -73,6 +78,7 @@
                 <EditText
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
+                    android:id="@+id/signpwCheck"
                     android:inputType="textPassword"/>
             </LinearLayout>
 
