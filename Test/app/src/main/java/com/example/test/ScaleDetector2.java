@@ -59,38 +59,12 @@ public class ScaleDetector2 {
 
                 while (started) {
                     int bufferReadResult = audioRecord.read(buffer, 0, blockSize);
-
                     //FFT는 Double 형 데이터를 사용하므로 short로 읽은 데이터를 형변환 시켜줘야함. short / short.MAX_VALUE = double
                     for (int i = 0; i < blockSize && i < bufferReadResult; i++) {
                         toTransform[i] = (double) buffer[i] / Short.MAX_VALUE; // 부호 있는 16비트
                     }
-
-                    //-> JTransform 부분
-                    //Jtransform 은 입력에 실수부 허수부가 들어가야하므로 허수부 임의로 0으로 채워서 생성해줌
-                    double y[] = new double[blockSize];
-                    for (int i = 0; i < blockSize; i++) {
-                        y[i] = 0;
-                    }
-                    //실수 허수를 넣으므로 연산에는 blockSize의 2배인 배열 필요
-                    double[] summary = new double[2 * blockSize];
-                    for (int k = 0; k < blockSize; k++) {
-                        summary[2 * k] = toTransform[k]; //실수부
-                        summary[2 * k + 1] = y[k]; //허수부 0으로 채워넣음.
-                    }
-                    //  DoubleFFT_1D fft = new DoubleFFT_1D(blockSize);
-                    fft.complexForward(summary);
-                    //잡음잡는것은 RealDoubleFFT가 훨씬 더 잘잡는다. 현재는 DoubleFFT 사용중
-                    //RealDoubleFFT 부분
-                    //transformer.ft(toTransform);
-                    for(int k=0;k<blockSize/2;k++){
-                        mag[k] = Math.sqrt(Math.pow(summary[2*k],2)+Math.pow(summary[2*k+1],2));
-                    }
-
-                    // publishProgress를 호출하면 onProgressUpdate가 호출된다.
-                    //publishProgress(toTransform);
-                    publishProgress(mag);
-
-
+                    transformer.ft(toTransform);
+                    publishProgress(toTransform);
                 }
                 audioRecord.stop();
             } catch (Throwable t) {
@@ -137,154 +111,81 @@ public class ScaleDetector2 {
         }
     }
     public String whichScale2(double[]... toTransform){
-
         if(toTransform[0][111]>99999){
 
         }
-        else if(toTransform[0][32]>55 ||toTransform[0][33]>55  ){
-            scale2 = "C"; //도
+        else if(toTransform[0][259]>55 ||toTransform[0][260]>55 || toTransform[0][261]>55  ){
+            scale2 = "C4"; //도
         }
-        else if(toTransform[0][73]>45 ||toTransform[0][74]>45){
-            scale2 = "D"; //레
+        else if(toTransform[0][293]>15 || toTransform[0][292]>30 || toTransform[0][294]>20 ||
+                toTransform[0][295]>30 || toTransform[0][296]>30 ){
+            scale2 = "D4"; //레
         }
-        else if(toTransform[0][41]>33 ){
-            scale2 = "E";
+        else if(toTransform[0][329]>50 ||toTransform[0][328]>50 || toTransform[0][330]>50  ){
+            scale2 = "E4"; //미
         }
-        else if(toTransform[0][75]>55 || toTransform[0][86]>55 || toTransform[0][87]>55){
-            scale2 = "F";
+        else if(toTransform[0][349]>50 || toTransform[0][348]>50 || toTransform[0][347]>50 ||
+                toTransform[0][346]>50 || toTransform[0][350]>50 || toTransform[0][351]>50 ){
+            scale2 = "F4"; //파
         }
-        else if(toTransform[0][48]>55 || toTransform[0][49]>55){
-            scale2 = "G";
+        else if(toTransform[0][391]>55 ||toTransform[0][390]>60 || toTransform[0][389]>60 ||
+                toTransform[0][392]>60  ){
+            scale2 = "G4"; //솔
         }
-        else if( toTransform[0][55]>35){
-            scale2 = "A";
+        else if(toTransform[0][440]>30 || toTransform[0][441]>30 || toTransform[0][442]>55 ||
+                toTransform[0][438]>30 || toTransform[0][436]>55 || toTransform[0][437]>55){
+            scale2 = "A4"; //라
         }
-        else if(toTransform[0][62]>45 || toTransform[0][61]>45  ){
-            scale2 = "B";
-        }
-
-        else if(toTransform[0][66]>35 || (toTransform[0][131]>45&&toTransform[0][131]<139)){
-            scale2 ="C"; //도
-        }
-        else if(toTransform[0][73]>55 || toTransform[0][61]>45 || toTransform[0][74]>45){
-            scale2 = "D"; //레
-            //74는 F4랑 겹쳐서 일단 뺌
-        }
-        else if(toTransform[0][70]>45 ){
-            scale2 = "E"; //미
-        }
-        else if(toTransform[0][87]>55 ||toTransform[0][86]>55 ){
-            scale2 = "F"; //파
-        }
-        else if((toTransform[0][98]>55 &&toTransform[0][97]>33) ||  toTransform[0][96]>55 || toTransform[0][85]>55 ){
-            scale2 = "G"; //솔
-            //솔 98 음 인식 좀 이상함
-        }
-        else if(toTransform[0][110]>110 ){
-            scale2 = "A"; //라
-        }
-        else if(toTransform[0][123]>80 || toTransform[0][124] >80  ){
-            scale2 = "B"; //시
+        else if(toTransform[0][493]>80 ||toTransform[0][494]>80 || toTransform[0][495]>80 ||
+                toTransform[0][496]>80  ){
+            scale2 = "B4"; //솔
         }
 
-        else if(toTransform[0][130]>45 || toTransform[0][131]>120 || toTransform[0][118]>45 || toTransform[0][119]>45 ){
-            scale2 = "C";
+        else if(toTransform[0][523]>44 ||toTransform[0][524]>44 || toTransform[0][521]>44  ){
+            scale2 = "C5";
         }
-        else if(toTransform[0][147]>45 || toTransform[0][135]>45){
-            scale2 = "D";
+        else if(toTransform[0][587]>44 ||toTransform[0][588]>44 || toTransform[0][589]>44  ){
+            scale2 = "D5";
         }
-        else if(toTransform[0][165]>45 || toTransform[0][153]>45){
-            scale2 = "E";
+        else if(toTransform[0][660]>15 ||toTransform[0][659]>20 || toTransform[0][662]>20 ||
+                toTransform[0][663]>20 ||toTransform[0][658]>15 || toTransform[0][657]>28 ){
+            scale2 = "E5";
         }
-        else if(toTransform[0][174]>45 || toTransform[0][175]>45 || toTransform[0][176]>45 || toTransform[0][163]>45 ){
-            scale2 = "F";
+        else if(toTransform[0][697]>60 ||toTransform[0][698]>60 ||  toTransform[0][699]>60 || toTransform[0][700]>60  ){
+            scale2 = "F5";
         }
-        else if((toTransform[0][171]>45 && toTransform[0][184]>40) || (toTransform[0][184]>45&& toTransform[0][184]>40)
-                || (toTransform[0][196]>45 && toTransform[0][184]>40)){
-            scale2 = "G";
+        else if(toTransform[0][783]>55 ||toTransform[0][784]>55 ){
+            scale2 = "G5";
         }
-        else if(toTransform[0][221]>60 || toTransform[0][220]>60 || toTransform[0][208]>60){
-            scale2 = "A";
+        else if(toTransform[0][880]>60 ||toTransform[0][881]>60 || toTransform[0][882]>60 ){
+            scale2 = "A5";
         }
-        else if(toTransform[0][223]>45 || toTransform[0][235]>45 || toTransform[0][247]>45 || toTransform[0][248]>45){
-            scale2 = "B";
+        else if(toTransform[0][987]>33 ||toTransform[0][988]>33 || toTransform[0][989]>33 ){
+            scale2 = "B5";
         }
-
-        else if(toTransform[0][34]>33 || toTransform[0][35]>33){
-            scale2 = "C3#";
-        }
-        else if(toTransform[0][39]>33){
-            scale2 = "D3#";
-        }
-        else if(toTransform[0][46]>33){
-            scale2 = "F3#";
-        }
-        else if(toTransform[0][52]>33 || toTransform[0][51]>33 || toTransform[0][50]>33){
-            scale2 = "G3#";
-        }
-        else if(toTransform[0][58]>33){
-            scale2 = "A3#";
-        }
-        else if(toTransform[0][64]>33 || toTransform[0][69]>33){
-            scale2 = "C4#";
-        }
-        else if(toTransform[0][79]>33 || toTransform[0][78]>33){
-            scale2 = "D4#";
-        }
-        else if(toTransform[0][92]>33){
-            scale2 = "F4#";
-        }
-        else if(toTransform[0][104]>33){
-            scale2 = "G4#";
-        }
-        else if(toTransform[0][117]>33 || toTransform[0][116]>33){
-            scale2 = "A4#";
-        }
-        else if(toTransform[0][139]>33 ){
-            scale2 = "C5#";
-        }
-        else if(toTransform[0][155]>33 || toTransform[0][156]>33){
-            scale2 = "D5#";
-        }
-        else if(toTransform[0][185]>33 || toTransform[0][186]>33){
-            scale2 = "F5#";
-        }
-        else if(toTransform[0][208]>33 || toTransform[0][209]>33  || toTransform[0][207]>33  ){
-            scale2 = "G5#";
-        }
-        else if(toTransform[0][233]>33 || toTransform[0][234]>33 ){
-            scale2 = "A5#";
+        //3옥타브
+        else if(toTransform[0][129]>18 ||toTransform[0][130]>18){
+            scale2 = "C3";
         }
 
-        else{
-
+        else if(toTransform[0][145]>18 ||toTransform[0][144]>18 ||toTransform[0][146]>18 ){
+            scale2 = "D3";
         }
-
+        else if(toTransform[0][164]>18 ||toTransform[0][163]>18 ||toTransform[0][165]>18 ){
+            scale2 = "E3";
+        }
+        else if(toTransform[0][174]>18 ||toTransform[0][173]>18 ||toTransform[0][175]>18 ){
+            scale2 = "F3";
+        }
+        else if(toTransform[0][195]>18 ||toTransform[0][196]>18 ||toTransform[0][194]>18 ){
+            scale2 = "G3";
+        }
+        else if(toTransform[0][220]>18 ||toTransform[0][221]>18 ||toTransform[0][119]>18 ){
+            scale2 = "A3";
+        } else if(toTransform[0][246]>18 ||toTransform[0][245]>18 ||toTransform[0][247]>18 ){
+            scale2 = "B3";
+        }
+        else{ }
         return scale2;
     }
-    public String whichScale(int k){
-        String scale="dib";
-
-        if(k>250 && k<270 ){
-            scale ="C4"; //도
-        }else if(k>286 && k<302){
-            scale = "D4"; //레
-        }else if(k>320 && k<340)
-        {
-            scale = "E4"; //미
-        } else if(k>378 && k<403){
-            scale ="G4"; //솔
-        }else if(k>427 && k<452){
-            scale = "A4"; //라
-        }
-        else if(k>508&&k<538){
-            scale ="C5"; //도
-        }
-        else{
-            scale = "no";
-        }
-
-        return scale;
-    }
-
 }

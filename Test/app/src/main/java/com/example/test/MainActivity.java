@@ -33,79 +33,90 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
+        {
+            // call Login Activity
+            Button login=(Button) findViewById(R.id.login);
+            Button signup=(Button) findViewById(R.id.signup);
 
-
-        Button login=(Button) findViewById(R.id.login);
-        Button signup=(Button) findViewById(R.id.signup);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
                 /*TextView textView = (TextView)findViewById(R.id.textView);
                 EditText editText = (EditText)findViewById(R.id.editText);
 
                 textView.setText(editText.getText());*/
 
-                EditText password = (EditText)findViewById(R.id.upassT);
-                EditText id = (EditText)findViewById(R.id.uidT);
-                u_id = id.getText().toString();
-                u_password = password.getText().toString();
+                    EditText password = (EditText)findViewById(R.id.upassT);
+                    EditText id = (EditText)findViewById(R.id.uidT);
+                    u_id = id.getText().toString();
+                    u_password = password.getText().toString();
 
-                String serverUrl="http://27.96.131.137/noonchi/sign/login.php";
+                    String serverUrl="http://27.96.131.137/noonchi/sign/login.php";
 
-                SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //new AlertDialog.Builder(MainActivity.this).setMessage("응답:"+response).create().show();
+                    SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            //new AlertDialog.Builder(MainActivity.this).setMessage("응답:"+response).create().show();
 
-                      //  Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
-                        
-                       try{
-                           JSONObject jsonObject = new JSONObject(response);
-                           boolean success = jsonObject.getBoolean("success");
-                           if(success) {
-                               Toast.makeText(MainActivity.this, "로그인성공", Toast.LENGTH_SHORT).show();
-                               Intent intent=new Intent(MainActivity.this,Home.class);
-                               startActivity(intent);
-                           }else{
-                               Toast.makeText(MainActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
-                           }
-                       } catch (JSONException e) {
-                           e.printStackTrace();
-                       }
+                            //  Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
 
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            try{
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean success = jsonObject.getBoolean("success");
+                                if(success) {
+                                    SaveSharedPreference.setUserName(MainActivity.this, id.getText().toString());
+                                    Toast.makeText(MainActivity.this, "로그인성공", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(MainActivity.this,Home.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(MainActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                smpr.addStringParam("u_id", u_id);
-                smpr.addStringParam("u_password", u_password);
-                RequestQueue requestQueue= Volley.newRequestQueue(MainActivity.this);
-                requestQueue.add(smpr);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //Toast.makeText(MainActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    smpr.addStringParam("u_id", u_id);
+                    smpr.addStringParam("u_password", u_password);
+                    RequestQueue requestQueue= Volley.newRequestQueue(MainActivity.this);
+                    requestQueue.add(smpr);
 
 
 
-                //로그인에 성공하면 Intent로 Home으로 이동함
-               // Intent intent=new Intent(MainActivity.this,Home.class);
-               // startActivity(intent);
-            }
-        });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,Home.class);
-                startActivity(intent);
+                    //로그인에 성공하면 Intent로 Home으로 이동함
+                    // Intent intent=new Intent(MainActivity.this,Home.class);
+                    // startActivity(intent);
+                }
+            });
+            signup.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(MainActivity.this,Home.class);
+                    startActivity(intent);
 
-                //일단 임시로 signup에 바로 저장하는거 넣음
-                //Intent intent2=new Intent(MainActivity.this,Signup.class);
-                //startActivity(intent2);
-            }
-        });
-    }
+                    //일단 임시로 signup에 바로 저장하는거 넣음
+                    //Intent intent2=new Intent(MainActivity.this,Signup.class);
+                    //startActivity(intent2);
+                }
+            });
+
+        }
+        else
+        {
+            // Call Next Activity
+            Intent intent=new Intent(MainActivity.this,Home.class);
+            startActivity(intent);
+        }
+
+    }//onCreate
 
 }
