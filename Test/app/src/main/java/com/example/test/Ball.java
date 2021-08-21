@@ -37,6 +37,9 @@ class Ball {
     private boolean touch_line; //빛 막대에 닿았는지 안 닿았는지
     private boolean finish_line;
 
+
+
+    private boolean score_check;
     private int Scale_Line;
     private int correct;
     private int effect_check = 0;
@@ -60,6 +63,7 @@ class Ball {
         finish_line=false;
         Scale_Line=0;
 
+        score_check=false;
 
         bitmap1 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.effect_hit1), 100,100,false);
         bitmap2 = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(context.getResources(), R.drawable.effect_hit2), 100,100,false);
@@ -101,6 +105,7 @@ class Ball {
         this.Scale_Line=f.Scale_Line;
         //this.touch_line=f.touch_line;
 
+        this.score_check=score_check;
         //this.finish_line=f.finish_line;
 
         this.correct=f.correct;
@@ -194,18 +199,27 @@ class Ball {
     public void setColor(int protocol) {
         paint = new Paint();
 
+
+
         if(protocol / 10000000 == 1) {  // 오른손이라면, 쉼표도 이에 해당하지만, 어차피 안 보이니 상관 없다
             if(start_point==false) //반복기능 꺼졌을때
                 paint.setColor(Color.YELLOW); // 오른손은 빨강색
             else //켜졌을 때
                 paint.setColor(Color.RED);
-        } else { // 왼손이라면
+        }
+        else { // 왼손이라면
             if(start_point==false)
                 paint.setColor(Color.GREEN); // 왼손은 초록색
             else
                 paint.setColor(Color.BLUE);
         }
+
+
+
     }
+
+    public boolean getScore_Check(){return score_check;}
+    public void setScore_Check(boolean score_check){this.score_check=score_check;}
 
     public boolean getGo_down() {
         return go_down;
@@ -258,6 +272,7 @@ class Ball {
         return touch_line;
     }
     public int getScale_Line(){ return Scale_Line; }
+    public void setScale_Line(int scale_line){Scale_Line=scale_line;}
     public void setCount_while(int count_while){
         this.count_while=count_while;
     }
@@ -432,8 +447,11 @@ class Ball {
                 Scale_Line=3; // 정확(EXCELLENT)
             }
         }
-        else{
+        else if(touch_line==true){
             Scale_Line=1; //판정 끝(bad)
+        }
+        else if(touch_line==true&&y > y_piano_upleft+gunban.getWhiteVertical() -length+10){
+            Scale_Line=0;
         }
         if(y >= y_piano_upleft + gunban.getWhiteVertical() - length) { // 흰색 건반 아래쪽 경계선에 빛막대가 닿게 될 경우
             touch_line=true; // 막대에 닿았다고 판정
@@ -486,6 +504,18 @@ class Ball {
     }
 
     public void drawBlackGubanLight(Canvas canvas) {
+        if(y >= y_piano_upleft + gunban.getBlackVertical() - (length+10) && y <= y_piano_upleft+gunban.getBlackVertical() -length+10){ //판정 시작
+            Scale_Line=2; // 판정 시작(GOOD)
+            if(y >= y_piano_upleft + gunban.getBlackVertical() - (length+5) && y <= y_piano_upleft+gunban.getBlackVertical() -length+5){ //판정 시작
+                Scale_Line=3; // 정확(EXCELLENT)
+            }
+        }
+        else if(touch_line==true){
+            Scale_Line=1; //판정 끝(bad)
+        }
+        else if(touch_line==true&&y > y_piano_upleft+gunban.getBlackVertical() -length+10){
+            Scale_Line=0;
+        }
         if(y >= y_piano_upleft + gunban.getBlackVertical() - length) { // 검은 건반 아래쪽 경계선에 빛막대가 닿게 될 경우
             touch_line=true;
 
