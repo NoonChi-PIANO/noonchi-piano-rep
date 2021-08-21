@@ -40,26 +40,33 @@ import static com.example.test.Panel.last_flag;
 import static com.example.test.Panel.right_scale;
 import static com.example.test.Panel.left_scale;
 
+
 class DrawBall extends Thread {
     public static String is_correct;
     private SurfaceHolder holder;
     private Paint white_gunban;
     private Paint black_gunban;
     private Paint judge_line;
+    private int score;
     private boolean stop;
     private int total_Count_while=0;
     Context mContext;
-
+    
+    public static final int BAD =1;
+    public static final int GOOD =2;
+    public static final int EXCELLENT =3;
     //public DrawBall(){ }
     public DrawBall(Panel panel){
         setHolder(panel);
         setColor();
         setStop(false);
+        score =0;
     }
     public DrawBall(Panel panel, Context context){
         setHolder(panel);
         setColor();
         setStop(false);
+        score =0;
         mContext = context;
        // setStart_point(false);
         //setEnd_point(false);
@@ -94,8 +101,14 @@ class DrawBall extends Thread {
     {
         public void handleMessage(Message msg)
         {
-            if(t2.getText().equals(right_scale)||t2.getText().equals(left_scale)){
-                is_Correct.setText("correct");
+            if(t2.getText().equals(right_scale)||t2.getText().equals(left_scale)||score==EXCELLENT){
+                is_Correct.setText("Excellent");
+
+                t2.setText("...");
+            }
+            else if(t2.getText().equals(right_scale)||t2.getText().equals(left_scale)||score==GOOD){
+                is_Correct.setText("GOOD");
+                t2.setText("...");
             }
             else
                 is_Correct.setText("bad");
@@ -199,12 +212,26 @@ class DrawBall extends Thread {
                                     total_Count_while++;
                                 } else {
                                     ball.drawWhiteGubanLight(canvas);
-                                    if(ball.getTouch_Line()==true){
+                                    if(ball.getScale_Line()==2){
                                         right_scale=(ball.getWhiteScale());
-
+                                        score = GOOD;
+                                        
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
+                                    else if(ball.getScale_Line()==3){
+                                        score=EXCELLENT;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==1){
+                                        score=BAD;
+                                        right_scale="..";
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                        
+                                    }
+                                    
                                 }
                             }
                         }
@@ -310,11 +337,24 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawWhiteGubanLight(canvas);
-                                    if(ball.getTouch_Line()==true){
+                                    if(ball.getScale_Line()==2){
                                         left_scale=(ball.getWhiteScale());
+                                        score = GOOD;
 
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==3){
+                                        score=EXCELLENT;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==1){
+                                        score=BAD;
+                                        left_scale="..";
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+
                                     }
                                 }
                             }
@@ -422,11 +462,24 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawBlackGubanLight(canvas);
-                                    if(ball.getTouch_Line()==true){
+                                    if(ball.getScale_Line()==2){
                                         right_scale=(ball.getBlackScale());
+                                        score = GOOD;
 
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==3){
+                                        score=EXCELLENT;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==1){
+                                        score=BAD;
+                                        right_scale="..";
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+
                                     }
                                 }
                             }
@@ -506,11 +559,24 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawBlackGubanLight(canvas);
-                                    if(ball.getTouch_Line()==true){
+                                    if(ball.getScale_Line()==2){
                                         left_scale=(ball.getBlackScale());
+                                        score = GOOD;
 
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==3){
+                                        score=EXCELLENT;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+                                    }
+                                    else if(ball.getScale_Line()==1){
+                                        score=BAD;
+                                        left_scale="..";
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
+
                                     }
                                 }
                             }

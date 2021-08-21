@@ -9,31 +9,30 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:background="#BFE3FD">
 
         <ToggleButton
-            android:layout_margin="10dp"
+
+            android:id="@+id/btn_play_or_stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/buttonstyle2"
+            android:onClick="onToggleClicked"
             android:padding="20dp"
-            android:id="@+id/btn_play_or_stop"
             android:text="play or stop"
             android:textOff="연습하기"
             android:textOn="멈추기"
-            android:textSize="30dp"
-            android:background="@drawable/buttonstyle2"
-            android:onClick="onToggleClicked"
-            />
+            android:textSize="30dp" />
 
         <ImageView
             android:id="@+id/btn_velocity1"
             android:layout_width="40dp"
             android:layout_height="40dp"
 
-            android:background="@drawable/btn_velocity1"
-            android:onClick="clickVelocity"
             android:layout_toRightOf="@id/btn_play_or_stop"
-            />
+            android:background="@drawable/btn_velocity1"
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity2"
@@ -42,8 +41,7 @@
 
             android:layout_toRightOf="@+id/btn_velocity1"
             android:background="@drawable/btn_velocity2"
-            android:onClick="clickVelocity"
-            />
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity3"
@@ -52,7 +50,7 @@
 
             android:layout_toRightOf="@+id/btn_velocity2"
             android:background="@drawable/btn_velocity3"
-            android:onClick="clickVelocity"/>
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity4"
@@ -62,7 +60,7 @@
 
             android:layout_toRightOf="@+id/btn_velocity3"
             android:background="@drawable/btn_velocity4"
-            android:onClick="clickVelocity"/>
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity5"
@@ -71,7 +69,7 @@
 
             android:layout_toRightOf="@+id/btn_velocity4"
             android:background="@drawable/btn_velocity5"
-            android:onClick="clickVelocity"/>
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity6"
@@ -80,7 +78,7 @@
 
             android:layout_toRightOf="@+id/btn_velocity5"
             android:background="@drawable/btn_velocity6"
-            android:onClick="clickVelocity"/>
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity7"
@@ -89,7 +87,7 @@
 
             android:layout_toRightOf="@+id/btn_velocity6"
             android:background="@drawable/btn_velocity7"
-            android:onClick="clickVelocity"/>
+            android:onClick="clickVelocity" />
 
         <ImageView
             android:id="@+id/btn_velocity8"
@@ -98,38 +96,37 @@
 
             android:layout_toRightOf="@+id/btn_velocity7"
             android:background="@drawable/btn_velocity8"
-            android:onClick="clickVelocity"/>
+            android:onClick="clickVelocity" />
 
         <Button
             android:id="@+id/repeat_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttonstyle2"
+            android:layout_below="@id/btn_velocity1"
             android:layout_margin="10dp"
             android:layout_toRightOf="@id/btn_play_or_stop"
-            android:layout_below="@id/btn_velocity1"
+            android:background="@drawable/buttonstyle2"
             android:text="반복" />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/buttonstyle2"
-            android:layout_margin="10dp"
-            android:text="반복 끝"
             android:id="@+id/repeat_end"
-            android:layout_below="@id/btn_velocity3"
-            android:layout_toRightOf="@+id/repeat_start"
-            />
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttonstyle2"
-            android:text="반복 연습 시작"
-            android:id="@+id/repeat"
-            android:layout_below="@id/btn_velocity6"
-            android:layout_toRightOf="@+id/repeat_end"
+            android:layout_below="@id/btn_velocity3"
             android:layout_margin="10dp"
-            />
+            android:layout_toRightOf="@+id/repeat_start"
+            android:background="@drawable/buttonstyle2"
+            android:text="반복 끝" />
+
+        <Button
+            android:id="@+id/repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_velocity6"
+            android:layout_margin="10dp"
+            android:layout_toRightOf="@+id/repeat_end"
+            android:background="@drawable/buttonstyle2"
+            android:text="반복 연습 시작" />
 
 
         <Button
@@ -137,9 +134,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/btn_velocity8"
+            android:layout_margin="10dp"
             android:layout_toRightOf="@+id/repeat"
             android:background="@drawable/buttonstyle2"
-            android:layout_margin="10dp"
             android:text="Start" />
 
         <TableLayout
@@ -163,16 +160,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="입력 음계"
-                    android:textSize="12dp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
 
                 <TextView
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:text="채점"
-                    android:textSize="12dp"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
                 <!--     <TextView
                          android:id="@+id/textView3"
                          android:layout_width="wrap_content"
@@ -197,10 +194,10 @@
 
                 <TextView
                     android:id="@+id/isCorrect"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/Right_Scale"
                     android:text="..."
                     android:textAlignment="center" />
@@ -214,23 +211,23 @@
 
             </TableRow>
 
-            <TableRow >
+            <TableRow>
 
                 <TextView
                     android:id="@+id/left_fos"
                     android:layout_width="47dp"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
                     android:text="왼손"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
 
                 <TextView
                     android:id="@+id/right_fos"
                     android:layout_width="wrap_content"
-                    android:textSize="12dp"
                     android:layout_height="wrap_content"
                     android:text="오른손"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
 
 
             </TableRow>
@@ -278,7 +275,10 @@
 
 
     <ImageView
+        android:background="@color/black"
         android:id="@+id/test"
-        android:layout_width="50dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"/>
+
+
 </LinearLayout>

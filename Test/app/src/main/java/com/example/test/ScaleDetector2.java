@@ -102,6 +102,9 @@ public class ScaleDetector2 {
 
                     ((TextView) ((Activity)mContext).findViewById(R.id.isCorrect)).setText("correct");
                 }
+                else{
+                    ((TextView) ((Activity)mContext).findViewById(R.id.isCorrect)).setText("BAD");
+                }
             }
 
             hzSize.clear();
