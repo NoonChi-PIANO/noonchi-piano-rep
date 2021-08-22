@@ -14,8 +14,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,10 +36,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import jp.kshoji.javax.sound.midi.UsbMidiSystem;
+
 public class Galary extends AppCompatActivity {
+
+    UsbMidiSystem usbMidiSystem;
 
     EditText etName,etMsg;
     ImageView iv;
+
+    Button StartBTN;
+    TextView t1,t2,t3;
+
+    private midiRecord md2;
+    private midiRecord.RecordAudio recordTask;
 
     //업로드할 이미지의 절대경로(실제 경로)
     String imgPath;
@@ -51,12 +63,18 @@ public class Galary extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.galary);
+
+        usbMidiSystem = new UsbMidiSystem(this);
+        usbMidiSystem.initialize();
+
        // etName=findViewById(R.id.et_name);
         //etMsg=findViewById(R.id.et_msg);
         iv=findViewById(R.id.iv);
 
         //업로드 하려면 외부저장소 권한 필요
         //동적 퍼미션 코드 필요..
+
+
 
 
         //동적퍼미션 작업
@@ -70,10 +88,41 @@ public class Galary extends AppCompatActivity {
             //cv.setVisibility(View.VISIBLE);
         }
 
+        StartBTN = findViewById(R.id.btn1);
+        t1 = findViewById(R.id.tx1);
+        t2 = findViewById(R.id.tx2);
+        t3 = findViewById(R.id.tx3);
+
+        md2= new midiRecord(this);
+        StartBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(md2.started){
+                    StartBTN.setText("Start");
+                    md2.started=false;
+                    recordTask.cancel(true);
 
 
+                }else{
+                    StartBTN.setText("Stop");
+                    md2.started=true;
+                    recordTask = md2.new RecordAudio();
+                    recordTask.execute();
+                }
+            }
+        });
 
     }//onCreate() ..
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (usbMidiSystem != null) {
+            usbMidiSystem.terminate();
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

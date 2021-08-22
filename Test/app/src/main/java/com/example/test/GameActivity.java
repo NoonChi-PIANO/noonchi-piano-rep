@@ -89,6 +89,8 @@ public class GameActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.game);
 
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -99,29 +101,21 @@ public class GameActivity extends AppCompatActivity{
         usbMidiSystem.initialize();
 
         final int[] selectedItem={0};
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.game);
-
         context_game = this;
-
-
         switch_music=9;//default
         excellent=0;
         good=0;
         bad=0;
-
         result_score=findViewById(R.id.score_result);
         repeat=findViewById(R.id.repeat);
         repeat_end=findViewById(R.id.repeat_end);
         repeat_start=findViewById(R.id.repeat_start);
-
         Right_scale = findViewById(R.id.Right_Scale);
         Left_scale = findViewById(R.id.Left_Scale);
         is_Correct = findViewById((R.id.isCorrect));
         Intent myintent = getIntent();
         int selectImg= myintent.getIntExtra("select",0);
         music = myintent.getIntExtra("music",0);
-
         panel = new Panel(this);
 
         if(selectImg==0){
@@ -248,14 +242,13 @@ public class GameActivity extends AppCompatActivity{
 
 
         //sc2.started
-        sc2 = new ScaleDetector2(this);
+        //sc2 = new ScaleDetector2(this);
         md2 = new midiRecord(this);
 
         StartStopBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /*
-               //마이크 인식시 사용
+              /* //마이크 인식시 사용
                if(sc2.started){
                     StartStopBTN.setText("Start");
                     sc2.started=false;
@@ -275,12 +268,11 @@ public class GameActivity extends AppCompatActivity{
                     md2.started=false;
                     recordTask2.cancel(true);
 
-
                 }else{
                     StartStopBTN.setText("Stop");
                     md2.started=true;
                     recordTask2 = md2.new RecordAudio();
-                    recordTask.execute();
+                    recordTask2.execute();
                 }
 
             }
@@ -303,6 +295,14 @@ public class GameActivity extends AppCompatActivity{
 
  */
 
+    }//oncreate
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (usbMidiSystem != null) {
+            usbMidiSystem.terminate();
+        }
     }
 
 
@@ -311,15 +311,13 @@ public class GameActivity extends AppCompatActivity{
         ToggleButton play_or_stop = (ToggleButton)findViewById(R.id.btn_play_or_stop);
         if(is_on) {
             //play_or_stop.setText("멈추기");
+
             panel.thread = new DrawBall(panel,this);
             panel.thread.start();
 
-
         } else {
             //play_or_stop.setText("연습하기");
-
             //score.setVisibility(View.VISIBLE);
-
             panel.thread.setStop(true);
         }
     }

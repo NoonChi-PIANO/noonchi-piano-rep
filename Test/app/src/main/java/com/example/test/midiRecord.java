@@ -28,8 +28,6 @@ public class midiRecord {
         @Override
         protected Void doInBackground(Void... params) {
 
-
-
             MidiDevice device;
             MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
 
@@ -75,9 +73,11 @@ public class midiRecord {
         @Override
         protected void onProgressUpdate(Void...params) {
 
-           // ((TextView) ((Activity)mContext).findViewById(R.id.tx1)).setText(mds1);
+            //((TextView) ((Activity)mContext).findViewById(R.id.tx1)).setText(mds1);
            // ((TextView) ((Activity)mContext).findViewById(R.id.tx2)).setText(mds2);
-           // ((TextView) ((Activity)mContext).findViewById(R.id.tx3)).setText(mds3);
+            //((TextView) ((Activity)mContext).findViewById(R.id.tx3)).setText(mds3);
+            //((TextView) ((Activity)mContext).findViewById(R.id.tx2)).setText(mds2);
+            ((TextView) ((Activity)mContext).findViewById(R.id.HzText2)).setText(mds2);
 
 
         }
@@ -128,6 +128,12 @@ public class midiRecord {
 
         public void close() {
         }
+    }
+
+    public String whichScale2Midi(String scale){
+
+
+        return scale;
     }
 
 

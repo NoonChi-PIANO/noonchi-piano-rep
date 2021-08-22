@@ -20,17 +20,26 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import java.util.Arrays;
 import java.util.List;
 
+import jp.kshoji.javax.sound.midi.UsbMidiSystem;
+
 public class Home extends AppCompatActivity {
     ViewpagerAdapter adapter;
     ViewPager2 viewPager;
     ImageButton setting;
     TabLayout tabLayout;
 
+    UsbMidiSystem usbMidiSystem;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        usbMidiSystem = new UsbMidiSystem(this);
+        usbMidiSystem.initialize();
 
         setting=(ImageButton)findViewById(R.id.setting);
         viewPager = findViewById(R.id.viewpager);
