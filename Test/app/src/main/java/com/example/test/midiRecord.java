@@ -20,7 +20,7 @@ public class midiRecord {
     public midiRecord(Context context){ mContext = context;}
     public boolean started = false;
 
-    String mds1, mds2, mds3;
+    String mds1, mds2, mds3,mds4;
 
 
     public class RecordAudio extends AsyncTask<Void, Void, Void> {
@@ -77,7 +77,7 @@ public class midiRecord {
            // ((TextView) ((Activity)mContext).findViewById(R.id.tx2)).setText(mds2);
             //((TextView) ((Activity)mContext).findViewById(R.id.tx3)).setText(mds3);
             //((TextView) ((Activity)mContext).findViewById(R.id.tx2)).setText(mds2);
-            ((TextView) ((Activity)mContext).findViewById(R.id.HzText2)).setText(mds2);
+            ((TextView) ((Activity)mContext).findViewById(R.id.HzText2)).setText(mds4);
 
 
         }
@@ -105,24 +105,10 @@ public class midiRecord {
             mds1 = (String.valueOf(aMsg[0]));
             mds2 = (String.valueOf(aMsg[1]));
             mds3 = (String.valueOf(aMsg[2]));
-
-            System.out.println(aMsg[0]);
-
+            mds4 = whichScale2Midi(String.valueOf(aMsg[1]));
 
 
-            // msg.getLength() returns the length of the message in bytes
-			/*for (int i = 0; i < msg.getLength(); i++) {
-				System.out.println(aMsg[i]);
-				//메세지 모두 출력하는거임
 
-				// aMsg[0] is something, velocity maybe? Not 100% sure.
-				// aMsg[1] is the note value as an int. This is the important one.
-				// aMsg[2] is pressed or not (0/100), it sends 100 when they key goes down,
-				// and 0 when the key is back up again. With a better keyboard it could maybe
-				// send continuous values between then for how quickly it's pressed?
-				// I'm only using VMPK for testing on the go, so it's either
-				// clicked or not.
-			}*/
             System.out.println();
         }
 
@@ -131,9 +117,36 @@ public class midiRecord {
     }
 
     public String whichScale2Midi(String scale){
+        String result="";
+
+        if(scale.equals("99999")){ return result = "C4"; }
 
 
-        return scale;
+        else if(scale.equals("48")){ return result = "C3";}else if(scale.equals("54")){ return result = "F#3";}
+        else if(scale.equals("49")){ return result = "C#3";}else if(scale.equals("55")){ return result = "G3";}
+        else if(scale.equals("50")){ return result = "D3";}else if(scale.equals("56")){ return result = "G#3";}
+        else if(scale.equals("51")){ return result = "D#3";}else if(scale.equals("57")){ return result = "A3";}
+        else if(scale.equals("52")){ return result = "E#3";}else if(scale.equals("58")){ return result = "A#3";}
+        else if(scale.equals("53")){ return result = "F3";}else if(scale.equals("59")){ return result = "B#3";}
+
+        else if(scale.equals("60")){ return result = "C4";}else if(scale.equals("66")){ return result = "F#4";}
+        else if(scale.equals("61")){ return result = "C#4";}else if(scale.equals("67")){ return result = "G4";}
+        else if(scale.equals("62")){ return result = "D4";}else if(scale.equals("68")){ return result = "G#4";}
+        else if(scale.equals("63")){ return result = "D#4";}else if(scale.equals("69")){ return result = "A4";}
+        else if(scale.equals("64")){ return result = "E#4";}else if(scale.equals("70")){ return result = "A#4";}
+        else if(scale.equals("65")){ return result = "F4";}else if(scale.equals("71")){ return result = "B#4";}
+
+        else if(scale.equals("72")){ return result = "C5";}else if(scale.equals("78")){ return result = "F#5";}
+        else if(scale.equals("73")){ return result = "C#5";}else if(scale.equals("79")){ return result = "G5";}
+        else if(scale.equals("74")){ return result = "D5";}else if(scale.equals("80")){ return result = "G#5";}
+        else if(scale.equals("75")){ return result = "D#5";}else if(scale.equals("81")){ return result = "A5";}
+        else if(scale.equals("76")){ return result = "E#5";}else if(scale.equals("82")){ return result = "A#5";}
+        else if(scale.equals("77")){ return result = "F5";}else if(scale.equals("83")){ return result = "B#5";}
+
+
+
+
+        return result;
     }
 
 
