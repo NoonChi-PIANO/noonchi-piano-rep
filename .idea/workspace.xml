@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="" />
+    <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629561443637</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
+      <created>1629561688853</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1629561688853</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -98,11 +107,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="100" y="100" width="1336" height="624" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1628951104795" />
-    <state x="461" y="0" key="CommitChangelistDialog2" timestamp="1629561441191">
+    <state x="461" y="0" key="CommitChangelistDialog2" timestamp="1629561872923">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="369" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1628859304616" />
-    <state x="461" y="0" key="CommitChangelistDialog2/0.0.1920.1030@0.0.1920.1030" timestamp="1629561441191" />
+    <state x="461" y="0" key="CommitChangelistDialog2/0.0.1920.1030@0.0.1920.1030" timestamp="1629561872923" />
     <state x="686" y="209" key="FileChooserDialogImpl" timestamp="1629120566229">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
@@ -129,16 +138,16 @@
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1628859285921" />
     <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629134040594" />
-    <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629561330021">
+    <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629597417294">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="571" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1628859091073" />
-    <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629561330021" />
-    <state x="553" y="249" key="git4idea.merge.GitPullDialog" timestamp="1629561456814">
+    <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629597417294" />
+    <state x="553" y="249" key="git4idea.merge.GitPullDialog" timestamp="1629561900573">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="442" y="199" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1628858881943" />
-    <state x="553" y="249" key="git4idea.merge.GitPullDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629561456814" />
+    <state x="553" y="249" key="git4idea.merge.GitPullDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629561900573" />
     <state x="526" y="311" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1628855651529">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
