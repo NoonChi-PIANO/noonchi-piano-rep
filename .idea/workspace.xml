@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
+    <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/GameActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ResultScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ResultScore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/layout/score_result.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/layout/score_result.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +93,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629561688853</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
+      <created>1629597433888</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1629597433888</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -107,11 +118,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="100" y="100" width="1336" height="624" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1628951104795" />
-    <state x="461" y="0" key="CommitChangelistDialog2" timestamp="1629561872923">
+    <state x="461" y="0" key="CommitChangelistDialog2" timestamp="1629597432667">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="369" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1628859304616" />
-    <state x="461" y="0" key="CommitChangelistDialog2/0.0.1920.1030@0.0.1920.1030" timestamp="1629561872923" />
+    <state x="461" y="0" key="CommitChangelistDialog2/0.0.1920.1030@0.0.1920.1030" timestamp="1629597432667" />
     <state x="686" y="209" key="FileChooserDialogImpl" timestamp="1629120566229">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
@@ -133,11 +144,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1628950593942" />
-    <state x="451" y="181" key="Vcs.Push.Dialog.v2" timestamp="1629134040594">
+    <state x="451" y="181" key="Vcs.Push.Dialog.v2" timestamp="1629597451632">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1628859285921" />
-    <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629134040594" />
+    <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629597451632" />
     <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629597417294">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>

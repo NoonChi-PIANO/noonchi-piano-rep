@@ -56,6 +56,8 @@ public class GameActivity extends AppCompatActivity{
     public static TextView Left_scale;
     public static int total_length;//곡 전체 길이(프로토콜 개수)
 
+    public static int switch_music;
+
     public static int excellent;
     public static int good;
     public static int bad;
@@ -103,6 +105,7 @@ public class GameActivity extends AppCompatActivity{
         context_game = this;
 
 
+        switch_music=9;//default
         excellent=0;
         good=0;
         bad=0;
@@ -166,15 +169,12 @@ public class GameActivity extends AppCompatActivity{
 
                     Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
                     Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
-                    myIntent.putExtra("ex",excellent);
-                    myIntent.putExtra("good",good);
-                    myIntent.putExtra("bad",bad);
                     startActivity(myIntent);
 
 
 
 
-                    //y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
+                    y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
                 }catch (NullPointerException e){
 
 
@@ -186,7 +186,7 @@ public class GameActivity extends AppCompatActivity{
                     myIntent.putExtra("bad",bad);
                     startActivity(myIntent);
 
-                    //y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
+                    y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
                 }
             }
         });
@@ -348,6 +348,7 @@ public class GameActivity extends AppCompatActivity{
          */
         switch(music) {
             case 0:
+                switch_music=0;
                 insertRightProtocol(R.raw.butterfly_right, panel);
                 //insertLeftProtocol(R.raw.elise_left, panel);
                 answer_right = insertAnswerProtocol(R.raw.butterfly_right);
@@ -355,6 +356,7 @@ public class GameActivity extends AppCompatActivity{
                 break;
 
             case 1:
+                switch_music=1;
                 insertRightProtocol(R.raw.shanz_right, panel);
                 insertLeftProtocol(R.raw.shanz_left, panel);
                 answer_right = insertAnswerProtocol(R.raw.shanz_right);
@@ -362,6 +364,7 @@ public class GameActivity extends AppCompatActivity{
                 break;
 
             case 2:
+                switch_music=2;
                 insertRightProtocol(R.raw.summer_right, panel);
                 insertLeftProtocol(R.raw.summer_left, panel);
                 answer_right = insertAnswerProtocol(R.raw.summer_right);
