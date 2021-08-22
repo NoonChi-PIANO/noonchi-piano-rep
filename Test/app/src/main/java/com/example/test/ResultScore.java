@@ -74,5 +74,13 @@ public class ResultScore extends AppCompatActivity {
                 startActivity(new Intent(ResultScore.this,Home.class));
             }
         });
+
+    }
+    public void onBackPressed() {
+        excellent=0;
+        good=0;
+        bad=0;
+        startActivity(new Intent(ResultScore.this,Home.class));
+
     }
 }

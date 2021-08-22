@@ -145,6 +145,20 @@ public class GameActivity extends AppCompatActivity{
         Test = (ImageView)findViewById(R.id.test);
         Test.setImageBitmap(bitmap);
 
+        StartStopBTN = (Button)findViewById(R.id.StartStopButton);
+
+
+
+        t2 = (TextView)findViewById(R.id.HzText2);
+        t2.setText("...");
+        md2 = new midiRecord(this);
+
+        StartStopBTN.setText("Stop");
+        md2.started=true;
+        recordTask2 = md2.new RecordAudio();
+        recordTask2.execute();
+
+
 
         result_score.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +174,9 @@ public class GameActivity extends AppCompatActivity{
                     panel.repeat_left_sum.clear();
                     panel.repeat_number=0;
 
+                    StartStopBTN.setText("Start");
+                    md2.started=false;
+                    recordTask2.cancel(true);
 
                     Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
                     Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
@@ -171,7 +188,9 @@ public class GameActivity extends AppCompatActivity{
                     y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
                 }catch (NullPointerException e){
 
-
+                    StartStopBTN.setText("Start");
+                    md2.started=false;
+                    recordTask2.cancel(true);
 
                     Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
                     Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
@@ -245,10 +264,11 @@ public class GameActivity extends AppCompatActivity{
         //sc2 = new ScaleDetector2(this);
         md2 = new midiRecord(this);
 
+        /*
         StartStopBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /* //마이크 인식시 사용
+               //마이크 인식시 사용
                if(sc2.started){
                     StartStopBTN.setText("Start");
                     sc2.started=false;
@@ -260,9 +280,10 @@ public class GameActivity extends AppCompatActivity{
                     sc2.started=true;
                     recordTask = sc2.new RecordAudio();
                     recordTask.execute();
-                }*/
+                }
 
                 //midi 인식시 사용
+
                 if(md2.started){
                     StartStopBTN.setText("Start");
                     md2.started=false;
@@ -275,8 +296,12 @@ public class GameActivity extends AppCompatActivity{
                     recordTask2.execute();
                 }
 
+
+
             }
         });
+
+         */
 
 
 
@@ -1093,7 +1118,9 @@ public class GameActivity extends AppCompatActivity{
             answer_right.clear();
             answer_left.clear();
 
-
+            StartStopBTN.setText("Start");
+            md2.started=false;
+            recordTask2.cancel(true);
 
             Toast.makeText(this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
 

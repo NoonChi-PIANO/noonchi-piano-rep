@@ -98,12 +98,16 @@
             android:background="@drawable/btn_velocity8"
             android:onClick="clickVelocity" />
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="결과 보기"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="10dp"
+            android:text="게임 종료"
+
             android:id="@+id/score_result"
+
+            android:layout_below="@id/btn_velocity8"
             android:background="@drawable/buttonstyle2"
-            android:layout_toRightOf="@id/btn_velocity8"
+            android:layout_toRightOf="@id/StartStopButton"
             android:layout_margin="10dp"
 
             />
@@ -111,18 +115,20 @@
 
         <Button
             android:id="@+id/repeat_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="10dp"
             android:layout_below="@id/btn_velocity1"
             android:layout_margin="10dp"
             android:layout_toRightOf="@id/btn_play_or_stop"
             android:background="@drawable/buttonstyle2"
-            android:text="반복" />
+            android:text="반복 시작" />
 
         <Button
             android:id="@+id/repeat_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="10dp"
             android:layout_below="@id/btn_velocity3"
             android:layout_margin="10dp"
             android:layout_toRightOf="@+id/repeat_start"
@@ -131,19 +137,21 @@
 
         <Button
             android:id="@+id/repeat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="10dp"
             android:layout_below="@id/btn_velocity6"
             android:layout_margin="10dp"
             android:layout_toRightOf="@+id/repeat_end"
             android:background="@drawable/buttonstyle2"
-            android:text="반복 연습 시작" />
+            android:text="반복 연습" />
 
 
         <Button
             android:id="@+id/StartStopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="10dp"
             android:layout_below="@id/btn_velocity8"
             android:layout_margin="10dp"
             android:layout_toRightOf="@+id/repeat"
@@ -159,7 +167,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_toRightOf="@+id/StartStopButton">
+            android:layout_toRightOf="@+id/score_result">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -293,3 +301,4 @@
 
 
 </LinearLayout>
+
