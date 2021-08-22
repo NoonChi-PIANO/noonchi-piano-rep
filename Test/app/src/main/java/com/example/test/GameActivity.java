@@ -100,6 +100,12 @@ public class GameActivity extends AppCompatActivity{
         usbMidiSystem = new UsbMidiSystem(this);
         usbMidiSystem.initialize();
 
+        md2 = new midiRecord(this);
+        //StartStopBTN.setText("Stop");
+        md2.started=true;
+        recordTask2 = md2.new RecordAudio();
+        recordTask2.execute();
+
         final int[] selectedItem={0};
         context_game = this;
         switch_music=9;//default
@@ -145,20 +151,12 @@ public class GameActivity extends AppCompatActivity{
         Test = (ImageView)findViewById(R.id.test);
         Test.setImageBitmap(bitmap);
 
-        StartStopBTN = (Button)findViewById(R.id.StartStopButton);
+      //  StartStopBTN = (Button)findViewById(R.id.StartStopButton);
 
 
 
         t2 = (TextView)findViewById(R.id.HzText2);
         t2.setText("...");
-        md2 = new midiRecord(this);
-
-        StartStopBTN.setText("Stop");
-        md2.started=true;
-        recordTask2 = md2.new RecordAudio();
-        recordTask2.execute();
-
-
 
         result_score.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +172,7 @@ public class GameActivity extends AppCompatActivity{
                     panel.repeat_left_sum.clear();
                     panel.repeat_number=0;
 
-                    StartStopBTN.setText("Start");
+                    //StartStopBTN.setText("Start");
                     md2.started=false;
                     recordTask2.cancel(true);
 
@@ -188,7 +186,7 @@ public class GameActivity extends AppCompatActivity{
                     y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
                 }catch (NullPointerException e){
 
-                    StartStopBTN.setText("Start");
+                    //StartStopBTN.setText("Start");
                     md2.started=false;
                     recordTask2.cancel(true);
 
@@ -254,7 +252,7 @@ public class GameActivity extends AppCompatActivity{
             }
         });
 
-        StartStopBTN = (Button)findViewById(R.id.StartStopButton);
+       // StartStopBTN = (Button)findViewById(R.id.StartStopButton);
 
         t2 = (TextView)findViewById(R.id.HzText2);
         t2.setText("...");
@@ -262,7 +260,7 @@ public class GameActivity extends AppCompatActivity{
 
         //sc2.started
         //sc2 = new ScaleDetector2(this);
-        md2 = new midiRecord(this);
+       // md2 = new midiRecord(this);
 
         /*
         StartStopBTN.setOnClickListener(new View.OnClickListener() {
@@ -302,23 +300,6 @@ public class GameActivity extends AppCompatActivity{
         });
 
          */
-
-
-
-
-
-/*
-        int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
-        int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
-        int bufferSize = AudioRecord.getMinBufferSize(8000, channelConfiguration, audioEncoding);
-        audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, channelConfiguration, audioEncoding, bufferSize);
-
-        transformer = new RealDoubleFFT(blockSize);
-
-        record = new RecordAudio();
-        record.execute();
-
- */
 
     }//oncreate
     @Override

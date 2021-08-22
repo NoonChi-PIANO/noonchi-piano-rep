@@ -18,7 +18,7 @@ import jp.kshoji.javax.sound.midi.Transmitter;
 public class midiRecord {
     Context mContext;
     public midiRecord(Context context){ mContext = context;}
-    public boolean started = false;
+    public boolean started = true;
 
     String mds1, mds2, mds3,mds4;
 
