@@ -31,6 +31,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import jp.kshoji.javax.sound.midi.UsbMidiSystem;
+
 import static com.example.test.Fpractice.music_selected;
 import static com.example.test.DrawGunban.y_piano_upleft;
 import static com.example.test.Panel.balls_right;
@@ -71,20 +73,21 @@ public class GameActivity extends AppCompatActivity{
     private ScaleDetector2 sc2 ;
     private ScaleDetector2.RecordAudio recordTask;
 
+    private midiRecord md2;
+    private midiRecord.RecordAudio recordTask2;
 
-
+    UsbMidiSystem usbMidiSystem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-
-
 
         if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(GameActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
+        usbMidiSystem = new UsbMidiSystem(this);
+        usbMidiSystem.initialize();
 
         final int[] selectedItem={0};
         super.onCreate(savedInstanceState);
@@ -193,10 +196,14 @@ public class GameActivity extends AppCompatActivity{
 
         //sc2.started
         sc2 = new ScaleDetector2(this);
+        md2 = new midiRecord(this);
+
         StartStopBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sc2.started){
+               /*
+               //마이크 인식시 사용
+               if(sc2.started){
                     StartStopBTN.setText("Start");
                     sc2.started=false;
                     recordTask.cancel(true);
@@ -206,6 +213,20 @@ public class GameActivity extends AppCompatActivity{
                     StartStopBTN.setText("Stop");
                     sc2.started=true;
                     recordTask = sc2.new RecordAudio();
+                    recordTask.execute();
+                }*/
+
+                //midi 인식시 사용
+                if(md2.started){
+                    StartStopBTN.setText("Start");
+                    md2.started=false;
+                    recordTask2.cancel(true);
+
+
+                }else{
+                    StartStopBTN.setText("Stop");
+                    md2.started=true;
+                    recordTask2 = md2.new RecordAudio();
                     recordTask.execute();
                 }
 

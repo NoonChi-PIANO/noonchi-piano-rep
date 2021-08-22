@@ -27,7 +27,7 @@ public class ScaleDetector2 {
     public int channelConfiguration = AudioFormat.CHANNEL_IN_MONO;
     public int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
     private RealDoubleFFT transformer;
-    int blockSize = 2048; // 1024개의 배열이 나옴. 배열 한 칸당 4hz의 범위를 포함하고 있음.
+    int blockSize = 4096; // 1024개의 배열이 나옴. 배열 한 칸당 4hz의 범위를 포함하고 있음.
     DoubleFFT_1D fft = new DoubleFFT_1D(blockSize); //JTransform 라이브러리로 FFT 수행
 
     //frequency -> 측정 주파수 대역으로 퓨리에 변환 시 f/2 만큼의 크기의 주파수를 분석 할 수 있음.

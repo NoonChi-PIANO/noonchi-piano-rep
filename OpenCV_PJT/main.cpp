@@ -1,4 +1,4 @@
-#include<Windows.h>
+ï»¿#include<Windows.h>
 #include<iostream>
 #include<winnt.h>
 #include"opencv2/opencv.hpp"
@@ -9,10 +9,10 @@
 using namespace cv;
 using namespace std;
 
-#define LINE_CONNECTION 2 //À½°è »öÃâ ½Ã º¸Á¤°ª
+#define LINE_CONNECTION 2 //ìŒê³„ ìƒ‰ì¶œ ì‹œ ë³´ì •ê°’
 
 Mat image;
-Mat subImage[10] = {}; //¿À¼± ¹è¿­ µ¿ÀûÇÒ´ç
+Mat subImage[10] = {}; //ì˜¤ì„  ë°°ì—´ ë™ì í• ë‹¹
 double line_y[5] = {};
 int linecheck = 0;
 Note sheet_note[10][100];
@@ -126,7 +126,7 @@ void divide_by_four() {
 	int k = 10;
 	Rect rect[100] = {};
 	Mat houghImage[4] = {};
-	imshow("¼ÒÀı ºĞÇÒ ÀÌ¹ÌÁö", subImage[0]);
+	imshow("ì†Œì ˆ ë¶„í•  ì´ë¯¸ì§€", subImage[0]);
 
 	vector<Vec2f> line;
 	for (int j = 0;j < linecheck;j++) {
@@ -145,7 +145,7 @@ void divide_by_four() {
 			HoughLines(canny, line, 1, (CV_PI / 180), 10);
 			draw_houghLines(canny, houghImage[i], line, 10);
 			if (j == 0) {
-				imshow("4ºĞÇÒ ÀÌ¹ÌÁö" + to_string(i), houghImage[i]);
+				imshow("4ë¶„í•  ì´ë¯¸ì§€" + to_string(i), houghImage[i]);
 			}
 			
 
@@ -168,7 +168,7 @@ void find_beat() {
 	Point left_top;
 	
 
-	int Tolerance =4; //¿ÀÂ÷ Çã¿ë °ª
+	int Tolerance =4; //ì˜¤ì°¨ í—ˆìš© ê°’
 	dotted_half_l = imread("image/dotted_half_l.png", IMREAD_GRAYSCALE);
 	CV_Assert(dotted_half_l.data);
 	threshold(dotted_half_l, dotted_half_l, 127, 255, THRESH_BINARY | THRESH_OTSU);
@@ -242,7 +242,7 @@ void find_beat() {
 	
 
 		
-		//±ê¹ßÀÌ ÀÖ´Â ¾ÇÇ¥¸¦ °ËÃâÇÏ±â À§ÇÑ ¾Ë°í¸®Áò
+		//ê¹ƒë°œì´ ìˆëŠ” ì•…í‘œë¥¼ ê²€ì¶œí•˜ê¸° ìœ„í•œ ì•Œê³ ë¦¬ì¦˜
 		for (int j = 0;j < fn_number[i];j++) {
 			int flag_check[3] = {0,0,0};
 			int overlap = 0;
@@ -250,7 +250,7 @@ void find_beat() {
 			
 			bool is_flag = false;
 		
-			//Á¡ ºÎÅÍ °ËÃâ.
+			//ì  ë¶€í„° ê²€ì¶œ.
 			for (int k = 0;k < 1;k++) {
 				matchTemplate(clone, dot, coeff, TM_CCOEFF_NORMED);
 
@@ -545,7 +545,7 @@ void find_beat() {
 				beat_x = left_top.x + quater_h.cols / 2;
 				for (int j = 0;j <fn_number[i];j++) {
 					if ( beat_x - Tolerance < note[i][j].x && note[i][j].x  < beat_x + Tolerance) {
-						//cout <<"note¹è¿­ xÁÂÇ¥"<< note[i][j].x << endl;
+						//cout <<"noteë°°ì—´ xì¢Œí‘œ"<< note[i][j].x << endl;
 						sheet_note[i][j].setBeat(320);
 						//sheet_note[i][j].getNote();
 					}
@@ -564,7 +564,7 @@ void find_beat() {
 				beat_x = left_top.x + quater_h.cols / 2;
 				for (int j = 0;j < fn_number[i];j++) {
 					if (beat_x - Tolerance < note[i][j].x && note[i][j].x < beat_x + Tolerance) {
-						//cout <<"note¹è¿­ xÁÂÇ¥"<< note[i][j].x << endl;
+						//cout <<"noteë°°ì—´ xì¢Œí‘œ"<< note[i][j].x << endl;
 						sheet_note[i][j].setBeat(320);
 						//sheet_note[i][j].getNote();
 					}
@@ -578,7 +578,7 @@ void find_beat() {
 			sheet_note[i][j].getNote();
 		}
 		cout << endl;
-	}//¶óÀÎ º° ¹İº¹
+	}//ë¼ì¸ ë³„ ë°˜ë³µ
 	
 
 }
@@ -606,7 +606,7 @@ void find_beat() {
 
 
 
-void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
+void find_scale() { //ë¶€ë¶„ì  í…œí”Œë¦¿ ë§¤ì¹­ -> ì¢Œí‘œ ì°¾ì•„ ìŒê³„ ì°¾ê¸°
 	Mat temp, temp2,temp3,temp4;
 	Mat g_clef, c_clef;
 	Mat quater_rest;
@@ -698,15 +698,15 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 	CV_Assert(long_slur.data);
 	threshold(long_slur, long_slur, 127, 255, THRESH_BINARY);
 
-	cout << "°¡·Î±æÀÌ"<< temp.cols << endl;
-	cout << "¼¼·Î±æÀÌ" << temp.rows << endl;
+	cout << "ê°€ë¡œê¸¸ì´"<< temp.cols << endl;
+	cout << "ì„¸ë¡œê¸¸ì´" << temp.rows << endl;
 
 	for (int i = 0;i < linecheck;i++) {
 		Mat clone = subImage[i].clone();
 		int note_number = 0;
 		int clef_x;
 
-		//³ôÀºÀ½ÀÚ¸®Ç¥/³·ÀºÀ½ÀÚ¸®Ç¥ Å½»ö
+		//ë†’ì€ìŒìë¦¬í‘œ/ë‚®ì€ìŒìë¦¬í‘œ íƒìƒ‰
 		for (int k = 0;k < 1;k++) {
 			matchTemplate(clone, g_clef, coeff, TM_CCOEFF_NORMED);
 
@@ -729,7 +729,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 		}
 
 
-		//°èÀÌ¸§ Å½»ö
+		//ê³„ì´ë¦„ íƒìƒ‰
 		for (int k = 0;k < 1;k++) {
 			matchTemplate(clone, temp, coeff, TM_CCOEFF_NORMED);
 
@@ -788,7 +788,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 			}
 		}
-		//½°Ç¥ Å½»ö
+		//ì‰¼í‘œ íƒìƒ‰
 		for (int k = 0;k < 1;k++) {
 			matchTemplate(subImage[i], eighth_rest, coeff, TM_CCOEFF_NORMED);
 
@@ -814,7 +814,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 			}
 		}
 
-		//Á¶ Å½»ö.(# :: ÆÄµµ¼Ö·¹¶ó¹Ì½Ã. ´Ù¸¥°Å :: ½Ã¹Ì¶ó·¹¼ÖµµÆÄ)
+		//ì¡° íƒìƒ‰.(# :: íŒŒë„ì†”ë ˆë¼ë¯¸ì‹œ. ë‹¤ë¥¸ê±° :: ì‹œë¯¸ë¼ë ˆì†”ë„íŒŒ)
 		int key = 0;
 		int f_key = 0;
 		for (int k = 0;k < 1;k++) {
@@ -843,7 +843,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 			}
 		}
-		//¾µµ¥¾ø´Â ±âÈ£ Áö¿ö¹ö¸®±â(F, C7 µîµî..)
+		//ì“¸ë°ì—†ëŠ” ê¸°í˜¸ ì§€ì›Œë²„ë¦¬ê¸°(F, C7 ë“±ë“±..)
 		
 		for (int k = 0;k < 1;k++) {
 			matchTemplate(subImage[i], F, coeff, TM_CCOEFF_NORMED);
@@ -930,7 +930,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 
 		sort(note[i], note[i] + note_number, cmp2);
-		for (int j = 0;j < note_number;j++) { //Áßº¹ Á¦°Å
+		for (int j = 0;j < note_number;j++) { //ì¤‘ë³µ ì œê±°
 			if ((note[i][j].x - note[i][j - 1].x) < 3) {
 				memmove(note[i] + j, note[i] + j + 1, sizeof(note[i]) - j);
 				note_number--;
@@ -940,49 +940,49 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 		full_number += note_number;
 		fn_number[i] = note_number;
 		cout << endl;
-		cout << " À½Ç¥ °¹¼ö" << fn_number[i];
+		cout << " ìŒí‘œ ê°¯ìˆ˜" << fn_number[i];
 		cout << endl;
-		int Tolerance; //À½Ç¥ Áß½ÉÁÂÇ¥¿Í ¿À¼±°£ Çã¿ë ¿ÀÂ÷ °ª
+		int Tolerance; //ìŒí‘œ ì¤‘ì‹¬ì¢Œí‘œì™€ ì˜¤ì„ ê°„ í—ˆìš© ì˜¤ì°¨ ê°’
 
-		double line_gap = line_y[1] - line_y[0]; //¿À¼± »çÀÌ °£°İ
+		double line_gap = line_y[1] - line_y[0]; //ì˜¤ì„  ì‚¬ì´ ê°„ê²©
 		if (line_gap == 6) {
-			Tolerance = 2; //À½Ç¥ Áß½ÉÁÂÇ¥¿Í ¿À¼±°£ Çã¿ë ¿ÀÂ÷ °ª
+			Tolerance = 2; //ìŒí‘œ ì¤‘ì‹¬ì¢Œí‘œì™€ ì˜¤ì„ ê°„ í—ˆìš© ì˜¤ì°¨ ê°’
 		}
 		else
 			Tolerance = 3;
 
 		if (clef == 1) {
-			cout << "¿À¸¥¼Õ" << endl;
+			cout << "ì˜¤ë¥¸ì†" << endl;
 			for (int j = 0;j < note_number;j++) {
 				if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - 2 * line_gap - Tolerance) {
 					if (f_key > 0) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã ÇÃ·§" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ í”Œë«" << endl;
 						sheet_note[i][j].setBlackNumber(5);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ" << endl;
 						sheet_note[i][j].setWhiteNumber(7);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
 					}
 				}
 				else if (note[i][j].y < line_y[0] - line_gap + Tolerance && note[i][j].y > line_y[0] - line_gap - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¶ó" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¼" << endl;
 					sheet_note[i][j].setWhiteNumber(6);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(5);
 				}
 				else if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - Tolerance) {
 					if (key > 2) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¼Ö ˜Ş" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì†” ìƒ¾" << endl;
 						sheet_note[i][j].setBlackNumber(4);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¼Ö" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì†”" << endl;
 						sheet_note[i][j].setWhiteNumber(5);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
@@ -992,13 +992,13 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 				else if (note[i][j].y<line_y[0] + Tolerance && note[i][j].y>line_y[0] - Tolerance) {
 
 					if (key > 0) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ÆÄ ˜Ş" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "íŒŒ ìƒ¾" << endl;
 						sheet_note[i][j].setBlackNumber(3);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ÆÄ" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "íŒŒ" << endl;
 						sheet_note[i][j].setWhiteNumber(4);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
@@ -1006,13 +1006,13 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 				}
 				else if (note[i][j].y > line_y[0] + Tolerance && note[i][j].y < line_y[1] - Tolerance) {
 					if (f_key > 1) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¹Ì ÇÃ·§" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¯¸ í”Œë«" << endl;
 						sheet_note[i][j].setBlackNumber(2);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¹Ì" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¯¸" << endl;
 						sheet_note[i][j].setWhiteNumber(3);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
@@ -1020,7 +1020,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 				}
 				else if (note[i][j].y<line_y[1] + Tolerance && note[i][j].y>line_y[1] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "·¹" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë ˆ" << endl;
 					sheet_note[i][j].setWhiteNumber(2);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(5);
@@ -1028,13 +1028,13 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 				else if (note[i][j].y > line_y[1] + Tolerance && note[i][j].y < line_y[2] - Tolerance) {
 
 					if (key > 1) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "µµ ˜Ş" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë„ ìƒ¾" << endl;
 						sheet_note[i][j].setBlackNumber(1);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "µµ" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë„" << endl;
 						sheet_note[i][j].setWhiteNumber(1);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(5);
@@ -1042,13 +1042,13 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 				}
 				else if (note[i][j].y<line_y[2] + Tolerance && note[i][j].y>line_y[2] - Tolerance) {
 					if (f_key > 0) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã ÇÃ·§" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ í”Œë«" << endl;
 						sheet_note[i][j].setBlackNumber(5);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ" << endl;
 						sheet_note[i][j].setWhiteNumber(7);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
@@ -1056,20 +1056,20 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 				}
 				else if (note[i][j].y > line_y[2] + Tolerance && note[i][j].y < line_y[3] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¶ó" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¼" << endl;
 					sheet_note[i][j].setWhiteNumber(6);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(4);
 				}
 				else if (note[i][j].y<line_y[3] + Tolerance && note[i][j].y>line_y[3] - Tolerance) {
 					if (key > 2) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¼Ö ˜Ş" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì†” ìƒ¾" << endl;
 						sheet_note[i][j].setBlackNumber(4);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¼Ö" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì†”" << endl;
 						sheet_note[i][j].setWhiteNumber(5);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
@@ -1078,13 +1078,13 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 				else if (note[i][j].y > line_y[3] + Tolerance && note[i][j].y < line_y[4] - Tolerance) {
 
 					if (key > 0) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ÆÄ ˜Ş" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "íŒŒ ìƒ¾" << endl;
 						sheet_note[i][j].setBlackNumber(3);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ÆÄ" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "íŒŒ" << endl;
 						sheet_note[i][j].setWhiteNumber(4);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
@@ -1093,13 +1093,13 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 				}
 				else if (note[i][j].y<line_y[4] + Tolerance && note[i][j].y>line_y[4] - Tolerance) {
 					if (f_key > 1) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¹Ì ÇÃ·§" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¯¸ í”Œë«" << endl;
 						sheet_note[i][j].setBlackNumber(2);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "¹Ì" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¯¸" << endl;
 						sheet_note[i][j].setWhiteNumber(3);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
@@ -1107,20 +1107,20 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 					}
 				}
 				else if (note[i][j].y > line_y[4] + Tolerance && note[i][j].y < line_y[4] + line_gap - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "·¹" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë ˆ" << endl;
 					sheet_note[i][j].setWhiteNumber(2);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(4);
 				}
 				else if (note[i][j].y < line_y[4] + line_gap + Tolerance && note[i][j].y > line_y[4] + line_gap - Tolerance) {
 					if (key > 1) {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "µµ ˜Ş" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë„ ìƒ¾" << endl;
 						sheet_note[i][j].setBlackNumber(1);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
 					}
 					else {
-						cout << note[i][j].x << "  " << note[i][j].y << "  " << "µµ" << endl;
+						cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë„" << endl;
 						sheet_note[i][j].setWhiteNumber(1);
 						sheet_note[i][j].setClef(1);
 						sheet_note[i][j].setOctav(4);
@@ -1130,7 +1130,7 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 				else if (note[i][j].y > line_y[4] + line_gap + Tolerance && note[i][j].y < line_y[4] + line_gap * 2 - Tolerance) {
 
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ" << endl;
 					sheet_note[i][j].setWhiteNumber(7);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(3);
@@ -1138,16 +1138,16 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 
 
 
-				//½°Ç¥ Å½»ö
+				//ì‰¼í‘œ íƒìƒ‰
 				else if (note[i][j].y == -8) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "8ºĞ ½°Ç¥" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "8ë¶„ ì‰¼í‘œ" << endl;
 					sheet_note[i][j].setWhiteNumber(0);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(0);
 					sheet_note[i][j].setBeat(80);
 				}
 				else if (note[i][j].y == -4) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "4ºĞ ½°Ç¥" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "4ë¶„ ì‰¼í‘œ" << endl;
 					sheet_note[i][j].setWhiteNumber(0);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(0);
@@ -1160,109 +1160,109 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 			}
 		}
 		else if (clef == 0) {
-			cout << "¿Ş¼Õ" << endl;
+			cout << "ì™¼ì†" << endl;
 			for (int j = 0;j < note_number;j++) {
 				if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - Tolerance * line_gap - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "·¹" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë ˆ" << endl;
 					sheet_note[i][j].setWhiteNumber(2);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(4);
 				}
 				else if (note[i][j].y < line_y[0] - line_gap + Tolerance && note[i][j].y > line_y[0] - line_gap - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "µµ" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë„" << endl;
 					sheet_note[i][j].setWhiteNumber(1);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(4);
 				}
 				else if (note[i][j].y > line_y[0] - line_gap + Tolerance && note[i][j].y < line_y[0] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ" << endl;
 					sheet_note[i][j].setWhiteNumber(7);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y<line_y[0] + Tolerance && note[i][j].y>line_y[0] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¶ó" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¼" << endl;
 					sheet_note[i][j].setWhiteNumber(6);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y > line_y[0] + Tolerance && note[i][j].y < line_y[1] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¼Ö" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì†”" << endl;
 					sheet_note[i][j].setWhiteNumber(5);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y<line_y[1] + Tolerance && note[i][j].y>line_y[1] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ÆÄ" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "íŒŒ" << endl;
 					sheet_note[i][j].setWhiteNumber(4);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y > line_y[1] + Tolerance && note[i][j].y < line_y[2] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¹Ì" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¯¸" << endl;
 					sheet_note[i][j].setWhiteNumber(3);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y<line_y[2] + Tolerance && note[i][j].y>line_y[2] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "·¹" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë ˆ" << endl;
 					sheet_note[i][j].setWhiteNumber(2);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y > line_y[2] + Tolerance && note[i][j].y < line_y[3] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "µµ" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë„" << endl;
 					sheet_note[i][j].setWhiteNumber(1);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(3);
 				}
 				else if (note[i][j].y<line_y[3] + Tolerance && note[i][j].y>line_y[3] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "½Ã" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì‹œ" << endl;
 					sheet_note[i][j].setWhiteNumber(7);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(2);
 				}
 				else if (note[i][j].y > line_y[3] + Tolerance && note[i][j].y < line_y[4] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¶ó" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¼" << endl;
 					sheet_note[i][j].setWhiteNumber(6);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(2);
 				}
 				else if (note[i][j].y<line_y[4] + Tolerance && note[i][j].y>line_y[4] - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¼Ö" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ì†”" << endl;
 					sheet_note[i][j].setWhiteNumber(5);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(2);
 				}
 				else if (note[i][j].y > line_y[4] + Tolerance && note[i][j].y < line_y[4] + line_gap - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ÆÄ" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "íŒŒ" << endl;
 					sheet_note[i][j].setWhiteNumber(4);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(2);
 				}
 				else if (note[i][j].y < line_y[4] + line_gap + Tolerance && note[i][j].y > line_y[4] + line_gap - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "¹Ì" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë¯¸" << endl;
 					sheet_note[i][j].setWhiteNumber(3);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(2);
 				}
 				else if (note[i][j].y > line_y[4] + line_gap + Tolerance && note[i][j].y < line_y[4] + line_gap * 2 - Tolerance) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "·¹" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "ë ˆ" << endl;
 					sheet_note[i][j].setWhiteNumber(2);
 					sheet_note[i][j].setClef(1);
 					sheet_note[i][j].setOctav(2);
 				}
 
-				//½°Ç¥ ÀÎ½Ä
+				//ì‰¼í‘œ ì¸ì‹
 				else if (note[i][j].y == -8) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "8ºĞ ½°Ç¥" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "8ë¶„ ì‰¼í‘œ" << endl;
 					sheet_note[i][j].setWhiteNumber(0);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(0);
 					sheet_note[i][j].setBeat(80);
 				}
 				else if (note[i][j].y == -4) {
-					cout << note[i][j].x << "  " << note[i][j].y << "  " << "4ºĞ ½°Ç¥" << endl;
+					cout << note[i][j].x << "  " << note[i][j].y << "  " << "4ë¶„ ì‰¼í‘œ" << endl;
 					sheet_note[i][j].setWhiteNumber(0);
 					sheet_note[i][j].setClef(0);
 					sheet_note[i][j].setOctav(0);
@@ -1275,11 +1275,11 @@ void find_scale() { //ºÎºĞÀû ÅÛÇÃ¸´ ¸ÅÄª -> ÁÂÇ¥ Ã£¾Æ À½°è Ã£±â
 			}
 		}
 
-		cout << "1¹øÂ° ¼± ÁÂÇ¥"<<line_y[0] << endl;
-		cout << "2¹øÂ° ¼± ÁÂÇ¥" << line_y[1] << endl;
-		cout << "3¹øÂ° ¼± ÁÂÇ¥" << line_y[2] << endl;
-		cout << "4¹øÂ° ¼± ÁÂÇ¥" << line_y[3] << endl;
-		cout << "5¹øÂ° ¼± ÁÂÇ¥" << line_y[4] << endl;
+		cout << "1ë²ˆì§¸ ì„  ì¢Œí‘œ"<<line_y[0] << endl;
+		cout << "2ë²ˆì§¸ ì„  ì¢Œí‘œ" << line_y[1] << endl;
+		cout << "3ë²ˆì§¸ ì„  ì¢Œí‘œ" << line_y[2] << endl;
+		cout << "4ë²ˆì§¸ ì„  ì¢Œí‘œ" << line_y[3] << endl;
+		cout << "5ë²ˆì§¸ ì„  ì¢Œí‘œ" << line_y[4] << endl;
 		
 		imshow("clone" + i, clone);
 	}
@@ -1292,15 +1292,15 @@ void CallBackFunc(int event, int x, int y, int flags, void* userdata)
 {
 	if (event == EVENT_LBUTTONDOWN)
 	{
-		cout << "¿ŞÂÊ ¸¶¿ì½º ¹öÆ° Å¬¸¯.. ÁÂÇ¥ = (" << x << ", " << y << ")" << endl;
+		cout << "ì™¼ìª½ ë§ˆìš°ìŠ¤ ë²„íŠ¼ í´ë¦­.. ì¢Œí‘œ = (" << x << ", " << y << ")" << endl;
 	}
 }
 Mat drop_lyrics(Mat binary_image) {
 	double min, max;
 	Point left_top;
 	Mat coeff;
-	Mat temp = imread("image/°õ.png", IMREAD_GRAYSCALE);
-	Mat temp2 = imread("image/¶ó.png", IMREAD_GRAYSCALE);
+	Mat temp = imread("image/ê³°.png", IMREAD_GRAYSCALE);
+	Mat temp2 = imread("image/ë¼.png", IMREAD_GRAYSCALE);
 	CV_Assert(temp.data);
 	threshold(temp, temp, 127, 255, THRESH_BINARY);
 
@@ -1344,7 +1344,7 @@ int main() {
 	imshow("binary_image", binary_image);
 
 	binary_image = drop_lyrics(binary_image);
-	imshow("°¡»ç Á¦°Å", binary_image);
+	imshow("ê°€ì‚¬ ì œê±°", binary_image);
 	divide_image(binary_image);
 	divide_by_four();
 	find_scale();
@@ -1353,16 +1353,16 @@ int main() {
 	
 	namedWindow("gray image", WINDOW_AUTOSIZE);
 
-	//ÅÛÇÃ¸´ ÀÌ¹ÌÁö ÃßÃâ(¼öµ¿) >>
-	//À©µµ¿ì¿¡ Ãâ·Â  
+	//í…œí”Œë¦¿ ì´ë¯¸ì§€ ì¶”ì¶œ(ìˆ˜ë™) >>
+	//ìœˆë„ìš°ì— ì¶œë ¥  
 	
 	imshow("gray image", binary_image);
 
-	//À©µµ¿ì¿¡ Äİ¹éÇÔ¼ö¸¦ µî·Ï
+	//ìœˆë„ìš°ì— ì½œë°±í•¨ìˆ˜ë¥¼ ë“±ë¡
 	setMouseCallback("gray image", CallBackFunc, NULL);
 	
 	Mat A = binary_image(Rect(Point(304,500), Point(321, 517)));
-	imwrite("¶ó.png", A);
+	imwrite("ë¼.png", A);
 
 	Mat B = binary_image(Rect(Point(74, 297), Point(145, 311)));
 	imwrite("long_slur.png", B);
@@ -1383,7 +1383,7 @@ for (int i = 0; i < linecheck;i++) {
 }
 fout.close();
 
-cout << "ÃÑ À½Ç¥ °¹¼ö : " << full_number <<" °³"<< endl;
+cout << "ì´ ìŒí‘œ ê°¯ìˆ˜ : " << full_number <<" ê°œ"<< endl;
 
 
 

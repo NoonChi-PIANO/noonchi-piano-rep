@@ -25,6 +25,9 @@ import com.android.volley.error.VolleyError;
 import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -141,24 +144,50 @@ public class Galary extends AppCompatActivity {
 
     public void clickUpload(View view) {
 
-        //서버로 보낼 데이터
-      //  name= etName.getText().toString();
-        // String msg= etMsg.getText().toString();
-
         //안드로이드에서 보낼 데이터를 받을 php 서버 주소
         String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
-        // String serverUrl="http://172.30.1.60/noonchi/insertDB.php";
-        //192.168.206.159
 
-        //Volley plus Library를 이용해서
-        //파일 전송하도록..
-        //Volley+는 AndroidStudio에서 검색이 안됨 [google 검색 이용]
-
-        //파일 전송 요청 객체 생성[결과를 String으로 받음]
         SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 new AlertDialog.Builder(Galary.this).setMessage("응답:"+response).create().show();
+                Toast.makeText(Galary.this, "download CA", Toast.LENGTH_SHORT).show();
+
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+                    if(success) {
+                        Toast.makeText(Galary.this, "download CA", Toast.LENGTH_SHORT).show();
+                        String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/download.php";
+
+                        //다운로드 한번에 수행
+                        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        new AlertDialog.Builder(Galary.this).setMessage("file download success!").create().show();
+                                        //new AlertDialog.Builder(Galary.this).setMessage("응답:\n"+response).create().show();
+
+                                        WriteTextFile(folderNAME,"bair.txt",response);
+                                    }
+                                },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Toast.makeText(Galary.this, "ERROR", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                        RequestQueue requestQueue= Volley.newRequestQueue(Galary.this);
+                        requestQueue.add(smpr);
+
+                    }else{
+                        Toast.makeText(Galary.this, "업로드 실패", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }, new Response.ErrorListener() {
             @Override

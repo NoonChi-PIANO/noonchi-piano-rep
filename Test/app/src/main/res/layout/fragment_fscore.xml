@@ -11,6 +11,19 @@
         >
         <!-- TODO: Update blank fragment layout -->
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/refreshBTN"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="새로고침"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_margin="10dp"
             android:padding="15dp"
             android:layout_width="match_parent"

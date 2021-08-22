@@ -30,6 +30,8 @@ android {
 
 repositories {
     maven { url 'https://jitpack.io' }
+    maven { url 'https://github.com/kshoji/javax.sound.midi-for-Android/raw/master/javax.sound.midi/repository' }
+    maven { url 'https://github.com/kshoji/USB-MIDI-Driver/raw/master/MIDIDriver/snapshots' }
 }
 
 dependencies {
@@ -50,6 +52,10 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     implementation files('libs\\fftpack-0.1.jar')
     //mpandroidchart는 위에 리포지토리도 추가해야함
+
+    implementation 'jp.kshoji:javax-sound-midi:0.0.4:@aar'
+    // check the latest release version with https://github.com/kshoji/USB-MIDI-Driver/releases/latest
+    implementation 'jp.kshoji:midi-driver:0.1.5:@aar'
 
     //compile group: 'me.franfernandez', name: 'fftpack', version: '0.1'
 
