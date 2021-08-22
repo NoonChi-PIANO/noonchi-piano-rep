@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ResultScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ResultScore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Fscore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Fscore.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,10 +136,10 @@
     </state>
     <state x="369" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1628859304616" />
     <state x="461" y="0" key="CommitChangelistDialog2/0.0.1920.1030@0.0.1920.1030" timestamp="1629644142072" />
-    <state x="183" y="79" key="DiffContextDialog" timestamp="1629645853011">
+    <state x="240" y="136" key="DiffContextDialog" timestamp="1629649505820">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
-    <state x="183" y="79" key="DiffContextDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629645853011" />
+    <state x="240" y="136" key="DiffContextDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629649505820" />
     <state x="686" y="209" key="FileChooserDialogImpl" timestamp="1629120566229">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
@@ -173,11 +171,11 @@
     </state>
     <state x="571" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1628859091073" />
     <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629644101681" />
-    <state x="553" y="249" key="git4idea.merge.GitPullDialog" timestamp="1629646162681">
+    <state x="553" y="249" key="git4idea.merge.GitPullDialog" timestamp="1629649517716">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="442" y="199" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1628858881943" />
-    <state x="553" y="249" key="git4idea.merge.GitPullDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629646162681" />
+    <state x="553" y="249" key="git4idea.merge.GitPullDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629649517716" />
     <state x="526" y="311" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1628855651529">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
