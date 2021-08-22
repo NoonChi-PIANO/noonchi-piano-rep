@@ -48,6 +48,8 @@
         <activity android:name=".GameActivity"
             android:screenOrientation="landscape"/>
 
+        <activity android:name=".ResultScore"
+            android:screenOrientation="landscape"/>
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
 

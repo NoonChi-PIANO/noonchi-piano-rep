@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="">
+    <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/DrawBall.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/DrawBall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ScaleDetector2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ScaleDetector2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/drawable/buttonstyle2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/drawable/buttonstyle2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +36,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -66,12 +61,42 @@
       <option name="project" value="LOCAL" />
       <updated>1628859306015</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adf">
+      <created>1629133898731</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1629133898731</updated>
+    </task>
+    <task id="LOCAL-00003" summary="EXCELLENT,GOOD,BAD로 나눔. 핸드폰 없어서 테스트 못함 공기계좀...">
+      <created>1629134027435</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1629134027435</updated>
+    </task>
+    <task id="LOCAL-00004" summary="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
+      <created>1629561443637</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1629561443637</updated>
+    </task>
+    <task id="LOCAL-00005" summary="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)">
+      <created>1629561688853</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1629561688853</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adf" />
-    <option name="LAST_COMMIT_MESSAGE" value="adf" />
+    <MESSAGE value="EXCELLENT,GOOD,BAD로 나눔. 핸드폰 없어서 테스트 못함 공기계좀..." />
+    <MESSAGE value="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)" />
+    <option name="LAST_COMMIT_MESSAGE" value="군대보다 삽질 더 많이하네요 한 곡 끝나고 결과페이지 넘어가는거 완료(excellent, good, bad로 나눔.)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1628950978178">
@@ -82,10 +107,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="100" y="100" width="1336" height="624" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1628951104795" />
-    <state x="369" y="0" key="CommitChangelistDialog2" timestamp="1628859304616">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="461" y="0" key="CommitChangelistDialog2" timestamp="1629561872923">
+      <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="369" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1628859304616" />
+    <state x="461" y="0" key="CommitChangelistDialog2/0.0.1920.1030@0.0.1920.1030" timestamp="1629561872923" />
     <state x="686" y="209" key="FileChooserDialogImpl" timestamp="1629120566229">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
@@ -107,19 +133,21 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1628950593942" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1628859285921">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="451" y="181" key="Vcs.Push.Dialog.v2" timestamp="1629134040594">
+      <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1628859285921" />
-    <state x="571" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1628859091073">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629134040594" />
+    <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1629597417294">
+      <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="571" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1628859091073" />
-    <state x="553" y="249" key="git4idea.merge.GitPullDialog" timestamp="1629120539922">
+    <state x="714" y="406" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1030@0.0.1920.1030" timestamp="1629597417294" />
+    <state x="553" y="249" key="git4idea.merge.GitPullDialog" timestamp="1629561900573">
       <screen x="0" y="0" width="1920" height="1030" />
     </state>
     <state x="442" y="199" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1628858881943" />
-    <state x="553" y="249" key="git4idea.merge.GitPullDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629120539922" />
+    <state x="553" y="249" key="git4idea.merge.GitPullDialog/0.0.1920.1030@0.0.1920.1030" timestamp="1629561900573" />
     <state x="526" y="311" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1628855651529">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

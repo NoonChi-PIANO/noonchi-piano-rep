@@ -28,6 +28,7 @@ class Panel extends SurfaceView implements SurfaceHolder.Callback {
     public static int repeat_right_num;
     public static int repeat_left_num;
 
+
     public static String right_scale;
     public static String left_scale;
 
@@ -46,6 +47,7 @@ class Panel extends SurfaceView implements SurfaceHolder.Callback {
         repeat_right_sum = new ArrayList<>();
         repeat_left_sum = new ArrayList<>();
         last_flag=true;
+
 
     }
 

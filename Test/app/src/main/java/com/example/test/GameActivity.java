@@ -35,8 +35,10 @@ import jp.kshoji.javax.sound.midi.UsbMidiSystem;
 
 import static com.example.test.Fpractice.music_selected;
 import static com.example.test.DrawGunban.y_piano_upleft;
+
 import static com.example.test.Panel.balls_right;
 import static com.example.test.Panel.balls_left;
+
 import static com.example.test.Panel.repeat_number;
 import static com.example.test.Ball.velocity;
 
@@ -54,6 +56,10 @@ public class GameActivity extends AppCompatActivity{
     public static TextView Left_scale;
     public static int total_length;//곡 전체 길이(프로토콜 개수)
 
+    public static int excellent;
+    public static int good;
+    public static int bad;
+
 
     public int music;
     public static TextView is_Correct;
@@ -65,6 +71,7 @@ public class GameActivity extends AppCompatActivity{
     private Canvas background;
     private Paint green_line;
     private ImageView Test;
+    private Button result_score;
 
     public static Context context_game;
 
@@ -96,6 +103,11 @@ public class GameActivity extends AppCompatActivity{
         context_game = this;
 
 
+        excellent=0;
+        good=0;
+        bad=0;
+
+        result_score=findViewById(R.id.score_result);
         repeat=findViewById(R.id.repeat);
         repeat_end=findViewById(R.id.repeat_end);
         repeat_start=findViewById(R.id.repeat_start);
@@ -137,6 +149,47 @@ public class GameActivity extends AppCompatActivity{
         Test.setImageBitmap(bitmap);
 
 
+        result_score.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try{
+                    //panel.thread.setStop(true);
+                    panel.balls_right.clear();
+                    panel.balls_left.clear();
+                    panel.repeat_right.clear();
+                    panel.repeat_left.clear();
+                    panel.repeat_right_sum.clear();
+                    panel.repeat_left_sum.clear();
+                    panel.repeat_number=0;
+
+
+                    Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
+                    Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
+                    myIntent.putExtra("ex",excellent);
+                    myIntent.putExtra("good",good);
+                    myIntent.putExtra("bad",bad);
+                    startActivity(myIntent);
+
+
+
+
+                    //y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
+                }catch (NullPointerException e){
+
+
+
+                    Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
+                    Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
+                    myIntent.putExtra("excellent",excellent);
+                    myIntent.putExtra("good",good);
+                    myIntent.putExtra("bad",bad);
+                    startActivity(myIntent);
+
+                    //y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
+                }
+            }
+        });
         repeat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1043,7 +1096,7 @@ public class GameActivity extends AppCompatActivity{
 
             Toast.makeText(this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(GameActivity.this, "game start", Toast.LENGTH_SHORT).show();
+
 
 
             startActivity(new Intent(GameActivity.this,Home.class));
