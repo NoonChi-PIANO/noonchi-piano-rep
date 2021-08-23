@@ -55,6 +55,7 @@ public class GameActivity extends AppCompatActivity{
     public static TextView Right_scale;
     public static TextView Left_scale;
     public static TextView bad_scale;
+    public static TextView answer_scale;
     public static int total_length;//곡 전체 길이(프로토콜 개수)
 
     public static int switch_music;
@@ -120,6 +121,7 @@ public class GameActivity extends AppCompatActivity{
         Right_scale = findViewById(R.id.good_scale);
         Left_scale = findViewById(R.id.excellent_scale);
         bad_scale = findViewById(R.id.bad_scale);
+        answer_scale=findViewById(R.id.answer_scale);
         is_Correct = findViewById((R.id.isCorrect));
         Intent myintent = getIntent();
         int selectImg= myintent.getIntExtra("select",0);

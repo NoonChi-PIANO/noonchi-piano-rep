@@ -127,59 +127,60 @@ class Ball {
     }
 
     public String getWhiteScale(){
-        //int octav = 0;
+
         int scale = 0;
 
+        String octav=null;
         String answer=null;
-        //octav = ((protocol/1000000)%10);
+        octav = Integer.toString(((protocol/1000000)%10));
         scale = ((protocol/100000)%10);
 
         if(scale==1){
-            answer="C";//+Integer.toString(octav);
+            answer="C"+octav;
         }
         else if(scale==2){
-            answer="D";//+Integer.toString(octav);
+            answer="D"+octav;
         }
         else if(scale==3){
-            answer="E";//+Integer.toString(octav);
+            answer="E"+octav;
         }
         else if(scale==4){
-            answer="F";//+Integer.toString(octav);
+            answer="F"+octav;
         }
         else if(scale==5){
-            answer="G";//+Integer.toString(octav);
+            answer="G"+octav;
         }
         else if(scale==6){
-            answer="A";//+Integer.toString(octav);
+            answer="A"+octav;
         }
         else if(scale==7){
-            answer="B";//+Integer.toString(octav);
+            answer="B"+octav;
         }
         return answer;
     }
     public String getBlackScale(){
-        int octav = 0;
         int scale = 0;
-        String answer=null;
 
-        octav = ((protocol/1000000)%10);
+        String octav=null;
+        String answer=null;
+        octav = Integer.toString(((protocol/1000000)%10));
         scale = ((protocol/10000)%10);
 
 
         if(scale==1){
-            answer="C#"+Integer.toString(octav);
+            answer="C#"+octav;
         }
         else if(scale==2){
-            answer="D#"+Integer.toString(octav);
+            answer="D#"+octav;
         }
         else if(scale==3){
-            answer="F#"+Integer.toString(octav);
+            answer="F#"+octav;
         }
         else if(scale==4){
-            answer="G#"+Integer.toString(octav);
+            answer="G#"+octav;
         }
         else if(scale==5){
-            answer="A#"+Integer.toString(octav);
+            answer="A#"+octav;
         }
         return answer;
     }

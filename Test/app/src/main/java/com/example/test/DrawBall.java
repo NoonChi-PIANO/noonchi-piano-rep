@@ -1,19 +1,13 @@
 package com.example.test;
 
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.view.SurfaceHolder;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.core.app.ActivityCompat;
-
 import java.util.ArrayList;
 
 import static com.example.test.Panel.repeat_L_flag;
@@ -38,6 +32,8 @@ import static com.example.test.Panel.repeat_left;
 import static com.example.test.GameActivity.Right_scale;
 import static com.example.test.GameActivity.Left_scale;
 import static com.example.test.GameActivity.bad_scale;
+import static com.example.test.GameActivity.answer_scale;
+
 import static com.example.test.GameActivity.t2;
 import static com.example.test.GameActivity.is_Correct;
 import static com.example.test.Panel.right_scale;
@@ -139,6 +135,7 @@ class DrawBall extends Thread {
                 score_check=true;
 
             }
+            answer_scale.setText(right_scale);
 
 
 

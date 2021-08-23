@@ -189,6 +189,14 @@
                     android:text="채점"
                     android:textAlignment="center"
                     android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="연주 음"
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
                 <!--     <TextView
                          android:id="@+id/textView3"
                          android:layout_width="wrap_content"
@@ -213,6 +221,16 @@
 
                 <TextView
                     android:id="@+id/isCorrect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/HzText2"
+                    android:text="..."
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/answer_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
