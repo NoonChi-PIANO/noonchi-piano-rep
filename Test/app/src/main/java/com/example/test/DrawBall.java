@@ -37,9 +37,9 @@ import static com.example.test.Panel.repeat_left_num;
 import static com.example.test.Panel.repeat_left;
 import static com.example.test.GameActivity.Right_scale;
 import static com.example.test.GameActivity.Left_scale;
+import static com.example.test.GameActivity.bad_scale;
 import static com.example.test.GameActivity.t2;
 import static com.example.test.GameActivity.is_Correct;
-import static com.example.test.Panel.last_flag;
 import static com.example.test.Panel.right_scale;
 import static com.example.test.Panel.left_scale;
 
@@ -57,7 +57,9 @@ class DrawBall extends Thread {
     private boolean stop;
     private int total_Count_while=0;
     Context mContext;
-    
+
+    public static boolean score_check;
+
     public static final int BAD =1;
     public static final int GOOD =2;
     public static final int EXCELLENT =3;
@@ -67,12 +69,14 @@ class DrawBall extends Thread {
         setColor();
         setStop(false);
         score =0;
+        score_check=false;
     }
     public DrawBall(Panel panel, Context context){
         setHolder(panel);
         setColor();
         setStop(false);
         score =0;
+        score_check=false;
         mContext = context;
        // setStart_point(false);
         //setEnd_point(false);
@@ -103,33 +107,46 @@ class DrawBall extends Thread {
     public void setStart_point(boolean true_or_false){start_point = true_or_false;}
     public void setStart(boolean true_or_false){start=true_or_false;}
     public void setEnd_point(boolean true_or_false){end_point = true_or_false;}
+
     final Handler handler = new Handler()
     {
         public void handleMessage(Message msg)
         {
-            if(t2.getText().equals(right_scale)||t2.getText().equals(left_scale)&&score==EXCELLENT){
+            if((t2.getText().equals(right_scale)||t2.getText().equals(left_scale))&&score==EXCELLENT&&score_check==false){
                 is_Correct.setText("Excellent");
                 excellent++;
 
+                score_check=true;
+                score=0;
                 t2.setText("...");
+                Left_scale.setText(Integer.toString(excellent));
             }
-            else if(t2.getText().equals(right_scale)||t2.getText().equals(left_scale)&&score==GOOD){
+            else if((t2.getText().equals(right_scale)||t2.getText().equals(left_scale))&&score==GOOD&&score_check==false){
                 is_Correct.setText("GOOD");
                 good++;
+                score_check=true;
+                score=0;
                 t2.setText("...");
+                Right_scale.setText(Integer.toString(good));
             }
-            else if(score==BAD){
+            else if(score==BAD&&score_check==false){
                 is_Correct.setText("bad");
 
                 bad++;
                 t2.setText("...");
+                bad_scale.setText(Integer.toString(bad));
                 score=0;
+                score_check=true;
+
             }
 
-            Right_scale.setText(right_scale);
-            Left_scale.setText(left_scale);
+
+
+
         }
     };
+
+
     public void run(){
 
         int right_stop=0;
@@ -228,29 +245,33 @@ class DrawBall extends Thread {
                                     total_Count_while++;
                                 } else {
                                     ball.drawWhiteGubanLight(canvas);
-                                    if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                    if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         right_scale=(ball.getWhiteScale());
-                                        score = GOOD;
-                                        
-                                        Message msg = handler.obtainMessage();
-                                        handler.sendMessage(msg);
-
-                                    }
-                                    else if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         score=EXCELLENT;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
-
+                                    }
+                                    else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                        right_scale=(ball.getWhiteScale());
+                                        score = GOOD;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
-                                        right_scale="..";
+                                        //right_scale="..";
+
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
 
                                         ball.setScore_Check(true);
-                                        
                                     }
+
+                                    if(score_check==true){
+                                        ball.setScore_Check(true);
+                                        score_check=false;
+                                    }
+
                                     
                                 }
                             }
@@ -357,28 +378,30 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawWhiteGubanLight(canvas);
-                                    if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                    if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         left_scale=(ball.getWhiteScale());
-                                        score = GOOD;
-
-                                        Message msg = handler.obtainMessage();
-                                        handler.sendMessage(msg);
-
-                                    }
-                                    else if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         score=EXCELLENT;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
-
+                                    }
+                                    else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                        left_scale=(ball.getWhiteScale());
+                                        score = GOOD;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
-                                        left_scale="..";
+                                        //right_scale="..";
+
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
 
                                         ball.setScore_Check(true);
-
+                                    }
+                                    if(score_check==true){
+                                        ball.setScore_Check(true);
+                                        score_check=false;
                                     }
                                 }
                             }
@@ -486,27 +509,30 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawBlackGubanLight(canvas);
-                                    if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                    if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         right_scale=(ball.getBlackScale());
-                                        score = GOOD;
-
-                                        Message msg = handler.obtainMessage();
-                                        handler.sendMessage(msg);
-
-                                    }
-                                    else if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         score=EXCELLENT;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
-
+                                    }
+                                    else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                        right_scale=(ball.getBlackScale());
+                                        score = GOOD;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
-                                        right_scale="..";
+                                        //right_scale="..";
+
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
-                                        ball.setScore_Check(true);
 
+                                        ball.setScore_Check(true);
+                                    }
+                                    if(score_check==true){
+                                        ball.setScore_Check(true);
+                                        score_check=false;
                                     }
                                 }
                             }
@@ -586,26 +612,30 @@ class DrawBall extends Thread {
                                     ball.minusCount_while();
                                 } else {
                                     ball.drawBlackGubanLight(canvas);
-                                    if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                    if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         left_scale=(ball.getBlackScale());
-                                        score = GOOD;
-
-                                        Message msg = handler.obtainMessage();
-                                        handler.sendMessage(msg);
-
-                                    }
-                                    else if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         score=EXCELLENT;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
-
+                                    }
+                                    else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
+                                        left_scale=(ball.getBlackScale());
+                                        score = GOOD;
+                                        Message msg = handler.obtainMessage();
+                                        handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
-                                        left_scale="..";
+                                        //right_scale="..";
+
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+
                                         ball.setScore_Check(true);
+                                    }
+                                    if(score_check==true){
+                                        ball.setScore_Check(true);
+                                        score_check=false;
                                     }
                                 }
                             }

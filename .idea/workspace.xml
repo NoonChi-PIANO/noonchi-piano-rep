@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="22cb40bd-5d82-4739-b748-6a877821b16e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Fscore.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Fscore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/DrawBall.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/DrawBall.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/GameActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/GameActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ScaleDetector2.java" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/java/com/example/test/ScaleDetector2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/layout/game.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/app/src/main/res/layout/score_result.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Test/app/src/main/res/layout/score_result.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

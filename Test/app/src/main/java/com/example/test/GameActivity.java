@@ -54,6 +54,7 @@ public class GameActivity extends AppCompatActivity{
     public static int sum_left_count_while; // 왼손 for문 도는 개수
     public static TextView Right_scale;
     public static TextView Left_scale;
+    public static TextView bad_scale;
     public static int total_length;//곡 전체 길이(프로토콜 개수)
 
     public static int switch_music;
@@ -116,8 +117,9 @@ public class GameActivity extends AppCompatActivity{
         repeat=findViewById(R.id.repeat);
         repeat_end=findViewById(R.id.repeat_end);
         repeat_start=findViewById(R.id.repeat_start);
-        Right_scale = findViewById(R.id.Right_Scale);
-        Left_scale = findViewById(R.id.Left_Scale);
+        Right_scale = findViewById(R.id.good_scale);
+        Left_scale = findViewById(R.id.excellent_scale);
+        bad_scale = findViewById(R.id.bad_scale);
         is_Correct = findViewById((R.id.isCorrect));
         Intent myintent = getIntent();
         int selectImg= myintent.getIntExtra("select",0);
@@ -254,8 +256,7 @@ public class GameActivity extends AppCompatActivity{
 
        // StartStopBTN = (Button)findViewById(R.id.StartStopButton);
 
-        t2 = (TextView)findViewById(R.id.HzText2);
-        t2.setText("...");
+
 
 
         //sc2.started

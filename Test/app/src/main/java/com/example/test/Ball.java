@@ -441,18 +441,20 @@ class Ball {
     }
 
     public void drawWhiteGubanLight(Canvas canvas) {
-        if(y >= y_piano_upleft + gunban.getWhiteVertical() - (length+10) && y <= y_piano_upleft+gunban.getWhiteVertical() -length+10){ //판정 시작
-            Scale_Line=2; // 판정 시작(GOOD)
-            if(y >= y_piano_upleft + gunban.getWhiteVertical() - (length+5) && y <= y_piano_upleft+gunban.getWhiteVertical() -length+5){ //판정 시작
-                Scale_Line=3; // 정확(EXCELLENT)
-            }
+        if(y >= y_piano_upleft + gunban.getWhiteVertical() - (length+5) && y <= y_piano_upleft+gunban.getWhiteVertical() -length+5){ //판정 시작
+            Scale_Line=3; // 정확(EXCELLENT)
         }
-        else if(touch_line==true){
+        else if(y >= y_piano_upleft + gunban.getWhiteVertical() - (length+10) && y <= y_piano_upleft+gunban.getWhiteVertical() -length+10){ //판정 시작
+            Scale_Line=2; // 판정 시작(GOOD)
+
+        }
+        else if(y > y_piano_upleft + gunban.getWhiteVertical() - length+10){
             Scale_Line=1; //판정 끝(bad)
         }
-        else if(touch_line==true&&y > y_piano_upleft+gunban.getWhiteVertical() -length+10){
-            Scale_Line=0;
+        else{
+            Scale_Line=0; //아무것도 아님.
         }
+
         if(y >= y_piano_upleft + gunban.getWhiteVertical() - length) { // 흰색 건반 아래쪽 경계선에 빛막대가 닿게 될 경우
             touch_line=true; // 막대에 닿았다고 판정
 
@@ -504,17 +506,18 @@ class Ball {
     }
 
     public void drawBlackGubanLight(Canvas canvas) {
-        if(y >= y_piano_upleft + gunban.getBlackVertical() - (length+10) && y <= y_piano_upleft+gunban.getBlackVertical() -length+10){ //판정 시작
-            Scale_Line=2; // 판정 시작(GOOD)
-            if(y >= y_piano_upleft + gunban.getBlackVertical() - (length+5) && y <= y_piano_upleft+gunban.getBlackVertical() -length+5){ //판정 시작
-                Scale_Line=3; // 정확(EXCELLENT)
-            }
+        if(y >= y_piano_upleft + gunban.getBlackVertical() - (length+5) && y <= y_piano_upleft+gunban.getBlackVertical() -length+5){ //판정 시작
+            Scale_Line=3; // 정확(EXCELLENT)
         }
-        else if(touch_line==true){
+        else if(y >= y_piano_upleft + gunban.getBlackVertical() - (length+10) && y <= y_piano_upleft+gunban.getBlackVertical() -length+10){ //판정 시작
+            Scale_Line=2; // 판정 시작(GOOD)
+
+        }
+        else if(y > y_piano_upleft + gunban.getBlackVertical() - length+10){
             Scale_Line=1; //판정 끝(bad)
         }
-        else if(touch_line==true&&y > y_piano_upleft+gunban.getBlackVertical() -length+10){
-            Scale_Line=0;
+        else{
+            Scale_Line=0; //아무것도 아님.
         }
         if(y >= y_piano_upleft + gunban.getBlackVertical() - length) { // 검은 건반 아래쪽 경계선에 빛막대가 닿게 될 경우
             touch_line=true;

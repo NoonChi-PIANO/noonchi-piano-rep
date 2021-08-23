@@ -107,7 +107,7 @@
 
             android:layout_below="@id/btn_velocity8"
             android:background="@drawable/buttonstyle2"
-            android:layout_toRightOf="@id/StartStopButton"
+            android:layout_toRightOf="@id/repeat"
             android:layout_margin="10dp"
 
             />
@@ -146,7 +146,7 @@
             android:background="@drawable/buttonstyle2"
             android:text="반복 연습" />
 
-
+<!--
         <Button
             android:id="@+id/StartStopButton"
             android:layout_width="60dp"
@@ -157,9 +157,9 @@
             android:layout_toRightOf="@+id/repeat"
             android:background="@drawable/buttonstyle2"
             android:text="Start" />
-
+-->
         <TableLayout
-            android:layout_width="115dp"
+            android:layout_width="150dp"
             android:layout_height="96dp"
 
             android:layout_margin="5dp"
@@ -208,16 +208,16 @@
                     android:id="@+id/HzText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3번 음"
+                    android:text=".."
                     android:textAlignment="center" />
 
                 <TextView
                     android:id="@+id/isCorrect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/Right_Scale"
+                    android:layout_toRightOf="@id/HzText2"
                     android:text="..."
                     android:textAlignment="center" />
                 <!-- <TextView
@@ -234,9 +234,9 @@
 
                 <TextView
                     android:id="@+id/left_fos"
-                    android:layout_width="47dp"
+                    android:layout_width="48dp"
                     android:layout_height="wrap_content"
-                    android:text="왼손"
+                    android:text="EXLLNT"
                     android:textAlignment="center"
                     android:textSize="12dp" />
 
@@ -244,7 +244,18 @@
                     android:id="@+id/right_fos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="오른손"
+                    android:text="GOOD"
+                    android:layout_marginLeft="10dp"
+                    android:textAlignment="center"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/bad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+
+                    android:text="BAD"
                     android:textAlignment="center"
                     android:textSize="12dp" />
 
@@ -254,7 +265,7 @@
             <TableRow>
 
                 <TextView
-                    android:id="@+id/Left_Scale"
+                    android:id="@+id/excellent_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/left_fos"
@@ -263,11 +274,24 @@
                     android:textAlignment="center" />
 
                 <TextView
-                    android:id="@+id/Right_Scale"
+                    android:id="@+id/good_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/right_fos"
-                    android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:text="..."
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/bad_scale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/right_fos"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+
 
                     android:text="..."
                     android:textAlignment="center" />

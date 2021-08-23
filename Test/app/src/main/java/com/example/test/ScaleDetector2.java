@@ -93,18 +93,7 @@ public class ScaleDetector2 {
                 ((TextView) ((Activity)mContext).findViewById(R.id.HzText2)).setText(whichScale2(toTransform));
 
 
-                if(((TextView) ((Activity)mContext).findViewById(R.id.HzText2)).getText().toString().
-                        equals(((TextView) ((Activity)mContext).findViewById(R.id.Right_Scale)).getText().toString())
-                        ||
-                        ((TextView) ((Activity)mContext).findViewById(R.id.HzText2)).getText().toString().
-                                equals(((TextView) ((Activity)mContext).findViewById(R.id.Left_Scale)).getText().toString())
-                ){
 
-                    ((TextView) ((Activity)mContext).findViewById(R.id.isCorrect)).setText("correct");
-                }
-                else{
-                    ((TextView) ((Activity)mContext).findViewById(R.id.isCorrect)).setText("BAD");
-                }
             }
 
             hzSize.clear();
