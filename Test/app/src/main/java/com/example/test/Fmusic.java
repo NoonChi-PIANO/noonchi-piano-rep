@@ -72,6 +72,8 @@ public class Fmusic extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_fmusic, container, false);
         uploadimg = (Button)rootView.findViewById(R.id.uploadimg);
 

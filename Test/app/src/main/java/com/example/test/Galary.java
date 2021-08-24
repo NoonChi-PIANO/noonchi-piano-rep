@@ -80,6 +80,7 @@ public class Galary extends AppCompatActivity {
         //업로드 하려면 외부저장소 권한 필요
         //동적 퍼미션 코드 필요..
 
+
         //동적퍼미션 작업
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             int permissionResult= checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);

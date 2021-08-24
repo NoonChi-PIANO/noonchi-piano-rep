@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -45,7 +46,7 @@ public class Home extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         tabLayout=findViewById(R.id.tablayout);
 
-
+        //Toast.makeText(Home.this, SaveSharedPreference.getUserName(Home.this) + "(으)로 로그인 되었습니다", Toast.LENGTH_SHORT).show();
 
         adapter = new ViewpagerAdapter(this);
         viewPager.setAdapter(adapter);

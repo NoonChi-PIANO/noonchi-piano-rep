@@ -24,6 +24,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -183,8 +193,6 @@ public class GameActivity extends AppCompatActivity{
                     Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
                     Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
                     startActivity(myIntent);
-
-
 
 
                     y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp

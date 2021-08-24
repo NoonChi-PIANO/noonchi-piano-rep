@@ -1,11 +1,14 @@
 package com.example.test;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import static com.example.test.GameActivity.switch_music;
 import static com.example.test.GameActivity.excellent;
 import static com.example.test.GameActivity.good;
@@ -14,6 +17,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ResultScore extends AppCompatActivity {
 
 
@@ -21,6 +34,49 @@ public class ResultScore extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_result);
+
+        //SharedPrefManager.getInstance(this).getUsername()
+        //여기다가 디비 추가문을 넣을거에용!
+        String serverUrl="http://27.96.131.137/noonchi/sign/scoreUpload.php";
+        //String userIDforScore = SaveSharedPreference.getUserName(ResultScore.this);
+        //String userIDforScore = SharedPrefManager.getInstance(this).getUsername();
+
+
+        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                new AlertDialog.Builder(ResultScore.this).setMessage("응답:"+response).create().show();
+
+                //  Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+
+                try{
+                    JSONObject jsonObject = new JSONObject(response);
+                    boolean success = jsonObject.getBoolean("success");
+                    if(success) {
+                        //일반 리스폰스
+                    }else{
+                        //에러발생시
+                        Toast.makeText(ResultScore.this, "DB ERROR2", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(ResultScore.this, "DB ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        smpr.addStringParam("id",  SaveSharedPreference.getUserName(ResultScore.this));
+        smpr.addStringParam("bad",  Integer.toString(bad));
+        smpr.addStringParam("good",  Integer.toString(good));
+        smpr.addStringParam("excellent",  Integer.toString(excellent));
+        RequestQueue requestQueue= Volley.newRequestQueue(ResultScore.this);
+        requestQueue.add(smpr);
+        //디비 추가 끝!
 
         ImageView result_image;
         TextView result_title;
