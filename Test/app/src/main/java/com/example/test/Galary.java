@@ -20,11 +20,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.error.AuthFailureError;
+import com.android.volley.error.ParseError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.SimpleMultiPartRequest;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -35,12 +39,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import jp.kshoji.javax.sound.midi.UsbMidiSystem;
 
 public class Galary extends AppCompatActivity {
 
-    UsbMidiSystem usbMidiSystem;
+  //  UsbMidiSystem usbMidiSystem;
 
     EditText etName,etMsg;
     ImageView iv;
@@ -64,8 +70,8 @@ public class Galary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.galary);
 
-        usbMidiSystem = new UsbMidiSystem(this);
-        usbMidiSystem.initialize();
+       // usbMidiSystem = new UsbMidiSystem(this);
+      //  usbMidiSystem.initialize();
 
        // etName=findViewById(R.id.et_name);
         //etMsg=findViewById(R.id.et_msg);
@@ -73,9 +79,6 @@ public class Galary extends AppCompatActivity {
 
         //업로드 하려면 외부저장소 권한 필요
         //동적 퍼미션 코드 필요..
-
-
-
 
         //동적퍼미션 작업
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
@@ -93,7 +96,7 @@ public class Galary extends AppCompatActivity {
         t2 = findViewById(R.id.tx2);
         t3 = findViewById(R.id.tx3);
 
-        md2= new midiRecord(this);
+    /*    md2= new midiRecord(this);
         StartBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,19 +113,9 @@ public class Galary extends AppCompatActivity {
                     recordTask.execute();
                 }
             }
-        });
+        });*/
 
     }//onCreate() ..
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if (usbMidiSystem != null) {
-            usbMidiSystem.terminate();
-        }
-    }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -202,7 +195,7 @@ public class Galary extends AppCompatActivity {
                 new AlertDialog.Builder(Galary.this).setMessage("응답:"+response).create().show();
                 Toast.makeText(Galary.this, "download CA", Toast.LENGTH_SHORT).show();
 
-                try{
+                /*try{
                     JSONObject jsonObject = new JSONObject(response);
                     boolean success = jsonObject.getBoolean("success");
                     if(success) {
@@ -235,7 +228,7 @@ public class Galary extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
 
             }
         }, new Response.ErrorListener() {
@@ -266,10 +259,10 @@ public class Galary extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        new AlertDialog.Builder(Galary.this).setMessage("file download success!").create().show();
-                        //new AlertDialog.Builder(Galary.this).setMessage("응답:\n"+response).create().show();
+                        //new AlertDialog.Builder(Galary.this).setMessage("file download success!").create().show();
+                        new AlertDialog.Builder(Galary.this).setMessage("응답:\n"+response).create().show();
 
-                        WriteTextFile(folderNAME,"bair.txt",response);
+                        WriteTextFile(folderNAME,"bair.txt",response.replace("\uFEFF", ""));
                     }
                 },
                 new Response.ErrorListener() {
@@ -277,7 +270,25 @@ public class Galary extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(Galary.this, "ERROR", Toast.LENGTH_SHORT).show();
                     }
-                });
+                }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+            }
+        };
 
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(smpr);
