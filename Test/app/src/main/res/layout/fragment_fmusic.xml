@@ -14,45 +14,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_margin="20dp"
-                android:padding="5dp"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="악보 선택하기"
+                android:textAllCaps="false"
+                android:onClick="clickBtn"/>
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:id="@+id/uploadimg"
-                    android:background="@drawable/buttonstyle"
-                    android:text="pdf 올리기"/>
-                <TextView
-                    android:textColor="#5D5D5D"
-                    android:layout_marginLeft="30dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="핸드폰 갤러리에 저장된 PDF를 선택할 수 있습니다"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_margin="20dp"
-                android:padding="5dp"
+                android:text="악보 전송하기"
+                android:onClick="clickUpload"/>
+
+
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:background="@drawable/buttonstyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:text="사진 찍기"/>
-                <TextView
-                    android:textColor="#5D5D5D"
-                    android:layout_marginLeft="30dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="핸드폰으로 직접 사진을 찍어 악보를 만들 수 있습니다"/>
-            </LinearLayout>
+                android:text="악보 다운로드 하기"
+                android:onClick="clickDownLoad"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="게임 시작하기"
+                android:onClick="startGame"/>
         </LinearLayout>
 
     </ScrollView>

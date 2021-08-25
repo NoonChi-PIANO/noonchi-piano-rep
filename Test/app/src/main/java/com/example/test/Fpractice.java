@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fpractice#newInstance} factory method to
- * create an instance of this fragment.
+ * create an instance of getActivity() fragment.
  */
 
 public class Fpractice extends Fragment {
@@ -85,7 +85,7 @@ public class Fpractice extends Fragment {
         });
 
 
-        // Inflate the layout for this fragment
+        // Inflate the layout for getActivity() fragment
         //return view;
         return rootView;
 

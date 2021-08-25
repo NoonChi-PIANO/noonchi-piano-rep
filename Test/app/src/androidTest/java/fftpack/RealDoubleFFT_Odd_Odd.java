@@ -7,7 +7,7 @@ package fftpack;
 public class RealDoubleFFT_Odd_Odd extends RealDoubleFFT_Even_Odd
 {
 /**
-  * <em>norm_factor</em> can be used to normalize this FFT transform. This is because
+  * <em>norm_factor</em> can be used to normalize getActivity() FFT transform. getActivity() is because
   * a call of forward transform (<em>ft</em>) followed by a call of backward transform
   * (<em>bt</em>) will multiply the input sequence by <em>norm_factor</em>.
 */
@@ -19,7 +19,7 @@ public class RealDoubleFFT_Odd_Odd extends RealDoubleFFT_Even_Odd
   * are computed and stored.
   *
   * @param  n  the size of a real data sequence. When <em>n</em> is a multiplication of small
-  * numbers (4, 2, 3, 5), this FFT transform is very efficient.
+  * numbers (4, 2, 3, 5), getActivity() FFT transform is very efficient.
 */
      public RealDoubleFFT_Odd_Odd(int n)
      {
