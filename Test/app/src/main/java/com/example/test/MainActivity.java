@@ -23,6 +23,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import jp.kshoji.javax.sound.midi.UsbMidiSystem;
+
 //로그인화면, 첫화면임
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UsbMidiSystem usbMidiSystem;
+
+        usbMidiSystem = new UsbMidiSystem(this);
+        usbMidiSystem.initialize();
 
         if(SaveSharedPreference.getUserName(MainActivity.this).length() == 0)
         {

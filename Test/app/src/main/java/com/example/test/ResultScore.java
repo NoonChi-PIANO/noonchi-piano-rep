@@ -37,7 +37,7 @@ public class ResultScore extends AppCompatActivity {
 
         //SharedPrefManager.getInstance(this).getUsername()
         //여기다가 디비 추가문을 넣을거에용!
-        String serverUrl="http://27.96.131.137/noonchi/sign/scoreUpload.php";
+        String serverUrl="http://27.96.131.137/noonchi/sign/score.php";
         //String userIDforScore = SaveSharedPreference.getUserName(ResultScore.this);
         //String userIDforScore = SharedPrefManager.getInstance(this).getUsername();
 

@@ -109,8 +109,8 @@ public class GameActivity extends AppCompatActivity{
 
             ActivityCompat.requestPermissions(GameActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
-        usbMidiSystem = new UsbMidiSystem(this);
-        usbMidiSystem.initialize();
+       // usbMidiSystem = new UsbMidiSystem(this);
+        //usbMidiSystem.initialize();
 
         md2 = new midiRecord(this);
         //StartStopBTN.setText("Stop");
