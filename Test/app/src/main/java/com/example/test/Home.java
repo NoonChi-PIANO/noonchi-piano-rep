@@ -63,7 +63,7 @@ public class Home extends AppCompatActivity {
         }).attach();
 
 
-        final String[] array={"피아노 크기설정","정보수정"}; //setting버튼 클릭 시 다이얼로그 목록
+        final String[] array={"사용방법","정보수정"}; //setting버튼 클릭 시 다이얼로그 목록
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,10 +74,10 @@ public class Home extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (i==0){ //피아노 크기설정
-                            Intent intent=new Intent(Home.this,PianoSetting.class);
+                            Intent intent=new Intent(Home.this,Howtouse.class);
                             startActivity(intent);
                         }
-                        else if(i==1){ //정보수정정
+                        else if(i==1){ //정보수정
                            Intent intent=new Intent(Home.this,Setting.class);
                             startActivity(intent);
                         }

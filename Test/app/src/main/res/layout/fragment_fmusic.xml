@@ -13,35 +13,63 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <Button
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_margin="20dp"
+                android:id="@+id/iv"
+                android:layout_width="269dp"
+                android:layout_height="350dp"
+                android:layout_weight="1" />
+            <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="악보 선택하기"
-                android:textAllCaps="false"
-                android:onClick="clickBtn"/>
-            <ImageView
-                android:id="@+id/iv"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="악보 전송하기"
-                android:onClick="clickUpload"/>
+                android:orientation="vertical">
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/music_icon_1"
+                    android:text="악보 선택하기"
+                    android:background="@drawable/buttonstyle"
+                    android:paddingLeft="15dp"
+                    android:layout_margin="15dp"
+                    android:textAllCaps="false"
+                    android:onClick="clickBtn"/>
+
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/music_icon_2"
+                    android:background="@drawable/buttonstyle"
+                    android:paddingLeft="15dp"
+                    android:layout_margin="15dp"
+                    android:text="악보 전송하기"
+                    android:onClick="clickUpload"/>
 
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="악보 다운로드 하기"
-                android:onClick="clickDownLoad"/>
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/music_icon_3"
+                    android:background="@drawable/buttonstyle"
+                    android:paddingLeft="15dp"
+                    android:layout_margin="15dp"
+                    android:text="악보 다운로드 하기"
+                    android:onClick="clickDownLoad"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="게임 시작하기"
-                android:onClick="startGame"/>
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/music_icon_4"
+                    android:background="@drawable/buttonstyle"
+                    android:paddingLeft="15dp"
+                    android:layout_margin="15dp"
+                    android:text="게임 시작하기"
+                    android:onClick="startGame"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

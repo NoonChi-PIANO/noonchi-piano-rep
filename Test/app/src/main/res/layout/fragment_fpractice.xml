@@ -50,7 +50,10 @@
                     android:text="2/4박자 내림 나장조 \n독일민요\n나비야나비야 이리나라오너라..."/>
             </LinearLayout>
         </LinearLayout>
-
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
         <LinearLayout
             android:padding="15dp"
@@ -89,6 +92,10 @@
                     android:text="샹제리제"/>
             </LinearLayout>
         </LinearLayout>
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
         <LinearLayout
             android:padding="15dp"
@@ -127,6 +134,10 @@
                     android:text="Summer"/>
             </LinearLayout>
         </LinearLayout>
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
 
     </LinearLayout>
