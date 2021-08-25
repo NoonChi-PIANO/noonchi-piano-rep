@@ -31,7 +31,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="악보 전송 & 변환하기"
+        android:text="악보 전송하기"
         android:onClick="clickUpload"/>
 
 
