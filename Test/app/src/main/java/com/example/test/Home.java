@@ -52,7 +52,7 @@ public class Home extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         //TabLayout 타이틀
-        final List<String> tabElement=Arrays.asList("연습하기","점수보기","악보올리기","사용방법");
+        final List<String> tabElement=Arrays.asList("연습하기","랭킹보기","악보올리기","초보꿀팁");
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {

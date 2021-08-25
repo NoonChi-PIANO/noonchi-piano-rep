@@ -9,7 +9,6 @@
     android:padding="16dp"
     tools:context=".Galary">
 
-    ¿
     <!--    <EditText
             android:id="@+id/et_msg"
             android:layout_width="match_parent"
