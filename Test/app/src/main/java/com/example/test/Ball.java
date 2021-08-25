@@ -204,15 +204,15 @@ class Ball {
 
         if(protocol / 10000000 == 1) {  // 오른손이라면, 쉼표도 이에 해당하지만, 어차피 안 보이니 상관 없다
             if(start_point==false) //반복기능 꺼졌을때
-                paint.setColor(Color.YELLOW); // 오른손은 빨강색
+                paint.setColor(Color.RED); // 오른손은 빨강색
             else //켜졌을 때
-                paint.setColor(Color.RED);
+                paint.setColor(Color.YELLOW);
         }
         else { // 왼손이라면
             if(start_point==false)
-                paint.setColor(Color.GREEN); // 왼손은 초록색
+                paint.setColor(Color.BLUE); // 왼손은 초록색
             else
-                paint.setColor(Color.BLUE);
+                paint.setColor(Color.GREEN);
         }
 
 
