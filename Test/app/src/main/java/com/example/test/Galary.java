@@ -92,10 +92,10 @@ public class Galary extends AppCompatActivity {
             //cv.setVisibility(View.VISIBLE);
         }
 
-        StartBTN = findViewById(R.id.btn1);
-        t1 = findViewById(R.id.tx1);
-        t2 = findViewById(R.id.tx2);
-        t3 = findViewById(R.id.tx3);
+       // StartBTN = findViewById(R.id.btn1);
+      //  t1 = findViewById(R.id.tx1);
+       // t2 = findViewById(R.id.tx2);
+       // t3 = findViewById(R.id.tx3);
 
     /*    md2= new midiRecord(this);
         StartBTN.setOnClickListener(new View.OnClickListener() {

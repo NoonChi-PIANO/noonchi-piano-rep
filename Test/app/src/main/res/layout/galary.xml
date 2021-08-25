@@ -21,7 +21,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="select Image"
+        android:text="악보 선택하기"
         android:textAllCaps="false"
         android:onClick="clickBtn"/>
     <ImageView
@@ -31,29 +31,29 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="upload data"
+        android:text="악보 전송 & 변환하기"
         android:onClick="clickUpload"/>
 
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="download Sheet"
+        android:text="악보 다운로드 하기"
         android:onClick="clickDownLoad"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="startGame"
+        android:text="게임 시작하기"
         android:onClick="startGame"/>
 
-    <Button
+  <!--  <Button
         android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Button" />-->
 
-    <TextView
+  <!--  <TextView
         android:id="@+id/tx1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         android:id="@+id/tx3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="TextView" />-->
 
 
 </LinearLayout>
