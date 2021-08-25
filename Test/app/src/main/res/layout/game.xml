@@ -17,14 +17,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/buttonstyle2"
+            android:background="@drawable/buttonstyle"
             android:onClick="onToggleClicked"
             android:padding="20dp"
             android:text="play or stop"
             android:textOff="연습하기"
             android:textOn="멈추기"
             android:textSize="30dp" />
-
         <ImageView
             android:id="@+id/btn_velocity1"
             android:layout_width="40dp"
@@ -106,7 +105,7 @@
             android:id="@+id/score_result"
 
             android:layout_below="@id/btn_velocity8"
-            android:background="@drawable/buttonstyle2"
+            android:background="@drawable/buttonstyle"
             android:layout_toRightOf="@id/repeat"
             android:layout_margin="10dp"
 
@@ -121,7 +120,7 @@
             android:layout_below="@id/btn_velocity1"
             android:layout_margin="10dp"
             android:layout_toRightOf="@id/btn_play_or_stop"
-            android:background="@drawable/buttonstyle2"
+            android:background="@drawable/buttonstyle"
             android:text="반복 시작" />
 
         <Button
@@ -132,7 +131,7 @@
             android:layout_below="@id/btn_velocity3"
             android:layout_margin="10dp"
             android:layout_toRightOf="@+id/repeat_start"
-            android:background="@drawable/buttonstyle2"
+            android:background="@drawable/buttonstyle"
             android:text="반복 끝" />
 
         <Button
@@ -143,7 +142,7 @@
             android:layout_below="@id/btn_velocity6"
             android:layout_margin="10dp"
             android:layout_toRightOf="@+id/repeat_end"
-            android:background="@drawable/buttonstyle2"
+            android:background="@drawable/buttonstyle"
             android:text="반복 연습" />
 
 <!--
@@ -159,14 +158,12 @@
             android:text="Start" />
 -->
         <TableLayout
-            android:layout_width="150dp"
-            android:layout_height="96dp"
-
-            android:layout_margin="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="235dp"
+            android:layout_height="101dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_toRightOf="@+id/score_result">
 
             <TableRow
@@ -175,6 +172,7 @@
 
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,6 +181,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -191,6 +190,7 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -213,6 +213,7 @@
 
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/HzText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -220,20 +221,20 @@
                     android:textAlignment="center" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/isCorrect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/HzText2"
                     android:text="..."
                     android:textAlignment="center" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/answer_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/HzText2"
                     android:text="..."
@@ -251,6 +252,7 @@
             <TableRow>
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/left_fos"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
@@ -259,20 +261,21 @@
                     android:textSize="12dp" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/right_fos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="GOOD"
                     android:layout_marginLeft="10dp"
+                    android:text="GOOD"
                     android:textAlignment="center"
                     android:textSize="12dp" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/bad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-
                     android:text="BAD"
                     android:textAlignment="center"
                     android:textSize="12dp" />
@@ -283,6 +286,7 @@
             <TableRow>
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/excellent_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -292,6 +296,7 @@
                     android:textAlignment="center" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/good_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -303,14 +308,13 @@
                     android:textAlignment="center" />
 
                 <TextView
+                    android:textColor="@color/black"
                     android:id="@+id/bad_scale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/right_fos"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
-
-
                     android:text="..."
                     android:textAlignment="center" />
 
