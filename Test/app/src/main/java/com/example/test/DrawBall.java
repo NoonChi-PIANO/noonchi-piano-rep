@@ -54,6 +54,7 @@ class DrawBall extends Thread {
     private int total_Count_while=0;
     Context mContext;
 
+    private static Ball superball;
     public static boolean score_check;
 
     public static final int BAD =1;
@@ -112,8 +113,10 @@ class DrawBall extends Thread {
                 is_Correct.setText("Excellent");
                 excellent++;
 
+
                 score_check=true;
                 score=0;
+                superball.setScore_Check(true);
                 t2.setText("...");
                 Left_scale.setText(Integer.toString(excellent));
             }
@@ -122,6 +125,7 @@ class DrawBall extends Thread {
                 good++;
                 score_check=true;
                 score=0;
+                superball.setScore_Check(true);
                 t2.setText("...");
                 Right_scale.setText(Integer.toString(good));
             }
@@ -132,11 +136,13 @@ class DrawBall extends Thread {
                 t2.setText("...");
                 bad_scale.setText(Integer.toString(bad));
                 score=0;
+
                 score_check=true;
+                superball.setScore_Check(true);
 
             }
             answer_scale.setText(right_scale);
-
+            notifyAll();
 
 
 
@@ -245,21 +251,29 @@ class DrawBall extends Thread {
                                     if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         right_scale=(ball.getWhiteScale());
                                         score=EXCELLENT;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+
+
+
                                     }
                                     else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
                                         right_scale=(ball.getWhiteScale());
                                         score = GOOD;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
                                         //right_scale="..";
 
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
+
 
                                         ball.setScore_Check(true);
                                     }
@@ -378,19 +392,21 @@ class DrawBall extends Thread {
                                     if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         left_scale=(ball.getWhiteScale());
                                         score=EXCELLENT;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
                                         left_scale=(ball.getWhiteScale());
                                         score = GOOD;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
                                         //right_scale="..";
-
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
 
@@ -509,19 +525,21 @@ class DrawBall extends Thread {
                                     if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         right_scale=(ball.getBlackScale());
                                         score=EXCELLENT;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
                                         right_scale=(ball.getBlackScale());
                                         score = GOOD;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
                                         //right_scale="..";
-
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
 
@@ -612,19 +630,21 @@ class DrawBall extends Thread {
                                     if(ball.getScale_Line()==3&&ball.getScore_Check()==false){
                                         left_scale=(ball.getBlackScale());
                                         score=EXCELLENT;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==2&&ball.getScore_Check()==false){
                                         left_scale=(ball.getBlackScale());
                                         score = GOOD;
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
                                     }
                                     else if(ball.getScale_Line()==1&&ball.getScore_Check()==false){
                                         score=BAD;
                                         //right_scale="..";
-
+                                        superball = ball;
                                         Message msg = handler.obtainMessage();
                                         handler.sendMessage(msg);
 

@@ -36,7 +36,7 @@ public class ResultScore extends AppCompatActivity {
         setContentView(R.layout.score_result);
 
         //SharedPrefManager.getInstance(this).getUsername()
-        //여기다가 디비 추가문을 넣을거에용!
+        /*//여기다가 디비 추가문을 넣을거에용!
         String serverUrl="http://27.96.131.137/noonchi/sign/score.php";
         //String userIDforScore = SaveSharedPreference.getUserName(ResultScore.this);
         //String userIDforScore = SharedPrefManager.getInstance(this).getUsername();
@@ -76,7 +76,7 @@ public class ResultScore extends AppCompatActivity {
         smpr.addStringParam("excellent",  Integer.toString(excellent));
         RequestQueue requestQueue= Volley.newRequestQueue(ResultScore.this);
         requestQueue.add(smpr);
-        //디비 추가 끝!
+        //디비 추가 끝!*/
 
         ImageView result_image;
         TextView result_title;

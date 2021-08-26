@@ -448,7 +448,7 @@ public class GameActivity extends AppCompatActivity{
         } catch(IOException e) {
             e.printStackTrace();
         }
-        Toast.makeText(GameActivity.this, "game start", Toast.LENGTH_SHORT).show();
+        Toast.makeText(GameActivity.this, "game start_Read Text", Toast.LENGTH_SHORT).show();
         return text;
     }
 
@@ -487,7 +487,7 @@ public class GameActivity extends AppCompatActivity{
         }
 
  */
-        Toast.makeText(GameActivity.this, "game start", Toast.LENGTH_SHORT).show();
+        Toast.makeText(GameActivity.this, "game start_ReadIMG", Toast.LENGTH_SHORT).show();
 
         return text;
     }

@@ -124,21 +124,20 @@ public class Fmusic extends Fragment {
             @Override
             public void onClick(View v) {
                 //안드로이드에서 보낼 데이터를 받을 php 서버 주소
-                Toast.makeText(getActivity(), imgPath, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), imgPath, Toast.LENGTH_SHORT).show();
                 String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
+                Toast.makeText(getActivity(), "악보 전송중...", Toast.LENGTH_SHORT).show();
 
                 SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                        // new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
-                        new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("전송 성공").create().show();
-                        //Toast.makeText(getActivity(), "전송 성공", Toast.LENGTH_SHORT).show();
 
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "sendBERROR", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "sendBERROR", Toast.LENGTH_SHORT).show();
                     }
                 });
 

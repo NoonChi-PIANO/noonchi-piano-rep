@@ -72,7 +72,11 @@ public class Home extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else if(i==1){ //정보수정
-                           Intent intent=new Intent(Home.this,Setting.class);
+                          // Intent intent=new Intent(Home.this,Setting.class);
+                          //  startActivity(intent);
+
+                            SaveSharedPreference.setUserName(Home.this, "");
+                            Intent intent=new Intent(Home.this,MainActivity.class);
                             startActivity(intent);
                         }
                     }
