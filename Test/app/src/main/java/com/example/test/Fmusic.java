@@ -148,7 +148,7 @@ public class Fmusic extends Fragment {
                 smpr.addFile("img", imgPath);
 
                 //요청객체를 서버로 보낼 우체통 같은 객체 생성
-                RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+                RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
                 requestQueue.add(smpr);
             }
         });
@@ -194,7 +194,7 @@ public class Fmusic extends Fragment {
                     }
                 };
 
-                RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+                RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
                 requestQueue.add(smpr);
             }
         });
@@ -251,7 +251,7 @@ public class Fmusic extends Fragment {
                         imgPath= getRealPathFromUri(uri);   //임의로 만든 메소드 (절대경로를 가져오는 메소드)
 
                         //이미지 경로 uri 확인해보기
-                        new androidx.appcompat.app.AlertDialog.Builder(getActivity().getApplicationContext()).setMessage(uri.toString()+"\n"+imgPath).create().show();
+                        new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage(uri.toString()+"\n"+imgPath).create().show();
                     }
 
                 }else
@@ -265,7 +265,7 @@ public class Fmusic extends Fragment {
     //Uri -- > 절대경로로 바꿔서 리턴시켜주는 메소드
     String getRealPathFromUri(Uri uri){
         String[] proj= {MediaStore.Images.Media.DATA};
-        CursorLoader loader= new CursorLoader(getActivity().getApplicationContext(), uri, proj, null, null, null);
+        CursorLoader loader= new CursorLoader(getActivity(), uri, proj, null, null, null);
         Cursor cursor= loader.loadInBackground();
         int column_index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
