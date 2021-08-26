@@ -126,21 +126,21 @@ public class midiRecord {
         else if(scale.equals("49")){ return result = "C#3";}else if(scale.equals("55")){ return result = "G3";}
         else if(scale.equals("50")){ return result = "D3";}else if(scale.equals("56")){ return result = "G#3";}
         else if(scale.equals("51")){ return result = "D#3";}else if(scale.equals("57")){ return result = "A3";}
-        else if(scale.equals("52")){ return result = "E#3";}else if(scale.equals("58")){ return result = "A#3";}
+        else if(scale.equals("52")){ return result = "E3";}else if(scale.equals("58")){ return result = "A#3";}
         else if(scale.equals("53")){ return result = "F3";}else if(scale.equals("59")){ return result = "B#3";}
 
         else if(scale.equals("60")){ return result = "C4";}else if(scale.equals("66")){ return result = "F#4";}
         else if(scale.equals("61")){ return result = "C#4";}else if(scale.equals("67")){ return result = "G4";}
         else if(scale.equals("62")){ return result = "D4";}else if(scale.equals("68")){ return result = "G#4";}
         else if(scale.equals("63")){ return result = "D#4";}else if(scale.equals("69")){ return result = "A4";}
-        else if(scale.equals("64")){ return result = "E#4";}else if(scale.equals("70")){ return result = "A#4";}
+        else if(scale.equals("64")){ return result = "E4";}else if(scale.equals("70")){ return result = "A#4";}
         else if(scale.equals("65")){ return result = "F4";}else if(scale.equals("71")){ return result = "B#4";}
 
         else if(scale.equals("72")){ return result = "C5";}else if(scale.equals("78")){ return result = "F#5";}
         else if(scale.equals("73")){ return result = "C#5";}else if(scale.equals("79")){ return result = "G5";}
         else if(scale.equals("74")){ return result = "D5";}else if(scale.equals("80")){ return result = "G#5";}
         else if(scale.equals("75")){ return result = "D#5";}else if(scale.equals("81")){ return result = "A5";}
-        else if(scale.equals("76")){ return result = "E#5";}else if(scale.equals("82")){ return result = "A#5";}
+        else if(scale.equals("76")){ return result = "E5";}else if(scale.equals("82")){ return result = "A#5";}
         else if(scale.equals("77")){ return result = "F5";}else if(scale.equals("83")){ return result = "B#5";}
 
 

@@ -45,7 +45,7 @@ public class ResultScore extends AppCompatActivity {
         SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                new AlertDialog.Builder(ResultScore.this).setMessage("응답:"+response).create().show();
+                //new AlertDialog.Builder(ResultScore.this).setMessage("응답:"+response).create().show();
 
                 //  Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
 

@@ -106,7 +106,7 @@ class DrawBall extends Thread {
 
     final Handler handler = new Handler()
     {
-        public void handleMessage(Message msg)
+        public synchronized void handleMessage(Message msg)
         {
             if((t2.getText().equals(right_scale)||t2.getText().equals(left_scale))&&score==EXCELLENT&&score_check==false){
                 is_Correct.setText("Excellent");
@@ -144,7 +144,7 @@ class DrawBall extends Thread {
     };
 
 
-    public void run(){
+    public synchronized void run(){
 
         int right_stop=0;
         int left_stop=0;
