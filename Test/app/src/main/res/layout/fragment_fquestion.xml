@@ -7,70 +7,145 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:padding="20dp"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:textColor="#5D5D5D"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[연습하기]"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 연습하기를 통해 기존 어플에 있는 곡들을 연습해볼 수 있습니다."/>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/begin1"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="CHAPTER 1"
+                    android:textSize="25dp"
+                    android:textColor="#444444"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="&lt;왼손, 오른손은 어디에&gt;"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="15dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[점수보기]"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 지금까지 연습한 곡들의 점수를 확인할 수 있습니다.\n Great, Good, Bad의 갯수를 확인할 수 있습니다."/>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/begin1"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="CHAPTER 2"
+                    android:textSize="25dp"
+                    android:textColor="#444444"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="&lt;도, 레, 미 어디있니?&gt;"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="15dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[악보올리기]"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" PDF 올리기를 선택하면 핸드폰 갤러리에 저장된 PDF를 선택할 수 있습니다."/>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/begin1"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="CHAPTER 3"
+                    android:textSize="25dp"
+                    android:textColor="#444444"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="&lt;가볍게 손풀기&gt;"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
 
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="15dp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="[환경설정]"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-        <TextView
-            android:textColor="#5D5D5D"
-            android:layout_marginTop="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 우측상단의 설정버튼을 통해서 회원정보를 수정할 수 있습니다."/>
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/begin1"/>
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="CHAPTER 4"
+                    android:textSize="25dp"
+                    android:textColor="#444444"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="&lt;장조, 단조가 뭐지?&gt;"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="30dp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+            android:background="#BDBDBD"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
     </LinearLayout>
 
 </ScrollView>
