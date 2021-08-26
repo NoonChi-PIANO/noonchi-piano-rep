@@ -1,9 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EAEAEA"
     tools:context=".Howtouse">
+    <LinearLayout
+        android:padding="20dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[연습하기]"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 연습하기를 통해 기존 어플에 있는 곡들을 연습해볼 수 있습니다."/>
+
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[점수보기]"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 지금까지 연습한 곡들의 점수를 확인할 수 있습니다.\n Great, Good, Bad의 갯수를 확인할 수 있습니다."/>
+
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[악보올리기]"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" PDF 올리기를 선택하면 핸드폰 갤러리에 저장된 PDF를 선택할 수 있습니다."/>
+
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="[환경설정]"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+        <TextView
+            android:textColor="#5D5D5D"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 우측상단의 설정버튼을 통해서 회원정보를 수정할 수 있습니다."/>
+    </LinearLayout>
+</LinearLayout>

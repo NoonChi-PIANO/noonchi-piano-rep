@@ -25,6 +25,8 @@
         <activity
             android:name=".Setting" />
         <activity
+            android:name=".Howtouse" />
+        <activity
             android:name=".Home"
             android:screenOrientation="landscape" />
         <activity

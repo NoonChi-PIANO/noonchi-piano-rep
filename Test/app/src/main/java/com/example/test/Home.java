@@ -67,7 +67,7 @@ public class Home extends AppCompatActivity {
                 dialog.setItems(array, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (i==0){ //피아노 크기설정
+                        if (i==0){ //사용방법
                             Intent intent=new Intent(Home.this,Howtouse.class);
                             startActivity(intent);
                         }
