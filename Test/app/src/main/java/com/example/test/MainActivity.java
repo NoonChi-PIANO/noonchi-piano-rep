@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent=new Intent(MainActivity.this,Home.class);
                                     startActivity(intent);
                                 }else{
-                                    Toast.makeText(MainActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(MainActivity.this, "로그인실패", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -99,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                     //로그인에 성공하면 Intent로 Home으로 이동함
-                    // Intent intent=new Intent(MainActivity.this,Home.class);
-                    // startActivity(intent);
+                    Intent intent=new Intent(MainActivity.this,Home.class);
+                    startActivity(intent);
                 }
             });
             signup.setOnClickListener(new View.OnClickListener() {
