@@ -92,29 +92,7 @@ public class Galary extends AppCompatActivity {
             //cv.setVisibility(View.VISIBLE);
         }
 
-       // StartBTN = findViewById(R.id.btn1);
-      //  t1 = findViewById(R.id.tx1);
-       // t2 = findViewById(R.id.tx2);
-       // t3 = findViewById(R.id.tx3);
-
-    /*    md2= new midiRecord(this);
-        StartBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(md2.started){
-                    StartBTN.setText("Start");
-                    md2.started=false;
-                    recordTask.cancel(true);
-
-
-                }else{
-                    StartBTN.setText("Stop");
-                    md2.started=true;
-                    recordTask = md2.new RecordAudio();
-                    recordTask.execute();
-                }
-            }
-        });*/
+     
 
     }//onCreate() ..
 
