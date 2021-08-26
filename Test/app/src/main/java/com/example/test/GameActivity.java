@@ -109,7 +109,7 @@ public class GameActivity extends AppCompatActivity{
 
             ActivityCompat.requestPermissions(GameActivity.this, new String[]{Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
-        // usbMidiSystem = new UsbMidiSystem(this);
+       // usbMidiSystem = new UsbMidiSystem(this);
         //usbMidiSystem.initialize();
 
         md2 = new midiRecord(this);
@@ -165,7 +165,7 @@ public class GameActivity extends AppCompatActivity{
         Test = (ImageView)findViewById(R.id.test);
         Test.setImageBitmap(bitmap);
 
-        //  StartStopBTN = (Button)findViewById(R.id.StartStopButton);
+      //  StartStopBTN = (Button)findViewById(R.id.StartStopButton);
 
 
 
@@ -189,7 +189,6 @@ public class GameActivity extends AppCompatActivity{
                     //StartStopBTN.setText("Start");
                     md2.started=false;
                     recordTask2.cancel(true);
-                    onDestroy();
 
                     Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
                     Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
@@ -202,7 +201,7 @@ public class GameActivity extends AppCompatActivity{
                     //StartStopBTN.setText("Start");
                     md2.started=false;
                     recordTask2.cancel(true);
-                    onDestroy();
+
                     Toast.makeText(GameActivity.this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
                     Intent myIntent = new Intent(GameActivity.this,ResultScore.class);
                     myIntent.putExtra("excellent",excellent);
@@ -265,14 +264,14 @@ public class GameActivity extends AppCompatActivity{
             }
         });
 
-        // StartStopBTN = (Button)findViewById(R.id.StartStopButton);
+       // StartStopBTN = (Button)findViewById(R.id.StartStopButton);
 
 
 
 
         //sc2.started
         //sc2 = new ScaleDetector2(this);
-        // md2 = new midiRecord(this);
+       // md2 = new midiRecord(this);
 
         /*
         StartStopBTN.setOnClickListener(new View.OnClickListener() {
@@ -283,25 +282,34 @@ public class GameActivity extends AppCompatActivity{
                     StartStopBTN.setText("Start");
                     sc2.started=false;
                     recordTask.cancel(true);
+
+
                 }else{
                     StartStopBTN.setText("Stop");
                     sc2.started=true;
                     recordTask = sc2.new RecordAudio();
                     recordTask.execute();
                 }
+
                 //midi 인식시 사용
+
                 if(md2.started){
                     StartStopBTN.setText("Start");
                     md2.started=false;
                     recordTask2.cancel(true);
+
                 }else{
                     StartStopBTN.setText("Stop");
                     md2.started=true;
                     recordTask2 = md2.new RecordAudio();
                     recordTask2.execute();
                 }
+
+
+
             }
         });
+
          */
 
     }//oncreate
@@ -351,6 +359,7 @@ public class GameActivity extends AppCompatActivity{
         //insertLeftProtocol(R.raw.elise_left, panel);
         answer_right = insertAnswerProtocol(R.raw.butterfly_right);
         //answer_left = insertAnswerProtocol(R.raw.elise_left);
+
          */
         switch(music) {
             case 0:
@@ -383,6 +392,7 @@ public class GameActivity extends AppCompatActivity{
                 answer_right = insertAnswerProtocol(R.raw.rabbit_right);
                 answer_left = insertAnswerProtocol(R.raw.rabbit_left);
                 break;
+
  */
 
         }
@@ -468,12 +478,14 @@ public class GameActivity extends AppCompatActivity{
         try {
             InputStream is = openFileInput(music_name);
             byte[] buffer = new byte[is.available()];
+
             is.read(buffer);
             is.close();
             text = new String(buffer);
         } catch(IOException e) {
             e.printStackTrace();
         }
+
  */
         Toast.makeText(GameActivity.this, "game start", Toast.LENGTH_SHORT).show();
 
@@ -1095,12 +1107,13 @@ public class GameActivity extends AppCompatActivity{
             panel.repeat_right_sum.clear();
             panel.repeat_left_sum.clear();
             panel.repeat_number=0;
-
+            answer_right.clear();
+            answer_left.clear();
 
             StartStopBTN.setText("Start");
             md2.started=false;
             recordTask2.cancel(true);
-            onDestroy();
+
             Toast.makeText(this, "연습을 종료합니다!", Toast.LENGTH_SHORT).show();
 
 
@@ -1111,7 +1124,6 @@ public class GameActivity extends AppCompatActivity{
 
             y_piano_upleft = y_piano_upleft + 218; // 160pixel = 40dp
         }catch (NullPointerException e){
-
             startActivity(new Intent(GameActivity.this,Home.class));
             ActivityCompat.finishAffinity(this);
 

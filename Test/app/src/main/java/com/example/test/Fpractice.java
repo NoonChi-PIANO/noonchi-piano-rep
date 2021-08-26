@@ -12,13 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import jp.kshoji.javax.sound.midi.UsbMidiSystem;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Fpractice#newInstance} factory method to
- * create an instance of getActivity() fragment.
+ * create an instance of this fragment.
  */
 
 public class Fpractice extends Fragment {
@@ -26,7 +24,6 @@ public class Fpractice extends Fragment {
     LinearLayout testButton;
     LinearLayout testButton2;
     LinearLayout testButton3;
-
    public Fpractice() {
         // Required empty public constructor
    }
@@ -48,8 +45,6 @@ public class Fpractice extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_fpractice, container, false);
         testButton = (LinearLayout)rootView.findViewById(R.id.testbutton);
         testButton2 = (LinearLayout)rootView.findViewById(R.id.testbutton2);
@@ -90,7 +85,7 @@ public class Fpractice extends Fragment {
         });
 
 
-        // Inflate the layout for getActivity() fragment
+        // Inflate the layout for this fragment
         //return view;
         return rootView;
 
