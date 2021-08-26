@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import jp.kshoji.javax.sound.midi.UsbMidiSystem;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +26,7 @@ public class Fpractice extends Fragment {
     LinearLayout testButton;
     LinearLayout testButton2;
     LinearLayout testButton3;
+
    public Fpractice() {
         // Required empty public constructor
    }
@@ -45,6 +48,7 @@ public class Fpractice extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_fpractice, container, false);
         testButton = (LinearLayout)rootView.findViewById(R.id.testbutton);

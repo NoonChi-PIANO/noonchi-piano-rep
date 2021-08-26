@@ -130,14 +130,15 @@ public class Fmusic extends Fragment {
                 SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
-                        Toast.makeText(getActivity(), "download CA", Toast.LENGTH_SHORT).show();
+                       // new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
+                        new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("전송 성공").create().show();
+                        //Toast.makeText(getActivity(), "전송 성공", Toast.LENGTH_SHORT).show();
 
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "sendBERROR", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -164,7 +165,8 @@ public class Fmusic extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 //new AlertDialog.Builder(Galary.getActivity()).setMessage("file download success!").create().show();
-                                new AlertDialog.Builder(getActivity()).setMessage("응답:\n"+response).create().show();
+                               // new AlertDialog.Builder(getActivity()).setMessage("응답:\n"+response).create().show();
+                                new AlertDialog.Builder(getActivity()).setMessage("다운로드 성공").create().show();
 
                                 WriteTextFile(folderNAME,"bair.txt",response.replace("\uFEFF", ""));
                             }
@@ -172,7 +174,7 @@ public class Fmusic extends Fragment {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "downBERROR", Toast.LENGTH_SHORT).show();
                             }
                         }){
                     @Override //response를 UTF8로 변경해주는 소스코드

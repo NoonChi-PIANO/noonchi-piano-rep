@@ -29,18 +29,12 @@ public class Home extends AppCompatActivity {
     ImageButton setting;
     TabLayout tabLayout;
 
-    UsbMidiSystem usbMidiSystem;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        usbMidiSystem = new UsbMidiSystem(this);
-        usbMidiSystem.initialize();
 
         setting=(ImageButton)findViewById(R.id.setting);
         viewPager = findViewById(R.id.viewpager);
