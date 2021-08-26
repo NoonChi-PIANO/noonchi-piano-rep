@@ -40,6 +40,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,8 +63,7 @@ public class Fmusic extends Fragment {
     EditText etName,etMsg;
     ImageView iv;
 
-    Button StartBTN;
-    TextView t1,t2,t3;
+    Button uploadB,sendB,downB,startB;
 
     private midiRecord md2;
     private midiRecord.RecordAudio recordTask;
@@ -91,7 +93,12 @@ public class Fmusic extends Fragment {
         // Inflate the layout for getActivity() fragment
         //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_fmusic, container, false);
-        iv=rootView.findViewById(R.id.iv);
+        iv=rootView.findViewById(R.id.iv); //imgae view
+        uploadB=(Button)rootView.findViewById(R.id.upload);
+        sendB=(Button)rootView.findViewById(R.id.send);
+        downB=(Button)rootView.findViewById(R.id.download);
+        startB=(Button)rootView.findViewById(R.id.gameStart);
+
         //동적퍼미션 작업
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             int permissionResult= checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -102,7 +109,106 @@ public class Fmusic extends Fragment {
         }else{
             //cv.setVisibility(View.VISIBLE);
         }
+        // testButton = (LinearLayout)rootView.findViewById(R.id.testbutton);
 
+        uploadB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,10);
+            }
+        });
+
+        sendB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //안드로이드에서 보낼 데이터를 받을 php 서버 주소
+                Toast.makeText(getActivity(), imgPath, Toast.LENGTH_SHORT).show();
+                String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
+
+                SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
+                        Toast.makeText(getActivity(), "download CA", Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //요청 객체에 보낼 데이터를 추가
+                smpr.addStringParam("name", name);
+                //  smpr.addStringParam("msg", msg);
+                //이미지 파일 추가
+                smpr.addFile("img", imgPath);
+
+                //요청객체를 서버로 보낼 우체통 같은 객체 생성
+                RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+                requestQueue.add(smpr);
+            }
+        });
+
+        downB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/download.php";
+
+                SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                //new AlertDialog.Builder(Galary.getActivity()).setMessage("file download success!").create().show();
+                                new AlertDialog.Builder(getActivity()).setMessage("응답:\n"+response).create().show();
+
+                                WriteTextFile(folderNAME,"bair.txt",response.replace("\uFEFF", ""));
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
+                            }
+                        }){
+                    @Override //response를 UTF8로 변경해주는 소스코드
+                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                        try {
+                            String utf8String = new String(response.data, "UTF-8");
+                            return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                        } catch (UnsupportedEncodingException e) {
+                            // log error
+                            return Response.error(new ParseError(e));
+                        } catch (Exception e) {
+                            // log error
+                            return Response.error(new ParseError(e));
+                        }
+                    }
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        return super.getParams();
+                    }
+                };
+
+                RequestQueue requestQueue= Volley.newRequestQueue(getActivity().getApplicationContext());
+                requestQueue.add(smpr);
+            }
+        });
+
+        startB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myintent = new Intent(getActivity(),GameActivity.class);
+
+                myintent.putExtra("select",1);
+
+                startActivity(myintent);
+            }
+        });
 
         //
         //
@@ -126,13 +232,6 @@ public class Fmusic extends Fragment {
         }
     }
 
-    public void clickBtn(View view) {
-
-        //갤러리 or 사진 앱 실행하여 사진을 선택하도록..
-        Intent intent= new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        startActivityForResult(intent,10);
-    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -152,7 +251,7 @@ public class Fmusic extends Fragment {
                         imgPath= getRealPathFromUri(uri);   //임의로 만든 메소드 (절대경로를 가져오는 메소드)
 
                         //이미지 경로 uri 확인해보기
-                        new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage(uri.toString()+"\n"+imgPath).create().show();
+                        new androidx.appcompat.app.AlertDialog.Builder(getActivity().getApplicationContext()).setMessage(uri.toString()+"\n"+imgPath).create().show();
                     }
 
                 }else
@@ -166,7 +265,7 @@ public class Fmusic extends Fragment {
     //Uri -- > 절대경로로 바꿔서 리턴시켜주는 메소드
     String getRealPathFromUri(Uri uri){
         String[] proj= {MediaStore.Images.Media.DATA};
-        CursorLoader loader= new CursorLoader(getActivity(), uri, proj, null, null, null);
+        CursorLoader loader= new CursorLoader(getActivity().getApplicationContext(), uri, proj, null, null, null);
         Cursor cursor= loader.loadInBackground();
         int column_index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
@@ -175,117 +274,6 @@ public class Fmusic extends Fragment {
         return  result;
     }
 
-    public void clickUpload(View view) {
-
-        //안드로이드에서 보낼 데이터를 받을 php 서버 주소
-        String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
-
-        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
-                Toast.makeText(getActivity(), "download CA", Toast.LENGTH_SHORT).show();
-
-                /*try{
-                    JSONObject jsonObject = new JSONObject(response);
-                    boolean success = jsonObject.getBoolean("success");
-                    if(success) {
-                        Toast.makeText(Galary.getActivity(), "download CA", Toast.LENGTH_SHORT).show();
-                        String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/download.php";
-
-                        //다운로드 한번에 수행
-                        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
-                                new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        new AlertDialog.Builder(Galary.getActivity()).setMessage("file download success!").create().show();
-                                        //new AlertDialog.Builder(Galary.getActivity()).setMessage("응답:\n"+response).create().show();
-
-                                        WriteTextFile(folderNAME,"bair.txt",response);
-                                    }
-                                },
-                                new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Toast.makeText(Galary.getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                        RequestQueue requestQueue= Volley.newRequestQueue(Galary.getActivity());
-                        requestQueue.add(smpr);
-
-                    }else{
-                        Toast.makeText(Galary.getActivity(), "업로드 실패", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }*/
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //요청 객체에 보낼 데이터를 추가
-        smpr.addStringParam("name", name);
-        //  smpr.addStringParam("msg", msg);
-        //이미지 파일 추가
-        smpr.addFile("img", imgPath);
-
-        //요청객체를 서버로 보낼 우체통 같은 객체 생성
-        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
-        requestQueue.add(smpr);
-
-    }
-
-
-    public void clickDownLoad(View view){
-
-        String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/download.php";
-
-        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //new AlertDialog.Builder(Galary.getActivity()).setMessage("file download success!").create().show();
-                        new AlertDialog.Builder(getActivity()).setMessage("응답:\n"+response).create().show();
-
-                        WriteTextFile(folderNAME,"bair.txt",response.replace("\uFEFF", ""));
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), "ERROR", Toast.LENGTH_SHORT).show();
-                    }
-                }){
-            @Override //response를 UTF8로 변경해주는 소스코드
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                try {
-                    String utf8String = new String(response.data, "UTF-8");
-                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
-                } catch (UnsupportedEncodingException e) {
-                    // log error
-                    return Response.error(new ParseError(e));
-                } catch (Exception e) {
-                    // log error
-                    return Response.error(new ParseError(e));
-                }
-            }
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                return super.getParams();
-            }
-        };
-
-        RequestQueue requestQueue= Volley.newRequestQueue(getActivity());
-        requestQueue.add(smpr);
-
-
-    }
 
     public void WriteTextFile(String foldername, String filename, String contents){
         try{
@@ -307,15 +295,5 @@ public class Fmusic extends Fragment {
             e.printStackTrace();
         }
     }
-    public void startGame(View view){
-        Intent myintent = new Intent(getActivity(),GameActivity.class);
-
-        myintent.putExtra("select",1);
-
-        startActivity(myintent);
-
-    }
-
-
 
 }

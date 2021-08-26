@@ -36,7 +36,9 @@
                     android:paddingLeft="15dp"
                     android:layout_margin="15dp"
                     android:textAllCaps="false"
-                    android:onClick="clickBtn"/>
+                    android:id="@+id/upload"
+
+                    />
 
                 <Button
                     android:layout_width="200dp"
@@ -46,7 +48,9 @@
                     android:paddingLeft="15dp"
                     android:layout_margin="15dp"
                     android:text="악보 전송하기"
-                    android:onClick="clickUpload"/>
+                    android:id="@+id/send"
+
+                />
 
 
                 <Button
@@ -57,7 +61,8 @@
                     android:paddingLeft="15dp"
                     android:layout_margin="15dp"
                     android:text="악보 다운로드 하기"
-                    android:onClick="clickDownLoad"/>
+                    android:id="@+id/download"
+                    />
 
                 <Button
                     android:layout_width="200dp"
@@ -67,7 +72,8 @@
                     android:paddingLeft="15dp"
                     android:layout_margin="15dp"
                     android:text="게임 시작하기"
-                    android:onClick="startGame"/>
+                    android:id="@+id/gameStart"
+                    />
             </LinearLayout>
 
         </LinearLayout>

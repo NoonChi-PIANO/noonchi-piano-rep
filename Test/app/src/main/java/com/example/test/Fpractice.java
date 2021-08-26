@@ -45,6 +45,7 @@ public class Fpractice extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_fpractice, container, false);
         testButton = (LinearLayout)rootView.findViewById(R.id.testbutton);
         testButton2 = (LinearLayout)rootView.findViewById(R.id.testbutton2);
