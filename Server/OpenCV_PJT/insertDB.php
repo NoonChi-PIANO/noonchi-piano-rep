@@ -38,7 +38,7 @@
  
     // $name, $msg, $dstName, $now DB에 저장
     // MySQL에 접속
-    $conn= mysqli_connect("localhost","sangsu","@tkdtnfl98","noonchi");
+    $conn= mysqli_connect("localhost","sangsu","xxxxxx","noonchi");
    // if($conn) echo "id good \n"; else echo "id faillllll \n";
 
     //한글 깨짐 방지
