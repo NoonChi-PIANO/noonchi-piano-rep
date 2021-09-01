@@ -1,5 +1,6 @@
 # 공지사항
 API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가해야함
+
 산학대전ver로 바뀌면서 음계인식 FFT -> MIDI Input으로 변경  
 
 # noonchi-piano-rep
