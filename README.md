@@ -3,6 +3,8 @@ API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가�
 
 산학대전ver로 바뀌면서 음계인식 FFT -> MIDI Input으로 변경  
 
+Android 메니페스트, 앱단위 그래들 확인 필수
+
 # noonchi-piano-rep
 눈치 피아노 졸업 작품 공통 저장소
 
