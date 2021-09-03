@@ -10,6 +10,16 @@ Android 메니페스트, 앱단위 그래들 확인 필수
 
 # 프로젝트 개요
 
+피아노를 잘 연주하지 못하는 사람들을 위한 교육용 피아노 어플리케이션 
+
+1. 악보인식 프로그램
+악보이미지를 C++ OpenCV 를 이용한 영상처리로 컴퓨터가 이해할수 있는 프로토콜로 변환 -> 피아노 건반 위에 쳐야 할 악보 투사
+
+2. 음계인식 프로그램
+연주 점수측정을 위한 프로그램으로 어떤 건반을 쳤는지 알려주게됨
+2.1 FFT ver : 스마트폰 마이크를 이용하여 피아노 소리를 수집, Fast Fourier Transform 을 이용 wav 형식으로 들어오는 소리를 음계로 변환
+2.2 MIDI ver : 전자피아노와 스마트폰을 유선 연결, 출력되는 MIDI 신호를 분석하여 음계로 변환 
+
 ![image](https://user-images.githubusercontent.com/66546156/125243188-b59b8f80-e328-11eb-86d7-e23a7e9dd844.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242247-66089400-e327-11eb-82d6-2deb554cc10f.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242346-85072600-e327-11eb-87c4-5b354c792f6f.png)
