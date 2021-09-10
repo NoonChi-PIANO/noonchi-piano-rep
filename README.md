@@ -1,13 +1,3 @@
-# 공지사항
-API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가해야함
-
-산학대전ver로 바뀌면서 음계인식 FFT -> MIDI Input으로 변경  
-
-Android 메니페스트, 앱단위 그래들 확인 필수
-
-# noonchi-piano-rep
-눈치 피아노 졸업 작품 공통 저장소
-
 # 프로젝트 개요
 
 ![image](https://user-images.githubusercontent.com/66546156/132790186-edd89817-71c4-45ad-b0f6-7a68afd9eca9.png)
@@ -59,6 +49,14 @@ ver 2021.07.12 70%
 +) 서버에서 동작하는 악보인식 추가
 ![image](https://user-images.githubusercontent.com/66546156/125243417-0b703780-e329-11eb-9ce3-1ee7baf3358e.png)
 ![image](https://user-images.githubusercontent.com/66546156/125243604-470b0180-e329-11eb-87c0-2df0e5142b89.png)
+
+
+# 공지사항
+API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가해야함
+
+산학대전ver로 바뀌면서 음계인식 FFT -> MIDI Input으로 변경  
+
+Android 메니페스트, 앱단위 그래들 확인 필수
 
 
 
