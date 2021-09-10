@@ -22,8 +22,7 @@ Android 메니페스트, 앱단위 그래들 확인 필수
 2.1 FFT ver : 스마트폰 마이크를 이용하여 피아노 소리를 수집, Fast Fourier Transform 을 이용 wav 형식으로 들어오는 소리를 음계로 변환
 2.2 MIDI ver : 전자피아노와 스마트폰을 유선 연결, 출력되는 MIDI 신호를 분석하여 음계로 변환 
 
-![image](https://user-images.githubusercontent.com/66546156/125243188-b59b8f80-e328-11eb-86d7-e23a7e9dd844.png)
-![image](https://user-images.githubusercontent.com/66546156/125242247-66089400-e327-11eb-82d6-2deb554cc10f.png)
+
 ![image](https://user-images.githubusercontent.com/66546156/125242346-85072600-e327-11eb-87c4-5b354c792f6f.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242374-8e908e00-e327-11eb-9a53-6cf5a428ac8f.png)
 ![image](https://user-images.githubusercontent.com/66546156/125242391-94866f00-e327-11eb-80fb-e02b0e87f0f2.png)
