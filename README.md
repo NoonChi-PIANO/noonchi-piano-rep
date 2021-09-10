@@ -10,6 +10,8 @@ Android 메니페스트, 앱단위 그래들 확인 필수
 
 # 프로젝트 개요
 
+![image](https://user-images.githubusercontent.com/66546156/132790186-edd89817-71c4-45ad-b0f6-7a68afd9eca9.png)
+
 피아노를 잘 연주하지 못하는 사람들을 위한 교육용 피아노 어플리케이션 
 
 1. 악보인식 프로그램
