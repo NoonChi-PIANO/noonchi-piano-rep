@@ -2,7 +2,7 @@
  
     header('Content-Type:text/html; charset=utf-8');
  
-    $conn= mysqli_connect("localhost","sangsu","@tkdtnfl98A","testdb");
+    $conn= mysqli_connect("localhost","dd","ddd","dd");
     //$conn= mysqli_connect("localhost","umul","aa142536!","umul");
  
     mysqli_query($conn, "set names utf8");    //한글 깨짐 방지
