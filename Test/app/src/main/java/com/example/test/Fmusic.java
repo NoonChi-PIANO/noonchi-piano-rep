@@ -35,7 +35,7 @@ import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.ParseError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.HeaderParser;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -125,7 +125,7 @@ public class Fmusic extends Fragment {
             public void onClick(View v) {
                 //안드로이드에서 보낼 데이터를 받을 php 서버 주소
                 //Toast.makeText(getActivity(), imgPath, Toast.LENGTH_SHORT).show();
-                String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
+                String serverUrl="https://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
                 Toast.makeText(getActivity(), "악보 전송중...", Toast.LENGTH_SHORT).show();
 
                 SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
@@ -157,7 +157,7 @@ public class Fmusic extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/download.php";
+                String serverUrl="https://27.96.131.137/noonchi/OpenCV_PJT/download.php";
 
                 SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
                         new Response.Listener<String>() {
