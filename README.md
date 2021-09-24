@@ -49,6 +49,7 @@ ver 2021.07.12 70%
 +) 서버에서 동작하는 악보인식 추가
 ![image](https://user-images.githubusercontent.com/66546156/125243417-0b703780-e329-11eb-9ce3-1ee7baf3358e.png)
 ![image](https://user-images.githubusercontent.com/66546156/125243604-470b0180-e329-11eb-87c0-2df0e5142b89.png)
++) 시연용 버전은 MIDI 인식 버전
 
 
 # 공지사항
