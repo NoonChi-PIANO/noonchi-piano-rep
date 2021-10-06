@@ -36,7 +36,7 @@
 ![image](https://user-images.githubusercontent.com/66546156/125242684-fc3cba00-e327-11eb-80e3-f81a1904d5f5.png)
 
 ------
-##🎼 음계 인식 모듈
+## 🎼 음계 인식 모듈
 사용 기술
 -> Fast Fourier Transform (using RealDoubleFFT)
 
