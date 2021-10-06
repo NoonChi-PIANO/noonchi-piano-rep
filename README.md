@@ -18,6 +18,12 @@
 ![image](https://user-images.githubusercontent.com/66546156/125242391-94866f00-e327-11eb-80fb-e02b0e87f0f2.png)
 
 
+# 사용 기술표
+
+| Client | Server |
+|--------|--------|
+
+
 # 핵심 모듈의 소개
 ![image](https://user-images.githubusercontent.com/66546156/125242460-aec04d00-e327-11eb-92dc-42b0b50db1c2.png)
 
