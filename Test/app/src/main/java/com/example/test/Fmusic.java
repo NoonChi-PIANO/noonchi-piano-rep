@@ -35,7 +35,6 @@ import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.ParseError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.SimpleMultiPartRequest;
-
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
@@ -126,19 +125,19 @@ public class Fmusic extends Fragment {
             public void onClick(View v) {
                 //안드로이드에서 보낼 데이터를 받을 php 서버 주소
                 //Toast.makeText(getActivity(), imgPath, Toast.LENGTH_SHORT).show();
-                String serverUrl="https://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
+                String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/insertDB.php";
                 Toast.makeText(getActivity(), "악보 전송중...", Toast.LENGTH_SHORT).show();
 
                 SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                       // new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
+                        // new androidx.appcompat.app.AlertDialog.Builder(getActivity()).setMessage("응답:"+response).create().show();
 
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       // Toast.makeText(getActivity(), "sendBERROR", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getActivity(), "sendBERROR", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -158,14 +157,14 @@ public class Fmusic extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String serverUrl="https://27.96.131.137/noonchi/OpenCV_PJT/download.php";
+                String serverUrl="http://27.96.131.137/noonchi/OpenCV_PJT/download.php";
 
                 SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 //new AlertDialog.Builder(Galary.getActivity()).setMessage("file download success!").create().show();
-                               // new AlertDialog.Builder(getActivity()).setMessage("응답:\n"+response).create().show();
+                                // new AlertDialog.Builder(getActivity()).setMessage("응답:\n"+response).create().show();
                                 new AlertDialog.Builder(getActivity()).setMessage("다운로드 성공").create().show();
 
                                 WriteTextFile(folderNAME,"bair.txt",response.replace("\uFEFF", ""));
