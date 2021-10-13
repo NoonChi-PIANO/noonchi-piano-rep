@@ -35,7 +35,8 @@ import com.android.volley.error.AuthFailureError;
 import com.android.volley.error.ParseError;
 import com.android.volley.error.VolleyError;
 import com.android.volley.request.SimpleMultiPartRequest;
-import com.android.volley.toolbox.HeaderParser;
+
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;

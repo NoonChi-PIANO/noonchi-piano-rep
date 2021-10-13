@@ -16,10 +16,15 @@
             android:orientation="vertical">
 
             <Button
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:drawableLeft="@drawable/refresh_1"
+                android:background="@drawable/buttonstyle2"
                 android:id="@+id/refreshBTN"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="새로고침"
+                android:text=" 새로고침"
                 />
         </LinearLayout>
 
@@ -29,77 +34,210 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/butterfly"/>
             <LinearLayout
-                android:padding="10dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/butterfly"/>
                 <TextView
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:text="나비야"/>
+                    android:text="[나비야]"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textSize="20sp"
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="[GREAT] "/>
-                    <TextView
-                        android:textSize="20sp"
+                        android:src="@drawable/star_gold"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"/>
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="00개"/>
+                        android:src="@drawable/ranking_fix"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"/>
+                    <TextView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="foreverYoung0522"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:textColor="#444444"
+                        android:layout_marginRight="20dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[EXCELLENT] 15개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[GOOD] 15개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[BAD] 1개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                    </LinearLayout>
                 </LinearLayout>
+                <View
+                    android:layout_margin="10dp"
+                    android:background="#BDBDBD"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textSize="20sp"
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="[GOOD] "/>
-                    <TextView
-                        android:textSize="20sp"
+                        android:src="@drawable/star_silver"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"/>
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="00개"/>
+                        android:src="@drawable/ranking_up"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"/>
+                    <TextView
+                        android:textColor="#444444"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="Const4nt0228"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="20dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[EXCELLENT] 12개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[GOOD] 11개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[BAD] 8개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                    </LinearLayout>
                 </LinearLayout>
+                <View
+                    android:layout_margin="10dp"
+                    android:background="#BDBDBD"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textSize="20sp"
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="[BAD] "/>
-                    <TextView
-                        android:textSize="20sp"
+                        android:src="@drawable/star_bronz"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"/>
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:text="00개"/>
+                        android:src="@drawable/ranking_down"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="20dp"/>
+                    <TextView
+                        android:textColor="#444444"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:text="nativePark"
+                        android:layout_gravity="center"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginRight="20dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[EXCELLENT] 9개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[GOOD] 8개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                        <TextView
+                            android:textColor="#444444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[BAD] 13개"
+                            android:layout_gravity="left"
+                            android:textSize="18dp"/>
+                    </LinearLayout>
                 </LinearLayout>
+                <View
+                    android:layout_margin="10dp"
+                    android:background="#BDBDBD"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"/>
             </LinearLayout>
+
         </LinearLayout>
 
 
