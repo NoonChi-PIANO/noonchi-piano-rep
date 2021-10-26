@@ -64,11 +64,13 @@ ver 2021.07.12 70%
 
 ------
 # 🎼 공지사항
-API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가해야함
++ 05.21 API 29로 해야됨. 만약에 fftpack없다 뜨면 app/libs/ 에 fftpack추가해야함
 
-산학대전ver로 바뀌면서 음계인식 FFT -> MIDI Input으로 변경  
++ 07.23 서버가 Linux-> Windows WAMP로 변경, 기존 AWS에서 NaverCloud로 변경 
 
-Android 메니페스트, 앱단위 그래들 확인 필수
++ 08.28 산학대전ver로 바뀌면서 음계인식 FFT -> MIDI Input으로 변경  
+
++ 08.29 Anroid 메니페스트, 앱단위 그래들 확인 필수
 
 
 
