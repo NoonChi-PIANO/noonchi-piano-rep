@@ -1,5 +1,7 @@
 # 🎹 프로젝트 개요
 
+<iframe width="956" height="538" src="https://www.youtube.com/watch?v=9lid6GXLNqc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ![image](https://user-images.githubusercontent.com/66546156/132790186-edd89817-71c4-45ad-b0f6-7a68afd9eca9.png)
 
 ## 🎹 피아노를 잘 연주하지 못하는 사람들을 위한 교육용 피아노 어플리케이션 
