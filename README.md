@@ -1,5 +1,6 @@
 # 🎹 프로젝트 개요
 
+### YouTube 링크 바로가기!
 [![Video Label](http://img.youtube.com/vi/9lid6GXLNqc/0.jpg)](https://www.youtube.com/watch?v=9lid6GXLNqc)
 
 ![image](https://user-images.githubusercontent.com/66546156/132790186-edd89817-71c4-45ad-b0f6-7a68afd9eca9.png)
